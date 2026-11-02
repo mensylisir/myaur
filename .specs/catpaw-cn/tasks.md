@@ -29,7 +29,8 @@
 - 最终构建 `SRCDEST=/tmp/catpaw/srcdest makepkg -f --nodeps` 成功（2026-11-03 01:12，33 个 source 全部 Passed）；`.SRCINFO` 重复生成无差异。
 - 最终产物复验：app.asar 0644、无 chrome-sandbox、unpacked integrity=0、payload sha256 与上游一致；manifest node 24.18.0 / python 3.12.13 且 bin 路径正确；原生模块全部 require 成功；WM_CLASS=catpaw-moon；GTK IconTheme 16–512 全部可解析。
 
-## T6 提交（需用户确认）
-- 提交信息格式 `catpaw-cn: 新增 2026.1016.0034 Linux 移植包`，正文含构建命令、日期、审查结论、未推送 AUR 的事实。
-- 不在本轮推送 AUR；推送前再次征求确认。
+## T6 提交与推送 — 已完成
+- GitHub：`git push origin main`，`c70299a..e290fea`（2026-11-03）。
+- AUR：`a1273b0` 推送到 `ssh://aur@aur.archlinux.org/catpaw-cn.git` 的 `master`（2026-11-03）；`git clone`、`list-repos` 与包页面均可验证。
+- 推送结果已记录在 `README.md` 与提交信息中。
 
