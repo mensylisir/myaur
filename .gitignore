@@ -1,0 +1,16 @@
+# makepkg build products
+pkg/
+src/
+*.pkg.tar.zst
+*.pkg.tar.xz
+*.pkg.tar.gz
+*.pkg.tar.bz2
+*.pkg.tar.lz4
+
+# downloaded upstream archives must never be committed
+*.part
+*.dmg
+/catpaw-cn/*.zip
+/catpaw-cn/*.tgz
+/catpaw-cn/*.tar.gz
+/catpaw-cn/*.tar.xz
