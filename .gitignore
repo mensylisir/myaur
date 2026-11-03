@@ -10,6 +10,9 @@ src/
 # downloaded upstream archives must never be committed
 *.part
 *.dmg
+*.exe
+/catpaw/*innoextract-linux-amd64
+/catpaw-cn/*innoextract-linux-amd64
 /catpaw-cn/*.zip
 /catpaw-cn/*.tgz
 /catpaw-cn/*.tar.gz
