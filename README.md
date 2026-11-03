@@ -6,15 +6,15 @@
 
 | 包名 | 版本 | 上游 | 状态 |
 |---|---|---|---|
-| qoder-agent | 0.5.3 | https://qoder.com/ | 已构建（2026-11-04） |
-| qoder-cn-agent | 0.5.3 | https://qoder.cn | 已构建（2026-11-04） |
+| qoder-agent | 0.5.3 | https://qoder.com/ | 已推送 AUR（2026-11-04） |
+| qoder-cn-agent | 0.5.3 | https://qoder.cn | 已推送 AUR（2026-11-04） |
 | qoder-ide | 1.38.0 | https://qoder.com/ | 已推送 AUR（2026-11-03） |
 | qoder-cn-ide | 1.38.0 | https://qoder.cn | 已推送 AUR（2026-11-03） |
-| gw2api-bin | 4.27.0 | https://github.com/zexadev/gemini-web2api-go | 已构建（2026-11-04） |
-| catpaw-cn | 2026.1016.1131 | https://s3plus.meituan.net/catpaw-external-resources/ide/win32-x64/stable/ | 已构建（2026-11-04） |
-| catpaw | 2026.0929.1948 | https://s3-fra01-eu.mykeeta.net/catpaw-overseas/ide/win32-x64/stable/ | 已构建（2026-11-04） |
-| trae-ide | 2.3.99397 | https://www.trae.cn/ | 已构建（2026-11-04） |
-| trae-cn-ide | 2.3.99936 | https://www.trae.cn/ | 已构建（2026-11-04） |
+| gw2api-bin | 4.27.0 | https://github.com/zexadev/gemini-web2api-go | 已推送 AUR（2026-11-04） |
+| catpaw-cn | 2026.1016.1131 | https://s3plus.meituan.net/catpaw-external-resources/ide/win32-x64/stable/ | 已推送 AUR（2026-11-04） |
+| catpaw | 2026.0929.1948 | https://s3-fra01-eu.mykeeta.net/catpaw-overseas/ide/win32-x64/stable/ | 已推送 AUR（2026-11-04） |
+| trae-ide | 2.3.99397 | https://www.trae.cn/ | 已推送 AUR（2026-11-04） |
+| trae-cn-ide | 2.3.99936 | https://www.trae.cn/ | 已推送 AUR（2026-11-04） |
 | workbuddy-agent | 5.6.2.40046327_c7b525f3 | https://www.workbuddy.cn/app | 已推送 AUR（2026-11-03） |
 | workbuddy-intl-agent | 5.9.4.42593613_fa0a0901 | https://www.workbuddy.ai | 已推送 AUR（2026-11-03） |
 
