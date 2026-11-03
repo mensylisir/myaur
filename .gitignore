@@ -14,3 +14,6 @@ src/
 /catpaw-cn/*.tgz
 /catpaw-cn/*.tar.gz
 /catpaw-cn/*.tar.xz
+
+# gw2api-bin release downloads
+/gw2api-bin/gemini-web2api-go_v*-linux-*
