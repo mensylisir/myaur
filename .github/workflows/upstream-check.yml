@@ -34,6 +34,9 @@ jobs:
           SMTP_PASS: ${{ secrets.SMTP_PASS }}
           MAIL_TO: ${{ secrets.MAIL_TO }}
         run: |
+          if [ -z "${SMTP_PASS}" ]; then
+            echo "::warning title=邮件通知未配置::请在仓库 Secrets 中设置 SMTP_PASS（QQ 邮箱授权码）"
+          fi
           set +e
           python3 scripts/check-upstream-updates.py --json "${RUNNER_TEMP}/updates.json" --mail
           rc=$?
