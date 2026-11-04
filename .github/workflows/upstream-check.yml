@@ -34,14 +34,15 @@ jobs:
           SMTP_PASS: ${{ secrets.SMTP_PASS }}
           MAIL_TO: ${{ secrets.MAIL_TO }}
         run: |
-          if [ -z "${SMTP_PASS}" ]; then
-            echo "::warning title=邮件通知未配置::请在仓库 Secrets 中设置 SMTP_PASS（QQ 邮箱授权码）"
-          fi
           set +e
           python3 scripts/check-upstream-updates.py --json "${RUNNER_TEMP}/updates.json" --mail
           rc=$?
           echo "rc=${rc}" >> "${GITHUB_OUTPUT}"
-          exit 0
+          if [ "${rc}" -ne 0 ]; then
+            # 让 job 失败，由 GitHub 自带的邮件通知把结果发给该账号，无需任何 SMTP 凭证。
+            echo "::error title=上游有更新或探测失败::详见下方 JSON；该失败会触发 GitHub 通知邮件"
+            exit "${rc}"
+          fi
 
       - name: Show probe result
         run: python3 -m json.tool "${RUNNER_TEMP}/updates.json" || true

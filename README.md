@@ -45,21 +45,26 @@ SMTP_PASS=<QQ 邮箱授权码> python3 scripts/check-upstream-updates.py --mail
 
 ## 邮件通知（GitHub Actions）
 
-`.github/workflows/upstream-check.yml` 每 2 天 03:00 UTC（也可手动触发）运行探测；
-有包待更新或探测失败时，脚本用 `smtplib` 直连 SMTP，把摘要发到
-`710080675@qq.com`，全部为最新时静默。不再创建 Issue，也不在 CI 里构建或发布。
+`.github/workflows/upstream-check.yml` 每 2 天 03:00 UTC（也可手动触发）运行探测。
+有包待更新或探测失败时，job 以非 0 退出，GitHub 会把「workflow 失败」的邮件发到
+触发该定时任务的账号（即最后修改 `cron` 那一行的提交者，当前是仓库维护者），
+无需配置任何 SMTP 凭证。全部为最新时 job 成功，不发送任何邮件。
+不再创建 Issue，也不在 CI 里构建或发布。
 
-需要在仓库 `Settings → Secrets and variables → Actions` 配置：
+可选：如果还想额外用 SMTP 直接发信（例如发给别的地址），在仓库
+`Settings → Secrets and variables → Actions` 配置下表；不配置也不影响上面的失败通知。
 
 | Secret | 说明 |
 |---|---|
 | `SMTP_HOST` | 可留空，默认 `smtp.qq.com` |
 | `SMTP_PORT` | 可留空，默认 `465`（SSL） |
 | `SMTP_USER` | 发件邮箱，默认 `710080675@qq.com` |
-| `SMTP_PASS` | 邮箱 SMTP 授权码（QQ 邮箱需在设置里生成，不是登录密码） |
+| `SMTP_PASS` | 该发件邮箱的 SMTP 授权码（QQ 邮箱需在设置里生成，不是登录密码） |
 | `MAIL_TO` | 收件地址，默认 `710080675@qq.com` |
 
-未配置 `SMTP_PASS` 时脚本跳过邮件并在日志里提示，探测本身照常执行。
+未配置 `SMTP_PASS` 时脚本跳过 SMTP 发信，探测本身照常执行。
+GitHub 自带通知依赖该账号在 `Settings → Notifications` 里没有关闭 Actions 邮件，
+且账号主邮箱是 `710080675@qq.com`。
 
 **为什么不在 CI 里自动更新/发布**：
 
