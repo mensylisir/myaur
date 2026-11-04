@@ -26,6 +26,7 @@
 ```bash
 python3 scripts/check-upstream-updates.py            # 表格输出
 python3 scripts/check-upstream-updates.py --json out.json
+SMTP_PASS=<QQ 邮箱授权码> python3 scripts/check-upstream-updates.py --mail
 ```
 
 退出码：`0` 全部为最新；`1` 有包待更新；`2` 至少一个探测失败（网络或协议变化）。
@@ -42,27 +43,29 @@ python3 scripts/check-upstream-updates.py --json out.json
 | gw2api-bin | GitHub Releases API |
 | trae-ide / trae-cn-ide | 官方 icube 版本清单，取 Linux 构建号 |
 
-## GitHub Actions 自动化（评估结论）
+## 邮件通知（GitHub Actions）
 
-`.github/workflows/upstream-check.yml` 每 2 天跑一次探测，发现更新或探测失败时在
-仓库里创建/更新一个 `upstream-check` Issue；全部为最新时自动关闭该 Issue。
+`.github/workflows/upstream-check.yml` 每 2 天 03:00 UTC（也可手动触发）运行探测；
+有包待更新或探测失败时，脚本用 `smtplib` 直连 SMTP，把摘要发到
+`710080675@qq.com`，全部为最新时静默。不再创建 Issue，也不在 CI 里构建或发布。
 
-**能做**：
+需要在仓库 `Settings → Secrets and variables → Actions` 配置：
 
-- 定时探测、结果通知：完全可行。公开仓库不计费，runner 自带 Python 与 `gh`。
-- 手动触发（`workflow_dispatch`）：可直接在 Actions 页面跑一次。
-- 自动化提交 PR（改 `pkgver`、`source`、校验和）：技术上可行，但需要额外脚本把
-  探测结果回写 PKGBUILD，并处理 `.SRCINFO` 生成与 `makepkg` 校验。
+| Secret | 说明 |
+|---|---|
+| `SMTP_HOST` | 可留空，默认 `smtp.qq.com` |
+| `SMTP_PORT` | 可留空，默认 `465`（SSL） |
+| `SMTP_USER` | 发件邮箱，默认 `710080675@qq.com` |
+| `SMTP_PASS` | 邮箱 SMTP 授权码（QQ 邮箱需在设置里生成，不是登录密码） |
+| `MAIL_TO` | 收件地址，默认 `710080675@qq.com` |
 
-**不能直接做（或代价过高）**：
+未配置 `SMTP_PASS` 时脚本跳过邮件并在日志里提示，探测本身照常执行。
 
-- 自动发布到 AUR：需要把 AUR 私钥放进仓库 Secret，且每个包都要跑一次
-  `makepkg`/`namcap`，属于「发布」动作，按本仓库规则必须人工确认。
-- 在 runner 上完整构建这 11 个包：单个 Electron 包解包 + 打包在 200–500 MB 量级，
-  11 个包串行会触及单 job 6 小时上限与磁盘配额，且 `catpaw`/`catpaw-cn` 还要用
-  `node-gyp` 重编原生模块，成本远高于本地构建。
-- 长期无人值守：公开仓库的 scheduled workflow 在 60 天无仓库活动后会被自动禁用，
-  需要有人偶尔提交或手动启用。
+**为什么不在 CI 里自动更新/发布**：
 
-结论：**探测与通知交给 GitHub Actions，构建与 AUR 发布留在本地人工执行**。
-workflow 只用 `issues: write` 权限，不接触任何凭据，也不在 CI 里构建产物。
+- 自动发布 AUR 需要把私钥放进仓库 Secret，且属于「发布」动作，按仓库规则必须人工确认。
+- runner 上完整构建这些 Electron 包会触及单 job 6 小时上限与磁盘配额。
+- 公开仓库的 scheduled workflow 在 60 天无活动后会被自动禁用。
+
+结论：**CI 只负责探测与邮件提醒，构建与 AUR 发布留在本地人工执行**。
+workflow 只有 `contents: read` 权限。

@@ -16,11 +16,16 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
+import smtplib
+import ssl
 import sys
 import urllib.error
 import urllib.request
 from dataclasses import dataclass, field
+from datetime import datetime, timezone
+from email.message import EmailMessage
 from pathlib import Path
 from typing import Any
 
@@ -28,6 +33,7 @@ ROOT = Path(__file__).resolve().parent.parent
 
 UA = "myaur-upstream-check/1 (+https://github.com/mensylisir/myaur)"
 TIMEOUT = 30
+MAIL_TO_DEFAULT = "710080675@qq.com"
 
 # Inno/RPM lead: the 66-byte name field starts at offset 10.
 RPM_LEAD_NAME = slice(10, 76)
@@ -196,10 +202,69 @@ PRODUCTS: tuple[tuple[str, str, Any], ...] = (
 )
 
 
+def mail_body(payload: dict[str, Any]) -> str:
+    lines = [
+        f"检测时间：{datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}",
+        "",
+    ]
+    for row in payload["results"]:
+        if row["state"] == "current":
+            continue
+        upstream = row.get("upstream") or "(探测失败)"
+        line = f"- {row['product']}（{row['package']}）：{row['current']} -> {upstream}"
+        if row["state"] == "error":
+            line += f"，失败原因：{row['error']}"
+        lines.append(line)
+        if row["state"] == "update" and row.get("url"):
+            lines.append(f"  {row['url']}")
+        if row["state"] == "update" and row.get("checksum"):
+            lines.append(f"  sha256: {row['checksum']}")
+    lines += [
+        "",
+        f"结论：{len(payload['updates'])} 个待更新，{len(payload['errors'])} 个探测失败。",
+        "该通知只做提醒，构建与 AUR 发布仍需人工执行。",
+        f"仓库：https://github.com/mensylisir/myaur",
+    ]
+    return "\n".join(lines)
+
+
+def send_mail(payload: dict[str, Any]) -> None:
+    password = os.environ.get("SMTP_PASS", "")
+    if not password:
+        print("SMTP_PASS 未配置，跳过邮件通知", file=sys.stderr)
+        return
+    host = os.environ.get("SMTP_HOST") or "smtp.qq.com"
+    port = int(os.environ.get("SMTP_PORT") or "465")
+    user = os.environ.get("SMTP_USER") or MAIL_TO_DEFAULT
+    recipient = os.environ.get("MAIL_TO") or MAIL_TO_DEFAULT
+
+    subject = "上游版本检测："
+    subject += f"{len(payload['updates'])} 个待更新"
+    if payload["errors"]:
+        subject += f"，{len(payload['errors'])} 个探测失败"
+
+    message = EmailMessage()
+    message["Subject"] = subject
+    message["From"] = user
+    message["To"] = recipient
+    message.set_content(mail_body(payload))
+
+    context = ssl.create_default_context()
+    with smtplib.SMTP_SSL(host, port, timeout=TIMEOUT, context=context) as smtp:
+        smtp.login(user, password)
+        smtp.send_message(message)
+    print(f"邮件已发送至 {recipient}")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--json", type=Path, help="write machine-readable results here")
     parser.add_argument("--only", nargs="*", help="limit to these package names")
+    parser.add_argument(
+        "--mail",
+        action="store_true",
+        help="email the report when any package is outdated or a probe fails",
+    )
     args = parser.parse_args()
 
     rows: list[dict[str, Any]] = []
@@ -258,11 +323,16 @@ def main() -> int:
     errors = [r["package"] for r in rows if r["state"] == "error"]
     print(f"\n{len(rows)} checked, {len(updates)} outdated, {len(errors)} probe errors")
 
+    payload = {"updates": updates, "errors": errors, "results": rows}
     if args.json:
-        args.json.write_text(
-            json.dumps({"updates": updates, "errors": errors, "results": rows}, indent=2),
-            encoding="utf-8",
-        )
+        args.json.write_text(json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8")
+
+    if args.mail and status != 0:
+        try:
+            send_mail(payload)
+        except Exception as exc:  # noqa: BLE001 - surface mail problems as a probe failure
+            print(f"邮件发送失败：{type(exc).__name__}: {exc}", file=sys.stderr)
+            status = max(status, 2)
     return status
 
 
