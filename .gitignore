@@ -24,3 +24,12 @@ src/
 
 # gw2api-bin release downloads
 /gw2api-bin/gemini-web2api-go_v*-linux-*
+
+# workbuddy port downloads
+/workbuddy-*/*.zip
+/workbuddy-*/*.deb
+
+# 无扩展名的上游二进制（catpaw CLI / agent-browser）
+/catpaw/catpaw-cli-linux-x64*
+/catpaw-cn/catpaw-cli-linux-x64*
+/catpaw-cn/agent-browser-linux-x64
