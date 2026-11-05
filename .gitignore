@@ -29,6 +29,14 @@ src/
 /workbuddy-*/*.zip
 /workbuddy-*/*.deb
 
+# qoderwake release archives
+/qoderwake-bin/*.tar.gz
+/qoderwake-cn-bin/*.tar.gz
+
+# python bytecode
+__pycache__/
+*.py[cod]
+
 # 无扩展名的上游二进制（catpaw CLI / agent-browser）
 /catpaw/catpaw-cli-linux-x64*
 /catpaw-cn/catpaw-cli-linux-x64*

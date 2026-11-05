@@ -10,6 +10,8 @@
 | qoder-cn-agent | 0.5.3 | https://qoder.cn | 已推送 AUR（2026-11-04） |
 | qoder-ide | 1.38.0 | https://qoder.com/ | 已推送 AUR（2026-11-03） |
 | qoder-cn-ide | 1.38.0 | https://qoder.cn | 已推送 AUR（2026-11-03） |
+| qoderwake-bin | 1.2.11 | https://qoder.com/ | 已构建 x86_64（2026-11-05，未推送 AUR） |
+| qoderwake-cn-bin | 1.2.11_cn | https://qoder.cn | 已构建 x86_64（2026-11-05，未推送 AUR） |
 | gw2api-bin | 4.27.0 | https://github.com/zexadev/gemini-web2api-go | 已推送 AUR（2026-11-04） |
 | catpaw-cn | 2026.1016.1131 | https://s3plus.meituan.net/catpaw-external-resources/ide/win32-x64/stable/ | 已推送 AUR（2026-11-04） |
 | catpaw | 2026.0929.1948 | https://s3-fra01-eu.mykeeta.net/catpaw-overseas/ide/win32-x64/stable/ | 已推送 AUR（2026-11-04） |
@@ -20,7 +22,7 @@
 
 ## 上游更新检测
 
-`scripts/check-upstream-updates.py` 逐一探测上表 11 个产品的官方发布通道，与各包
+`scripts/check-upstream-updates.py` 逐一探测上表 13 个产品的官方发布通道，与各包
 `PKGBUILD` 的 `pkgver` 比较。只依赖 Python 标准库，无需安装任何包。
 
 ```bash
@@ -40,6 +42,7 @@ SMTP_PASS=<QQ 邮箱授权码> python3 scripts/check-upstream-updates.py --mail
 | qoder-agent / qoder-cn-agent | electron-builder 的 `latest-linux.yml` |
 | qoder-ide | `center.qoder.sh` 更新接口 |
 | qoder-cn-ide | RPM lead 的 NEVRA（HTTP Range 只取前 96 字节） |
+| qoderwake-bin / qoderwake-cn-bin | 官方 channel `manifest.json` 的 `latest` 与 Linux amd64 归档 sha256 |
 | gw2api-bin | GitHub Releases API |
 | trae-ide / trae-cn-ide | 官方 icube 版本清单，取 Linux 构建号 |
 

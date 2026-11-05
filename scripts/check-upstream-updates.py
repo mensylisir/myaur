@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check whether any of the 11 packaged products has a newer upstream release.
+"""Check whether any of the 13 packaged products has a newer upstream release.
 
 Each package directory holds a PKGBUILD whose pkgver is compared against a
 small, product-specific probe of the official release channel.  Only the
@@ -75,9 +75,14 @@ def pkgver(pkg: str) -> str:
     return expand(match.group(1))
 
 
-def comparable(version: str) -> str:
-    """WorkBuddy encodes a content hash after the upstream version."""
-    return version.split("_", 1)[0]
+def comparable(version: Any) -> str:
+    """Normalise pkgver encodings.
+
+    WorkBuddy appends a content hash after ``_``; the domestic qoderwake
+    channel tags releases with ``-cn``, which pkgver turns into ``_cn``.
+    """
+    version = str(version)
+    return version.split("_", 1)[0].removesuffix("-cn")
 
 
 def version_key(version: str) -> tuple[int, ...]:
@@ -132,6 +137,36 @@ def probe_qoder_latest(url: str) -> Probe:
         version=version.group(1) if version else None,
         url=rpm.group(1) if rpm else None,
         checksum=checksum,
+    )
+
+
+def probe_qoderwake(url: str) -> Probe:
+    """qoderwake publishes a channel manifest listing per-arch runtime archives."""
+    data = http_json(url)
+    version = data.get("latest")
+    if not isinstance(version, str) or not version:
+        raise ValueError("manifest has no string 'latest' version")
+    files = data.get("files")
+    if not isinstance(files, list):
+        raise ValueError("manifest has no 'files' list")
+
+    def pick(arch: str) -> dict[str, Any] | None:
+        return next(
+            (item for item in files
+             if isinstance(item, dict)
+             and item.get("os") == "linux" and item.get("arch") == arch),
+            None,
+        )
+
+    amd64 = pick("amd64")
+    if not amd64 or not amd64.get("url") or not amd64.get("sha256"):
+        raise ValueError("manifest has no usable linux/amd64 archive entry")
+    arm64 = pick("arm64")
+    return Probe(
+        version=version,
+        url=amd64["url"],
+        checksum=amd64["sha256"],
+        extra={"arm64_sha256": (arm64 or {}).get("sha256")},
     )
 
 
@@ -193,6 +228,11 @@ PRODUCTS: tuple[tuple[str, str, Any], ...] = (
     ("qoder-cn-ide", "Qoder IDE 国内版",
      lambda _cur: probe_qoder_cn_ide(
          "https://qoder-ide-cn.oss-cn-hangzhou.aliyuncs.com/qoder/release/lastest/qoder-cn-ide_x86_64.rpm")),
+    ("qoderwake-bin", "QoderWake 国际版",
+     lambda _cur: probe_qoderwake("https://download.qoder.com/qoderwake/channels/manifest.json")),
+    ("qoderwake-cn-bin", "QoderWake 国内版",
+     lambda _cur: probe_qoderwake(
+         "https://ide.qoder.com.cn/qoderwake-cn/channels/manifest.json")),
     ("gw2api-bin", "gemini-web2api-go",
      lambda _cur: probe_github_release("zexadev/gemini-web2api-go")),
     ("trae-ide", "Trae IDE 国际版",
