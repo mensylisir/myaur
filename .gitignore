@@ -44,3 +44,10 @@ __pycache__/
 
 # MiMo 官方 deb 下载
 /mimo-desktop-bin/*.deb
+
+# qoder 客户端 RPM 下载
+/qoder-agent/qoder-*.rpm
+/qoder-cn-agent/qoder-cn-*.rpm
+
+# trae-cn 官方归档下载
+/trae-cn-ide/Trae_CN-linux-*.tar.gz

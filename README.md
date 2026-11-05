@@ -6,18 +6,18 @@
 
 | 包名 | 版本 | 上游 | 状态 |
 |---|---|---|---|
-| qoder-agent | 0.5.3 | https://qoder.com/ | 已推送 AUR（2026-11-04） |
-| qoder-cn-agent | 0.5.3 | https://qoder.cn | 已推送 AUR（2026-11-04） |
+| qoder-agent | 0.5.5 | https://qoder.com/ | 已推送 AUR（2026-11-06） |
+| qoder-cn-agent | 0.5.5 | https://qoder.cn | 已推送 AUR（2026-11-06） |
 | qoder-ide | 1.38.0 | https://qoder.com/ | 已推送 AUR（2026-11-03） |
 | qoder-cn-ide | 1.38.0 | https://qoder.cn | 已推送 AUR（2026-11-03） |
-| qoderwake-bin | 1.2.11 | https://qoder.com/ | 已推送 AUR（2026-11-05，x86_64 已构建） |
-| qoderwake-cn-bin | 1.2.11_cn | https://qoder.cn | 已推送 AUR（2026-11-05，x86_64 已构建） |
-| mimo-desktop-bin | 26.1105.50703_202 | https://mimo.xiaomimimo.com/desktop/ | 已构建（2026-11-05，x86_64） |
+| qoderwake-bin | 1.2.12 | https://qoder.com/ | 已推送 AUR（2026-11-06，x86_64 已构建） |
+| qoderwake-cn-bin | 1.2.12_cn | https://qoder.cn | 已推送 AUR（2026-11-06，x86_64 已构建） |
+| mimo-desktop-bin | 26.1105.50703_202 | https://mimo.xiaomimimo.com/desktop/ | 已推送 AUR（2026-11-06，x86_64 已构建） |
 | gw2api-bin | 4.27.0 | https://github.com/zexadev/gemini-web2api-go | 已推送 AUR（2026-11-04） |
 | catpaw-cn | 2026.1016.1131 | https://s3plus.meituan.net/catpaw-external-resources/ide/win32-x64/stable/ | 已推送 AUR（2026-11-04） |
 | catpaw | 2026.0929.1948 | https://s3-fra01-eu.mykeeta.net/catpaw-overseas/ide/win32-x64/stable/ | 已推送 AUR（2026-11-04） |
 | trae-ide | 2.3.99397 | https://www.trae.cn/ | 已推送 AUR（2026-11-04） |
-| trae-cn-ide | 2.3.99936 | https://www.trae.cn/ | 已推送 AUR（2026-11-04） |
+| trae-cn-ide | 2.3.100185 | https://www.trae.cn/ | 已推送 AUR（2026-11-06） |
 | workbuddy-agent | 5.6.2.40046327_c7b525f3 | https://www.workbuddy.cn/app | 已推送 AUR（2026-11-03） |
 | workbuddy-intl-agent | 5.9.4.42593613_fa0a0901 | https://www.workbuddy.ai | 已推送 AUR（2026-11-03） |
 
