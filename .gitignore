@@ -41,3 +41,6 @@ __pycache__/
 /catpaw/catpaw-cli-linux-x64*
 /catpaw-cn/catpaw-cli-linux-x64*
 /catpaw-cn/agent-browser-linux-x64
+
+# MiMo 官方 deb 下载
+/mimo-desktop-bin/*.deb

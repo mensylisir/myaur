@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check whether any of the 13 packaged products has a newer upstream release.
+"""Check whether any packaged product has a newer upstream release.
 
 Each package directory holds a PKGBUILD whose pkgver is compared against a
 small, product-specific probe of the official release channel.  Only the
@@ -15,12 +15,16 @@ Exit status:
 from __future__ import annotations
 
 import argparse
+import gzip
+import io
 import json
+import lzma
 import os
 import re
 import smtplib
 import ssl
 import sys
+import tarfile
 import urllib.error
 import urllib.request
 from dataclasses import dataclass, field
@@ -37,6 +41,13 @@ MAIL_TO_DEFAULT = "710080675@qq.com"
 
 # Inno/RPM lead: the 66-byte name field starts at offset 10.
 RPM_LEAD_NAME = slice(10, 76)
+
+# MiMo publishes a versionless "latest" deb, so the version lives in its
+# Debian control archive rather than in the file name or headers.
+MIMO_DEB_LATEST = (
+    "https://mimocode-cdn.xiaomimimo.com/mimocode/mimodesktop/XiaomiMiMo-latest-x64.deb"
+)
+AR_HEADER_SIZE = 60
 
 
 @dataclass
@@ -76,13 +87,18 @@ def pkgver(pkg: str) -> str:
 
 
 def comparable(version: Any) -> str:
-    """Normalise pkgver encodings.
+    """Normalise pkgver encodings without hiding real upstream changes.
 
-    WorkBuddy appends a content hash after ``_``; the domestic qoderwake
-    channel tags releases with ``-cn``, which pkgver turns into ``_cn``.
+    WorkBuddy appends an 8-hex content hash after ``_``; the domestic
+    qoderwake channel tags releases with ``-cn``/``_cn``.  Debian-style
+    revisions are kept (``26.1105.50703-202`` becomes ``_202``), because a
+    revision bump is still a new upstream package to rebuild.
     """
-    version = str(version)
-    return version.split("_", 1)[0].removesuffix("-cn")
+    version = str(version).replace("-", "_")
+    # Only strip an 8-char hexadecimal hash that actually contains a letter:
+    # a pure numeric suffix may be a real version/revision (e.g. _20261016).
+    version = re.sub(r"_(?=[0-9a-f]{8}$)[0-9a-f]*[a-f][0-9a-f]*$", "", version)
+    return re.sub(r"_cn$", "", version)
 
 
 def version_key(version: str) -> tuple[int, ...]:
@@ -184,6 +200,64 @@ def probe_qoder_cn_ide(url: str) -> Probe:
     return Probe(version=match.group(1) if match else None, url=url, extra={"nevra": name})
 
 
+def ar_members(raw: bytes) -> list[tuple[str, bytes, int]]:
+    """Split the first bytes of a Debian package into ``ar`` members."""
+    if not raw.startswith(b"!<arch>\n"):
+        raise ValueError("not an ar archive")
+    members: list[tuple[str, bytes, int]] = []
+    offset = 8
+    while offset + AR_HEADER_SIZE <= len(raw):
+        header = raw[offset:offset + AR_HEADER_SIZE]
+        name = header[:16].decode("ascii", "replace").strip().rstrip("/")
+        size = int(header[48:58].decode("ascii", "replace").strip() or "0")
+        start = offset + AR_HEADER_SIZE
+        members.append((name, raw[start:start + size], size))
+        offset = start + size + (size & 1)
+    return members
+
+
+def probe_mimo_deb(url: str) -> Probe:
+    """Read the version from the control archive of MiMo's ``latest`` deb.
+
+    The CDN object has no version in its name, so a single 2 MiB range
+    request replaces downloading the whole 300 MB package.
+    """
+    raw = http(url, {"Range": "bytes=0-2097151"}, limit=2 * 1024 * 1024)
+    control = None
+    for name, data, size in ar_members(raw):
+        if not name.startswith("control.tar"):
+            continue
+        if len(data) < size:
+            raise ValueError(f"{name} truncated in the first 2 MiB")
+        if name.endswith(".xz"):
+            blob = lzma.decompress(data)
+        elif name.endswith(".gz"):
+            blob = gzip.decompress(data)
+        elif name.endswith(".zst"):
+            raise ValueError("control.tar.zst needs an external zstd decoder")
+        else:
+            blob = data
+        with tarfile.open(fileobj=io.BytesIO(blob)) as tar:
+            names = tar.getnames()
+            member = "./control" if "./control" in names else "control"
+            if member in names:
+                control = tar.extractfile(member).read().decode("utf-8", "replace")
+        break
+    if control is None:
+        raise ValueError("deb has no readable control archive")
+    match = re.search(r"^Version:\s*(\S+)", control, re.MULTILINE)
+    if not match:
+        raise ValueError("control archive has no Version field")
+    raw_version = match.group(1)
+    # Debian revisions use "-", which pkgver spells "_"; normalise so the
+    # comparison does not depend on the revision separator.
+    return Probe(
+        version=raw_version.replace("-", "_"),
+        url=url,
+        extra={"control_version": raw_version},
+    )
+
+
 def probe_github_release(repo: str) -> Probe:
     data = http_json(f"https://api.github.com/repos/{repo}/releases/latest")
     return Probe(
@@ -233,6 +307,8 @@ PRODUCTS: tuple[tuple[str, str, Any], ...] = (
     ("qoderwake-cn-bin", "QoderWake 国内版",
      lambda _cur: probe_qoderwake(
          "https://ide.qoder.com.cn/qoderwake-cn/channels/manifest.json")),
+    ("mimo-desktop-bin", "Xiaomi MiMo 桌面版",
+     lambda _cur: probe_mimo_deb(MIMO_DEB_LATEST)),
     ("gw2api-bin", "gemini-web2api-go",
      lambda _cur: probe_github_release("zexadev/gemini-web2api-go")),
     ("trae-ide", "Trae IDE 国际版",
