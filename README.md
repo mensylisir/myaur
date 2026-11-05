@@ -12,7 +12,7 @@
 | qoder-cn-ide | 1.38.0 | https://qoder.cn | 已推送 AUR（2026-11-03） |
 | qoderwake-bin | 1.2.12 | https://qoder.com/ | 已推送 AUR（2026-11-06，x86_64 已构建） |
 | qoderwake-cn-bin | 1.2.12_cn | https://qoder.cn | 已推送 AUR（2026-11-06，x86_64 已构建） |
-| mimo-desktop-bin | 26.1105.50703_202 | https://mimo.xiaomimimo.com/desktop/ | 已推送 AUR（2026-11-06，x86_64 已构建） |
+| mimo-desktop-bin | 26.1105.50703_202 | https://mimo.xiaomimimo.com/desktop/ | 已推送 AUR（2026-11-06，x86_64 已构建；pkgrel 2 规避环境变量 128 KiB 上限导致的登录窗口崩溃） |
 | gw2api-bin | 4.27.0 | https://github.com/zexadev/gemini-web2api-go | 已推送 AUR（2026-11-04） |
 | catpaw-cn | 2026.1016.1131 | https://s3plus.meituan.net/catpaw-external-resources/ide/win32-x64/stable/ | 已推送 AUR（2026-11-04） |
 | catpaw | 2026.0929.1948 | https://s3-fra01-eu.mykeeta.net/catpaw-overseas/ide/win32-x64/stable/ | 已推送 AUR（2026-11-04） |
