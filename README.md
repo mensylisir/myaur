@@ -10,8 +10,8 @@
 | qoder-cn-agent | 0.5.3 | https://qoder.cn | 已推送 AUR（2026-11-04） |
 | qoder-ide | 1.38.0 | https://qoder.com/ | 已推送 AUR（2026-11-03） |
 | qoder-cn-ide | 1.38.0 | https://qoder.cn | 已推送 AUR（2026-11-03） |
-| qoderwake-bin | 1.2.11 | https://qoder.com/ | 已构建 x86_64（2026-11-05，未推送 AUR） |
-| qoderwake-cn-bin | 1.2.11_cn | https://qoder.cn | 已构建 x86_64（2026-11-05，未推送 AUR） |
+| qoderwake-bin | 1.2.11 | https://qoder.com/ | 已推送 AUR（2026-11-05，x86_64 已构建） |
+| qoderwake-cn-bin | 1.2.11_cn | https://qoder.cn | 已推送 AUR（2026-11-05，x86_64 已构建） |
 | gw2api-bin | 4.27.0 | https://github.com/zexadev/gemini-web2api-go | 已推送 AUR（2026-11-04） |
 | catpaw-cn | 2026.1016.1131 | https://s3plus.meituan.net/catpaw-external-resources/ide/win32-x64/stable/ | 已推送 AUR（2026-11-04） |
 | catpaw | 2026.0929.1948 | https://s3-fra01-eu.mykeeta.net/catpaw-overseas/ide/win32-x64/stable/ | 已推送 AUR（2026-11-04） |
