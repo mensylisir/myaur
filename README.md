@@ -6,13 +6,13 @@
 
 | 包名 | 版本 | 上游 | 状态 |
 |---|---|---|---|
-| qoder-agent | 0.5.5 | https://qoder.com/ | 已推送 AUR（2026-11-06） |
-| qoder-cn-agent | 0.5.5 | https://qoder.cn | 已推送 AUR（2026-11-06） |
+| qoder-agent | 0.5.6 | https://qoder.com/ | 已推送 AUR（2026-11-07） |
+| qoder-cn-agent | 0.5.6 | https://qoder.cn | 已推送 AUR（2026-11-07） |
 | qoder-ide | 1.38.0 | https://qoder.com/ | 已推送 AUR（2026-11-03） |
 | qoder-cn-ide | 1.38.0 | https://qoder.cn | 已推送 AUR（2026-11-03） |
-| qoderwake-bin | 1.2.12.2 | https://qoder.com/ | 已推送 AUR（2026-11-06，x86_64 已构建；patch 版本号对应守护进程运行时暂存修复） |
-| qoderwake-cn-bin | 1.2.12_cn.2 | https://qoder.cn | 已推送 AUR（2026-11-06，x86_64 已构建；同上） |
-| mimo-desktop-bin | 26.1106.61620 | https://mimo.xiaomimimo.com/desktop/ | 已推送 AUR（2026-11-06，x86_64 已构建；保留环境变量 128 KiB 上限规避） |
+| qoderwake-bin | 1.2.13 | https://qoder.com/ | 已推送 AUR（2026-11-07，x86_64 已构建） |
+| qoderwake-cn-bin | 1.2.13_cn | https://qoder.cn | 已推送 AUR（2026-11-07，x86_64 已构建） |
+| mimo-desktop-bin | 26.1107.70703_211 | https://mimo.xiaomimimo.com/desktop/ | 已推送 AUR（2026-11-07，x86_64 已构建；保留环境变量 128 KiB 上限规避） |
 | gw2api-bin | 4.27.0 | https://github.com/zexadev/gemini-web2api-go | 已推送 AUR（2026-11-04） |
 | catpaw-cn | 2026.1016.1131 | https://s3plus.meituan.net/catpaw-external-resources/ide/win32-x64/stable/ | 已推送 AUR（2026-11-04） |
 | catpaw | 2026.0929.1948 | https://s3-fra01-eu.mykeeta.net/catpaw-overseas/ide/win32-x64/stable/ | 已推送 AUR（2026-11-04） |
