@@ -8,18 +8,18 @@
 |---|---|---|---|
 | qoder-agent | 0.5.6 | https://qoder.com/ | 已推送 AUR（2026-11-07） |
 | qoder-cn-agent | 0.5.6 | https://qoder.cn | 已推送 AUR（2026-11-07） |
-| qoder-ide | 1.39.1 | https://qoder.com/ | 已构建（2026-11-09） |
-| qoder-cn-ide | 1.39.1 | https://qoder.cn | 已构建（2026-11-09） |
+| qoder-ide | 1.39.1 | https://qoder.com/ | 已推送 AUR（2026-11-09） |
+| qoder-cn-ide | 1.39.1 | https://qoder.cn | 已推送 AUR（2026-11-09） |
 | qoderwake-bin | 1.2.13 | https://qoder.com/ | 已推送 AUR（2026-11-07，x86_64 已构建） |
 | qoderwake-cn-bin | 1.2.13_cn | https://qoder.cn | 已推送 AUR（2026-11-07，x86_64 已构建） |
-| mimo-desktop-bin | 26.1108.82201 | https://mimo.xiaomimimo.com/desktop/ | 已构建（2026-11-09，x86_64；保留环境变量 128 KiB 上限规避） |
-| gw2api-bin | 4.27.1 | https://github.com/zexadev/gemini-web2api-go | 已构建（2026-11-09） |
+| mimo-desktop-bin | 26.1108.82201 | https://mimo.xiaomimimo.com/desktop/ | 已推送 AUR（2026-11-09，x86_64；保留环境变量 128 KiB 上限规避） |
+| gw2api-bin | 4.27.1 | https://github.com/zexadev/gemini-web2api-go | 已推送 AUR（2026-11-09） |
 | catpaw-cn | 2026.1016.1131 | https://s3plus.meituan.net/catpaw-external-resources/ide/win32-x64/stable/ | 已推送 AUR（2026-11-04） |
 | catpaw | 2026.0929.1948 | https://s3-fra01-eu.mykeeta.net/catpaw-overseas/ide/win32-x64/stable/ | 已推送 AUR（2026-11-04） |
 | trae-ide | 2.3.99397 | https://www.trae.cn/ | 已推送 AUR（2026-11-04） |
 | trae-cn-ide | 2.3.100185 | https://www.trae.cn/ | 已推送 AUR（2026-11-06） |
 | workbuddy-agent | 5.6.2.40046327_c7b525f3 | https://www.workbuddy.cn/app | 已推送 AUR（2026-11-03） |
-| workbuddy-intl-agent | 5.9.4.42593613_fa0a0901 | https://www.workbuddy.ai | 已构建（2026-11-09，pkgrel 3；改用国内 deb 的定制 Electron，修复 CREDENTIAL_BOOTSTRAP_FAILED） |
+| workbuddy-intl-agent | 5.9.4.42593613_fa0a0901 | https://www.workbuddy.ai | 已推送 AUR（2026-11-09，pkgrel 3；改用国内 deb 的定制 Electron，修复 CREDENTIAL_BOOTSTRAP_FAILED） |
 | kimi-work-bin | 3.2.26 | https://www.kimi.com/products/kimi-work | 已推送 AUR（2026-11-08，x86_64；启动命令 kimi-work，pkgrel 2） |
 | minimax-code-bin | 0.7.6 | https://agent.minimax.cn/download | 已推送 AUR（2026-11-08，x86_64） |
 | kimi-code-intl-bin | 1.3.2 | https://code.kimi.ai/ | 已构建（2026-11-08，x86_64；命令 kimi-code，区域固定 global） |
