@@ -23,7 +23,7 @@ src/
 /catpaw/*.tar.xz
 
 # gw2api-bin release downloads
-/gw2api-bin/gemini-web2api-go_v*-linux-*
+/gw2api-bin/gemini-web2api-go_v*_linux_*
 
 # workbuddy port downloads
 /workbuddy-*/*.zip
@@ -48,6 +48,8 @@ __pycache__/
 # qoder 客户端 RPM 下载
 /qoder-agent/qoder-*.rpm
 /qoder-cn-agent/qoder-cn-*.rpm
+/qoder-ide/qoder-ide-*.rpm
+/qoder-cn-ide/qoder-cn-ide-*.rpm
 
 # trae-cn 官方归档下载
 /trae-cn-ide/Trae_CN-linux-*.tar.gz
@@ -55,3 +57,17 @@ __pycache__/
 # minimax-code-bin / kimi-work-bin 上游下载
 /minimax-code-bin/*.tgz
 /minimax-code-bin/*.tar.gz
+
+# kimi-code / kimi-work / minimax-code 国际版与国内版上游下载
+/kimi-code-intl-bin/*.deb
+/kimi-code-cn-bin/*.deb
+/kimi-work-intl-bin/*.exe
+/kimi-work-cn-bin/*.exe
+/minimax-code-intl-bin/*.exe
+/minimax-code-intl-bin/*.zip
+/minimax-code-intl-bin/*.tgz
+/minimax-code-intl-bin/*.tar.gz
+/minimax-code-cn-bin/*.exe
+/minimax-code-cn-bin/*.zip
+/minimax-code-cn-bin/*.tgz
+/minimax-code-cn-bin/*.tar.gz
