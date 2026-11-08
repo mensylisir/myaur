@@ -20,7 +20,7 @@
 | trae-cn-ide | 2.3.100185 | https://www.trae.cn/ | 已推送 AUR（2026-11-06） |
 | workbuddy-agent | 5.6.2.40046327_c7b525f3 | https://www.workbuddy.cn/app | 已推送 AUR（2026-11-03） |
 | workbuddy-intl-agent | 5.9.4.42593613_fa0a0901 | https://www.workbuddy.ai | 已推送 AUR（2026-11-03） |
-| kimi-work-bin | 3.2.26 | https://www.kimi.com/products/kimi-work | 已构建（2026-11-08，x86_64） |
+| kimi-work-bin | 3.2.26 | https://www.kimi.com/products/kimi-work | 已推送 AUR（2026-11-08，x86_64） |
 | minimax-code-bin | 0.7.6 | https://agent.minimax.cn/download | 已推送 AUR（2026-11-08，x86_64） |
 
 ## 上游更新检测
