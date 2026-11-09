@@ -30,6 +30,14 @@
 | minimax-code-cn-bin | 3.1.12 | https://code.minimax.cn/ | 已推送 AUR（2026-11-09，x86_64；命令 minimax-code-cn，baseUrl agent.minimax.cn） |
 | appclone-bin | 1.0.0 | https://github.com/mensylisir/appclone | 已推送 AUR（2026-11-09） |
 
+## 打赏
+
+如果这些包省了你的时间，可以请我喝杯咖啡。
+
+| 支付宝 | 微信 |
+|---|---|
+| <img src="docs/assets/donate-alipay.jpg" width="260" alt="支付宝收款码"> | <img src="docs/assets/donate-wechat.jpg" width="260" alt="微信收款码"> |
+
 ## 上游更新检测
 
 `scripts/check-upstream-updates.py` 逐一探测上表 16 个产品的官方发布通道，与各包
