@@ -45,6 +45,12 @@ __pycache__/
 # MiMo 官方 deb 下载
 /mimo-desktop-bin/*.deb
 
+# appclone 官方发布归档
+/appclone-bin/*.tar.gz
+
+# workbuddy-agent 上游 npm 预编译包
+/workbuddy-agent/*.tgz
+
 # qoder 客户端 RPM 下载
 /qoder-agent/qoder-*.rpm
 /qoder-cn-agent/qoder-cn-*.rpm
