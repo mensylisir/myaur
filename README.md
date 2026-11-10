@@ -10,14 +10,14 @@
 | qoder-cn-agent | 0.5.7 | https://qoder.cn | 已推送 AUR（2026-11-09） |
 | qoder-ide | 1.39.2 | https://qoder.com/ | 已推送 AUR（2026-11-09） |
 | qoder-cn-ide | 1.39.2 | https://qoder.cn | 已推送 AUR（2026-11-09） |
-| qoderwake-bin | 1.2.13 | https://qoder.com/ | 已推送 AUR（2026-11-07，x86_64 已构建） |
-| qoderwake-cn-bin | 1.2.13_cn | https://qoder.cn | 已推送 AUR（2026-11-07，x86_64 已构建） |
-| mimo-desktop-bin | 26.1109.90703_218 | https://mimo.xiaomimimo.com/desktop/ | 已推送 AUR（2026-11-09，x86_64；保留环境变量 128 KiB 上限规避） |
+| qoderwake-bin | 1.2.14 | https://qoder.com/ | 已推送 AUR（2026-11-10，x86_64 已构建） |
+| qoderwake-cn-bin | 1.2.14_cn | https://qoder.cn | 已推送 AUR（2026-11-10，x86_64 已构建） |
+| mimo-desktop-bin | 26.1110.100859 | https://mimo.xiaomimimo.com/desktop/ | 已推送 AUR（2026-11-10，x86_64；保留环境变量 128 KiB 上限规避） |
 | gw2api-bin | 4.28.0 | https://github.com/zexadev/gemini-web2api-go | 已推送 AUR（2026-11-09） |
 | catpaw-cn | 2026.1030.1130 | https://s3plus.meituan.net/catpaw-external-resources/ide/win32-x64/stable/ | 已推送 AUR（2026-11-09） |
 | catpaw | 2026.0929.1948 | https://s3-fra01-eu.mykeeta.net/catpaw-overseas/ide/win32-x64/stable/ | 已推送 AUR（2026-11-09，pkgrel 3） |
 | trae-ide | 2.3.99397 | https://www.trae.cn/ | 已推送 AUR（2026-11-04） |
-| trae-cn-ide | 2.3.101515 | https://www.trae.cn/ | 已推送 AUR（2026-11-09） |
+| trae-cn-ide | 2.3.102035 | https://www.trae.cn/ | 已推送 AUR（2026-11-10） |
 | workbuddy-agent | 5.6.2.40046327_c7b525f3 | https://www.workbuddy.cn/app | 已推送 AUR（2026-11-09，pkgrel 2） |
 | workbuddy-intl-agent | 5.9.4.42593613_fa0a0901 | https://www.workbuddy.ai | 已推送 AUR（2026-11-09，pkgrel 4；改用国内 deb 的定制 Electron，修复 CREDENTIAL_BOOTSTRAP_FAILED） |
 | kimi-work-bin | 3.2.26 | https://www.kimi.com/products/kimi-work | 已推送 AUR（2026-11-08，x86_64；启动命令 kimi-work，pkgrel 2） |
