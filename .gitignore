@@ -37,6 +37,9 @@ src/
 __pycache__/
 *.py[cod]
 
+# 本地规格草稿，不属于包内容
+.specs/
+
 # 无扩展名的上游二进制（catpaw CLI / agent-browser）
 /catpaw/catpaw-cli-linux-x64*
 /catpaw-cn/catpaw-cli-linux-x64*
