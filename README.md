@@ -26,8 +26,8 @@
 | kimi-code-cn-bin | 1.3.2 | https://code.kimi.com/ | 已推送 AUR（2026-11-09，x86_64；命令 kimi-code-cn，区域固定 mainland-cn，pkgrel 2） |
 | kimi-work-intl-bin | 3.2.26 | https://www.kimi.ai/products/kimi-work | 已构建（2026-11-11，x86_64；命令 kimi-work，区域固定 overseas，pkgrel 3，默认关闭 launcher 快捷键） |
 | kimi-work-cn-bin | 3.2.26 | https://www.kimi.com/products/kimi-work | 已构建（2026-11-11，x86_64；命令 kimi-work-cn，区域固定 china，pkgrel 3，默认关闭 launcher 快捷键） |
-| minimax-code-intl-bin | 3.1.12 | https://code.minimax.io/ | 已构建（2026-11-11，x86_64；命令 minimax-code，baseUrl agent.minimax.io，pkgrel 2，注册 minimax 深链） |
-| minimax-code-cn-bin | 3.1.12 | https://code.minimax.cn/ | 已构建（2026-11-11，x86_64；命令 minimax-code-cn，baseUrl agent.minimax.cn，pkgrel 2，注册 minimax-cn 深链） |
+| minimax-code-intl-bin | 3.1.12 | https://code.minimax.io/ | 已构建（2026-11-11，x86_64；命令 minimax-code，baseUrl agent.minimax.io，pkgrel 3，注册 minimax 深链，托盘菜单可退出） |
+| minimax-code-cn-bin | 3.1.12 | https://code.minimax.cn/ | 已构建（2026-11-11，x86_64；命令 minimax-code-cn，baseUrl agent.minimax.cn，pkgrel 3，注册 minimax-cn 深链，托盘菜单可退出） |
 | appclone-bin | 1.0.0 | https://github.com/mensylisir/appclone | 已推送 AUR（2026-11-09） |
 
 ## 打赏
