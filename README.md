@@ -6,29 +6,29 @@
 
 | 包名 | 版本 | 上游 | 状态 |
 |---|---|---|---|
-| qoder-agent | 0.5.6 | https://qoder.com/ | 已推送 AUR（2026-11-07） |
+| qoder-agent | 0.5.7 | https://qoder.com/ | 已推送 AUR（2026-11-12） |
 | qoder-cn-agent | 0.5.7 | https://qoder.cn | 已推送 AUR（2026-11-09） |
 | qoder-ide | 1.39.2 | https://qoder.com/ | 已推送 AUR（2026-11-09） |
 | qoder-cn-ide | 1.39.2 | https://qoder.cn | 已推送 AUR（2026-11-09） |
-| qoderwake-bin | 1.2.14 | https://qoder.com/ | 已推送 AUR（2026-11-10，x86_64 已构建） |
-| qoderwake-cn-bin | 1.2.14_cn | https://qoder.cn | 已推送 AUR（2026-11-10，x86_64 已构建） |
-| mimo-desktop-bin | 26.1110.100859 | https://mimo.xiaomimimo.com/desktop/ | 已推送 AUR（2026-11-10，x86_64；保留环境变量 128 KiB 上限规避） |
+| qoderwake-bin | 1.2.16 | https://qoder.com/ | 已推送 AUR（2026-11-12，x86_64 已构建） |
+| qoderwake-cn-bin | 1.2.16_cn | https://qoder.cn | 已推送 AUR（2026-11-12，x86_64 已构建） |
+| mimo-desktop-bin | 26.1111.111142 | https://mimo.xiaomimimo.com/desktop/ | 已推送 AUR（2026-11-12，x86_64；保留环境变量 128 KiB 上限规避） |
 | gw2api-bin | 4.28.0 | https://github.com/zexadev/gemini-web2api-go | 已推送 AUR（2026-11-09） |
 | catpaw-cn | 2026.1030.1130 | https://s3plus.meituan.net/catpaw-external-resources/ide/win32-x64/stable/ | 已推送 AUR（2026-11-09） |
-| catpaw | 2026.0929.1948 | https://s3-fra01-eu.mykeeta.net/catpaw-overseas/ide/win32-x64/stable/ | 已推送 AUR（2026-11-09，pkgrel 3） |
+| catpaw | 2026.1111.1938 | https://s3-fra01-eu.mykeeta.net/catpaw-overseas/ide/win32-x64/stable/ | 已推送 AUR（2026-11-12，pkgrel 1） |
 | trae-ide | 2.3.99397 | https://www.trae.cn/ | 已推送 AUR（2026-11-04） |
-| trae-cn-ide | 2.3.102035 | https://www.trae.cn/ | 已推送 AUR（2026-11-10） |
+| trae-cn-ide | 2.3.102387 | https://www.trae.cn/ | 已推送 AUR（2026-11-12） |
 | workbuddy-agent | 5.6.2.40046327_c7b525f3 | https://www.workbuddy.cn/app | 已推送 AUR（2026-11-09，pkgrel 2） |
 | workbuddy-intl-agent | 5.9.4.42593613_fa0a0901 | https://www.workbuddy.ai | 已推送 AUR（2026-11-09，pkgrel 4；改用国内 deb 的定制 Electron，修复 CREDENTIAL_BOOTSTRAP_FAILED） |
 | kimi-work-bin | 3.2.26 | https://www.kimi.com/products/kimi-work | 已推送 AUR（2026-11-08，x86_64；启动命令 kimi-work，pkgrel 2） |
 | minimax-code-bin | 0.7.6 | https://agent.minimax.cn/download | 已推送 AUR（2026-11-08，x86_64） |
-| kimi-code-intl-bin | 1.3.2 | https://code.kimi.ai/ | 已推送 AUR（2026-11-09，x86_64；命令 kimi-code，区域固定 global，pkgrel 2） |
-| kimi-code-cn-bin | 1.3.2 | https://code.kimi.com/ | 已推送 AUR（2026-11-09，x86_64；命令 kimi-code-cn，区域固定 mainland-cn，pkgrel 2） |
+| kimi-code-intl-bin | 1.3.4 | https://code.kimi.ai/ | 已推送 AUR（2026-11-12，x86_64；命令 kimi-code，区域固定 global） |
+| kimi-code-cn-bin | 1.3.4 | https://code.kimi.com/ | 已推送 AUR（2026-11-12，x86_64；命令 kimi-code-cn，区域固定 mainland-cn） |
 | kimi-work-intl-bin | 3.2.26 | https://www.kimi.ai/products/kimi-work | 已推送 AUR（2026-11-11，x86_64；命令 kimi-work，区域固定 overseas，pkgrel 3，默认关闭 launcher 快捷键） |
 | kimi-work-cn-bin | 3.2.26 | https://www.kimi.com/products/kimi-work | 已推送 AUR（2026-11-11，x86_64；命令 kimi-work-cn，区域固定 china，pkgrel 3，默认关闭 launcher 快捷键） |
-| minimax-code-intl-bin | 3.1.12 | https://code.minimax.io/ | 已推送 AUR（2026-11-11，x86_64；命令 minimax-code，baseUrl agent.minimax.io，pkgrel 3，注册 minimax 深链，托盘菜单可退出） |
-| minimax-code-cn-bin | 3.1.12 | https://code.minimax.cn/ | 已推送 AUR（2026-11-11，x86_64；命令 minimax-code-cn，baseUrl agent.minimax.cn，pkgrel 3，注册 minimax-cn 深链，托盘菜单可退出） |
-| appclone-bin | 1.0.0 | https://github.com/mensylisir/appclone | 已推送 AUR（2026-11-09） |
+| minimax-code-intl-bin | 3.1.14 | https://code.minimax.io/ | 已推送 AUR（2026-11-12，x86_64；命令 minimax-code，baseUrl agent.minimax.io，注册 minimax 深链，托盘菜单可退出；安装包取自官方镜像 filecdn.minimax.chat） |
+| minimax-code-cn-bin | 3.1.14 | https://code.minimax.cn/ | 已推送 AUR（2026-11-12，x86_64；命令 minimax-code-cn，baseUrl agent.minimax.cn，注册 minimax-cn 深链，托盘菜单可退出） |
+| appclone-bin | 1.0.3 | https://github.com/mensylisir/appclone | 已推送 AUR（2026-11-12） |
 
 ## 打赏
 
