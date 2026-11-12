@@ -22,8 +22,8 @@
 | workbuddy-intl-agent | 5.9.4.42593613_fa0a0901 | https://www.workbuddy.ai | 已推送 AUR（2026-11-09，pkgrel 4；改用国内 deb 的定制 Electron，修复 CREDENTIAL_BOOTSTRAP_FAILED） |
 | kimi-work-bin | 3.2.26 | https://www.kimi.com/products/kimi-work | 已推送 AUR（2026-11-08，x86_64；启动命令 kimi-work，pkgrel 2） |
 | minimax-code-bin | 0.7.6 | https://agent.minimax.cn/download | 已推送 AUR（2026-11-08，x86_64） |
-| kimi-code-intl-bin | 1.3.4 | https://code.kimi.ai/ | 已推送 AUR（2026-11-12，x86_64；命令 kimi-code，区域固定 global） |
-| kimi-code-cn-bin | 1.3.4 | https://code.kimi.com/ | 已推送 AUR（2026-11-12，x86_64；命令 kimi-code-cn，区域固定 mainland-cn） |
+| kimi-code-intl-bin | 1.3.4 | https://code.kimi.ai/ | 已推送 AUR（2026-11-13，pkgrel 2；x86_64；命令 kimi-code，区域固定 global，Wayland 下禁用全局快捷键 portal 避免弹窗） |
+| kimi-code-cn-bin | 1.3.4 | https://code.kimi.com/ | 已推送 AUR（2026-11-13，pkgrel 2；x86_64；命令 kimi-code-cn，区域固定 mainland-cn，Wayland 下禁用全局快捷键 portal 避免弹窗） |
 | kimi-work-intl-bin | 3.2.26 | https://www.kimi.ai/products/kimi-work | 已推送 AUR（2026-11-11，x86_64；命令 kimi-work，区域固定 overseas，pkgrel 3，默认关闭 launcher 快捷键） |
 | kimi-work-cn-bin | 3.2.26 | https://www.kimi.com/products/kimi-work | 已推送 AUR（2026-11-11，x86_64；命令 kimi-work-cn，区域固定 china，pkgrel 3，默认关闭 launcher 快捷键） |
 | minimax-code-intl-bin | 3.1.14 | https://code.minimax.io/ | 已推送 AUR（2026-11-12，x86_64；命令 minimax-code，baseUrl agent.minimax.io，注册 minimax 深链，托盘菜单可退出；安装包取自官方镜像 filecdn.minimax.chat） |
