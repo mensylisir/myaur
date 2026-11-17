@@ -7,19 +7,19 @@
 | 包名 | 版本 | 上游 | 状态 |
 |---|---|---|---|
 | qoder-agent | 0.5.12 | https://qoder.com/ | 已推送 AUR（2026-11-16） |
-| qoder-cn-agent | 0.5.12 | https://qoder.cn | 已推送 AUR（2026-11-16） |
+| qoder-cn-agent | 0.5.13 | https://qoder.cn | 已推送 AUR（2026-11-17） |
 | qoder-ide | 1.40.1 | https://qoder.com/ | 已推送 AUR（2026-11-16） |
 | qoder-cn-ide | 1.40.1 | https://qoder.cn | 已推送 AUR（2026-11-13） |
 | qoderwake-bin | 1.2.18 | https://qoder.com/ | 已推送 AUR（2026-11-16，x86_64 已构建） |
 | qoderwake-cn-bin | 1.2.18_cn | https://qoder.cn | 已推送 AUR（2026-11-16，x86_64 已构建） |
 | mimo-desktop-bin | 26.1116.161705 | https://mimo.xiaomimimo.com/desktop/ | 已推送 AUR（2026-11-16，x86_64；保留环境变量 128 KiB 上限规避） |
-| gw2api-bin | 4.28.1 | https://github.com/zexadev/gemini-web2api-go | 已推送 AUR（2026-11-16） |
+| gw2api-bin | 4.29.0 | https://github.com/zexadev/gemini-web2api-go | 已推送 AUR（2026-11-17） |
 | catpaw-cn | 2026.1030.1130 | https://s3plus.meituan.net/catpaw-external-resources/ide/win32-x64/stable/ | 已推送 AUR（2026-11-09） |
 | catpaw | 2026.1111.1938 | https://s3-fra01-eu.mykeeta.net/catpaw-overseas/ide/win32-x64/stable/ | 已推送 AUR（2026-11-12，pkgrel 1） |
 | trae-ide | 2.3.99397 | https://www.trae.cn/ | 已推送 AUR（2026-11-04） |
 | trae-cn-ide | 2.3.103559 | https://www.trae.cn/ | 已推送 AUR（2026-11-16） |
 | workbuddy-agent | 5.6.2.40046327_c7b525f3 | https://www.workbuddy.cn/app | 已推送 AUR（2026-11-09，pkgrel 2） |
-| workbuddy-intl-agent | 5.9.4.42593613_fa0a0901 | https://www.workbuddy.ai | 已推送 AUR（2026-11-09，pkgrel 4；改用国内 deb 的定制 Electron，修复 CREDENTIAL_BOOTSTRAP_FAILED） |
+| workbuddy-intl-agent | 5.11.4.44121853_0026dff0 | https://www.workbuddy.ai | 已推送 AUR（2026-11-17；改用国内 deb 的定制 Electron，修复 CREDENTIAL_BOOTSTRAP_FAILED） |
 | kimi-work-bin | 3.2.27 | https://www.kimi.com/products/kimi-work | 已推送 AUR（2026-11-13，x86_64；启动命令 kimi-work） |
 | minimax-code-bin | 0.7.7 | https://agent.minimax.cn/download | 已推送 AUR（2026-11-13，x86_64） |
 | kimi-code-intl-bin | 1.3.5 | https://code.kimi.ai/ | 已推送 AUR（2026-11-13；x86_64；命令 kimi-code，区域固定 global，Wayland 下禁用全局快捷键 portal 避免弹窗） |
@@ -28,7 +28,7 @@
 | kimi-work-cn-bin | 3.2.27 | https://www.kimi.com/products/kimi-work | 已推送 AUR（2026-11-13；x86_64；命令 kimi-work-cn，区域固定 china，默认关闭 launcher 快捷键） |
 | minimax-code-intl-bin | 3.1.16 | https://code.minimax.io/ | 已推送 AUR（2026-11-16，x86_64；命令 minimax-code，baseUrl agent.minimax.io，注册 minimax 深链，托盘菜单可退出；安装包取自官方镜像 filecdn.minimax.chat） |
 | minimax-code-cn-bin | 3.1.16 | https://code.minimax.cn/ | 已推送 AUR（2026-11-16，x86_64；命令 minimax-code-cn，baseUrl agent.minimax.cn，注册 minimax-cn 深链，托盘菜单可退出） |
-| appclone-bin | 1.1.1 | https://github.com/mensylisir/appclone | 已推送 AUR（2026-11-16） |
+| appclone-bin | 1.1.2 | https://github.com/mensylisir/appclone | 已推送 AUR（2026-11-17） |
 | dumate-app-bin | 1.0.92 | https://www.dumate.cn/ | 已推送 AUR（2026-11-14，x86_64；官方 deb 重打包，版本化 URL；与 AUR 已有 dumate-bin 功能相同） |
 
 ## 打赏
