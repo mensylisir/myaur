@@ -1,7 +1,7 @@
 pkgbase = qoder-agent
 	pkgdesc = Qoder new form, with programming agents as the core engine, from idea to implementation, easy to handle.
 	pkgver = 0.5.12
-	pkgrel = 1
+	pkgrel = 2
 	url = https://qoder.com/
 	arch = x86_64
 	license = LicenseRef-custom

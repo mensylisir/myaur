@@ -3,7 +3,7 @@ pkgname=qoder-agent
 _pkgname=Qoder
 pkgver=0.5.12
 _electronversion=43
-pkgrel=1
+pkgrel=2
 pkgdesc="Qoder new form, with programming agents as the core engine, from idea to implementation, easy to handle."
 arch=('x86_64')
 url="https://qoder.com/"
@@ -58,6 +58,11 @@ prepare() {
         s/@appname@/qoder/g
     " "${srcdir}/qoder.sh" "${srcdir}/qoder.js"
     sed -i "s/\/opt\/${_pkgname}\///g" "${srcdir}/usr/share/applications/qoder.desktop"
+    # Upstream lists x-scheme-handler/qoder twice in MimeType. Deduplicate so
+    # desktop-file-validate stays quiet and file managers show one association.
+    _desktop="${srcdir}/usr/share/applications/qoder.desktop"
+    _mime="$(sed -n 's/^MimeType=//p' "${_desktop}" | tr ';' '\n' | awk 'NF && !seen[$0]++' | paste -sd';')"
+    sed -i "s|^MimeType=.*|MimeType=${_mime};|" "${_desktop}"
     ( cd "${srcdir}" && asar ef "$(_get_app_dir)/resources/app.asar" package.json )
     grep -oP '"version":\s*"\K[^"]+' "${srcdir}/package.json" > "${srcdir}/.pkgver"
 }

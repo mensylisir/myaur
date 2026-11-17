@@ -69,6 +69,8 @@ __pycache__/
 
 # trae-cn 官方归档下载
 /trae-cn-ide/Trae_CN-linux-*.tar.gz
+# trae 国际版官方归档下载
+/trae-ide/Trae-linux-*.tar.gz
 
 # minimax-code-bin / kimi-work-bin 上游下载
 /minimax-code-bin/*.tgz
