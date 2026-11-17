@@ -12,7 +12,8 @@
 | qoder-cn-ide | 1.40.1 | https://qoder.cn | 已推送 AUR（2026-11-13） |
 | qoderwake-bin | 1.2.18 | https://qoder.com/ | 已推送 AUR（2026-11-16，x86_64 已构建） |
 | qoderwake-cn-bin | 1.2.18_cn | https://qoder.cn | 已推送 AUR（2026-11-16，x86_64 已构建） |
-| mimo-desktop-bin | 26.1116.161705 | https://mimo.xiaomimimo.com/desktop/ | 已推送 AUR（2026-11-16，x86_64；保留环境变量 128 KiB 上限规避） |
+| mimo-desktop-bin | 26.1116.161705 | https://mimo.xiaomimimo.com/desktop/ | 已推送 AUR（2026-11-16，x86_64；pkgrel 2 补 mesa、修正 sandbox 权限与 AppArmor 缓存清理，待推送） |
+| mimo-desktop-intl-bin | 26.1116.161705 | https://mimo-ai.xiaomimimo.com/desktop/ | 已构建（2026-11-17，x86_64；官方海外 Linux deb 重打包，可与国内版并存），待推送 AUR |
 | gw2api-bin | 4.29.0 | https://github.com/zexadev/gemini-web2api-go | 已推送 AUR（2026-11-17） |
 | catpaw-cn | 2026.1030.1130 | https://s3plus.meituan.net/catpaw-external-resources/ide/win32-x64/stable/ | 已推送 AUR（2026-11-09） |
 | catpaw | 2026.1111.1938 | https://s3-fra01-eu.mykeeta.net/catpaw-overseas/ide/win32-x64/stable/ | 已推送 AUR（2026-11-12，pkgrel 1） |
@@ -65,6 +66,7 @@ SMTP_PASS=<QQ 邮箱授权码> python3 scripts/check-upstream-updates.py --mail
 | qoder-cn-ide | RPM lead 的 NEVRA（HTTP Range 只取前 96 字节） |
 | qoderwake-bin / qoderwake-cn-bin | 官方 channel `manifest.json` 的 `latest` 与 Linux amd64 归档 sha256 |
 | mimo-desktop-bin | 官方 `latest` deb 的 control 归档（HTTP Range 取前 2 MiB，读 `Version`） |
+| mimo-desktop-intl-bin | 同上，取海外 `mimodesktopai` 通道 |
 | gw2api-bin | GitHub Releases API |
 | trae-ide / trae-cn-ide | 官方 icube 版本清单，取 Linux 构建号 |
 

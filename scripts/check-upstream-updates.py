@@ -47,6 +47,9 @@ RPM_LEAD_NAME = slice(10, 76)
 MIMO_DEB_LATEST = (
     "https://mimocode-cdn.xiaomimimo.com/mimocode/mimodesktop/XiaomiMiMo-latest-x64.deb"
 )
+MIMO_AI_DEB_LATEST = (
+    "https://mimocode-cdn.xiaomimimo.com/mimocode/mimodesktopai/XiaomiMiMo-AI-latest-x64.deb"
+)
 AR_HEADER_SIZE = 60
 
 
@@ -309,6 +312,8 @@ PRODUCTS: tuple[tuple[str, str, Any], ...] = (
          "https://ide.qoder.com.cn/qoderwake-cn/channels/manifest.json")),
     ("mimo-desktop-bin", "Xiaomi MiMo 桌面版",
      lambda _cur: probe_mimo_deb(MIMO_DEB_LATEST)),
+    ("mimo-desktop-intl-bin", "Xiaomi MiMo 海外版",
+     lambda _cur: probe_mimo_deb(MIMO_AI_DEB_LATEST)),
     ("gw2api-bin", "gemini-web2api-go",
      lambda _cur: probe_github_release("zexadev/gemini-web2api-go")),
     ("trae-ide", "Trae IDE 国际版",
