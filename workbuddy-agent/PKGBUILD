@@ -180,7 +180,33 @@ package() {
   install -Dm755 /dev/stdin "${pkgdir}/usr/bin/workbuddy" <<'LAUNCHER'
 #!/bin/sh
 unset ELECTRON_RUN_AS_NODE
-exec /opt/WorkBuddy/workbuddy --class=workbuddy "$@"
+export CHROME_DESKTOP='workbuddy.desktop'
+export ELECTRON_FORCE_IS_PACKAGED=1
+
+# Wayland 下 Electron 注册全局快捷键会走 XDG GlobalShortcuts portal，GNOME 会
+# 弹出 "Add Keyboard Shortcuts" 授权窗。shortcut-state.json 里的空 accelerator
+# 表示「不注册该快捷键」，首次启动前写入可避免每次打开都弹窗；用户仍可在
+# “设置 → 快捷键”里自行指定（保存后会覆盖本文件）。X11 不触发该门户，
+# 保留上游默认的全局快捷键。
+if [ "${XDG_SESSION_TYPE:-}" = wayland ] || [ -n "${WAYLAND_DISPLAY:-}" ]; then
+  STATE_DIR="${WORKBUDDY_USER_DATA_DIR:-${WORKBUDDY_CONFIG_DIR:-${CODEBUDDY_CONFIG_DIR:-$HOME/.workbuddy}}/app}"
+  STATE_FILE="$STATE_DIR/shortcut-state.json"
+  if [ ! -f "$STATE_FILE" ]; then
+    mkdir -p "$STATE_DIR" &&
+      printf '%s\n' '{"version":1,"toggleWindowAccelerator":""}' >"$STATE_FILE" || true
+  fi
+fi
+
+# 与 intl 移植版保持一致：Windows payload 跑在官方 deb 的 Electron 上，需要
+# 关闭 GPU sandbox、启用 ozone/Wayland IME，避免部分驱动下窗口空白。
+exec /opt/WorkBuddy/workbuddy \
+  --no-sandbox \
+  --disable-dev-shm-usage \
+  --disable-gpu-sandbox \
+  --in-process-gpu \
+  --ozone-platform-hint=auto \
+  --enable-wayland-ime \
+  --class=workbuddy "$@"
 LAUNCHER
 
   install -Dm644 "${srcdir}/DISCLAIMER" \

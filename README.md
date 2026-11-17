@@ -21,8 +21,8 @@
 | catpaw | 2026.1111.1938 | https://s3-fra01-eu.mykeeta.net/catpaw-overseas/ide/win32-x64/stable/ | 已推送 AUR（2026-11-12，pkgrel 1） |
 | trae-ide | 2.3.99397 | https://www.trae.cn/ | 已推送 AUR（2026-11-04） |
 | trae-cn-ide | 2.3.103559 | https://www.trae.cn/ | 已推送 AUR（2026-11-16） |
-| workbuddy-agent | 5.11.3.43806934_ecace0f7 | https://www.workbuddy.cn/app | 已构建（2026-11-17；Windows 包 payload + 官方国内 deb 运行时，流程与 intl 一致），待推送 AUR |
-| workbuddy-intl-agent | 5.11.4.44121853_0026dff0 | https://www.workbuddy.ai | 已推送 AUR（2026-11-17；Windows 包 payload + 国内 deb 的定制 Electron/运行时，shadow asar 装配，修复 CREDENTIAL_BOOTSTRAP_FAILED） |
+| workbuddy-agent | 5.11.3.43806934_ecace0f7 | https://www.workbuddy.cn/app | 已构建（2026-11-17；Windows 包 payload + 官方国内 deb 运行时，流程与 intl 一致；Wayland 下预置空快捷键避免 Add Keyboard Shortcuts 弹窗，并带 GPU/Wayland IME 启动参数），待推送 AUR |
+| workbuddy-intl-agent | 5.11.4.44121853_0026dff0 | https://www.workbuddy.ai | 已推送 AUR 5.11.4-1（2026-11-17；Windows 包 payload + 国内 deb 的定制 Electron/运行时，shadow asar 装配，修复 CREDENTIAL_BOOTSTRAP_FAILED）；pkgrel 2 恢复 5.9.4 的 Wayland 快捷键防护与 GPU/IME 启动参数，待推送 |
 | kimi-work-bin | 3.2.27 | https://www.kimi.com/products/kimi-work | 已推送 AUR（2026-11-13，x86_64；启动命令 kimi-work） |
 | minimax-code-bin | 0.7.7 | https://agent.minimax.cn/download | 已推送 AUR（2026-11-13，x86_64） |
 | kimi-code-intl-bin | 1.3.5 | https://code.kimi.ai/ | 已推送 AUR（2026-11-13；x86_64；命令 kimi-code，区域固定 global，Wayland 下禁用全局快捷键 portal 避免弹窗） |

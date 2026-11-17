@@ -27,6 +27,7 @@ import sys
 import tarfile
 import urllib.error
 import urllib.request
+import zlib
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from email.message import EmailMessage
@@ -75,7 +76,21 @@ def http(url: str, headers: dict[str, str] | None = None, limit: int = 0) -> byt
 
 
 def http_json(url: str, headers: dict[str, str] | None = None) -> Any:
-    return json.loads(http(url, headers))
+    """Fetch JSON, decompressing when the server ignores Accept-Encoding.
+
+    download.qoder.com now returns gzip for the channel manifest even though
+    urllib sends no Accept-Encoding; decode it here rather than failing on
+    UndefinedCharacterError mid-run.
+    """
+    req = urllib.request.Request(url, headers={"User-Agent": UA, **(headers or {})})
+    with urllib.request.urlopen(req, timeout=TIMEOUT) as resp:
+        raw = resp.read()
+        encoding = (resp.headers.get("Content-Encoding") or "").lower()
+    if encoding == "gzip":
+        raw = gzip.decompress(raw)
+    elif encoding == "deflate":
+        raw = zlib.decompress(raw)
+    return json.loads(raw)
 
 
 def pkgver(pkg: str) -> str:
