@@ -291,7 +291,7 @@ PRODUCTS: tuple[tuple[str, str, Any], ...] = (
     ("workbuddy-intl-agent", "WorkBuddy 国际版",
      lambda _cur: probe_workbuddy("www.workbuddy.ai", "workbuddy-win32-x64-archive")),
     ("workbuddy-agent", "WorkBuddy 国内版",
-     lambda _cur: probe_workbuddy("www.workbuddy.cn", "workbuddy-linux-x64-deb")),
+     lambda _cur: probe_workbuddy("www.workbuddy.cn", "workbuddy-win32-x64-archive")),
     ("qoder-agent", "Qoder Agent 国际版",
      lambda _cur: probe_qoder_latest("https://download.qoder.com/qoder-app/releases/latest-linux.yml")),
     ("qoder-cn-agent", "Qoder Agent 国内版",
