@@ -14,6 +14,8 @@
 | qoderwake-cn-bin | 1.2.18_cn | https://qoder.cn | 已推送 AUR（2026-11-16，x86_64 已构建） |
 | mimo-desktop-bin | 26.1116.161705 | https://mimo.xiaomimimo.com/desktop/ | 已推送 AUR（2026-11-16，x86_64；pkgrel 2 补 mesa、修正 sandbox 权限与 AppArmor 缓存清理，待推送） |
 | mimo-desktop-intl-bin | 26.1116.161705 | https://mimo-ai.xiaomimimo.com/desktop/ | 已构建（2026-11-17，x86_64；官方海外 Linux deb 重打包，可与国内版并存），待推送 AUR |
+| zcode-intl-bin | 3.18.2_10443 | https://zcode.z.ai/ | 已构建（2026-11-17；官方 Linux deb 重打包，保留 Z.ai 默认与系统语言），待推送 AUR |
+| zcode-cn-bin | 3.18.2_10443 | https://zcode.z.ai/cn | 已构建（2026-11-17；同一官方 deb 在包层切分，BigModel 默认、中文界面、独立数据目录，可与国际版并存），待推送 AUR |
 | gw2api-bin | 4.29.0 | https://github.com/zexadev/gemini-web2api-go | 已推送 AUR（2026-11-17） |
 | catpaw-cn | 2026.1030.1130 | https://s3plus.meituan.net/catpaw-external-resources/ide/win32-x64/stable/ | 已推送 AUR（2026-11-09） |
 | catpaw | 2026.1111.1938 | https://s3-fra01-eu.mykeeta.net/catpaw-overseas/ide/win32-x64/stable/ | 已推送 AUR（2026-11-12，pkgrel 1） |
@@ -42,7 +44,7 @@
 
 ## 上游更新检测
 
-`scripts/check-upstream-updates.py` 逐一探测上表 16 个产品的官方发布通道，与各包
+`scripts/check-upstream-updates.py` 逐一探测上表各产品的官方发布通道，与各包
 `PKGBUILD` 的 `pkgver` 比较。只依赖 Python 标准库，无需安装任何包。
 `dumate-app-bin` 的上游只公布 `-latest.deb` 指针，需要下载 deb 读 control 才能拿到
 版本，暂未纳入自动探测。
@@ -67,6 +69,7 @@ SMTP_PASS=<QQ 邮箱授权码> python3 scripts/check-upstream-updates.py --mail
 | qoderwake-bin / qoderwake-cn-bin | 官方 channel `manifest.json` 的 `latest` 与 Linux amd64 归档 sha256 |
 | mimo-desktop-bin | 官方 `latest` deb 的 control 归档（HTTP Range 取前 2 MiB，读 `Version`） |
 | mimo-desktop-intl-bin | 同上，取海外 `mimodesktopai` 通道 |
+| zcode-intl-bin / zcode-cn-bin | 官方下载页的 linux-x64 deb 链接，再读 control 归档的 `Version`（含 Debian revision） |
 | gw2api-bin | GitHub Releases API |
 | trae-ide / trae-cn-ide | 官方 icube 版本清单，取 Linux 构建号 |
 

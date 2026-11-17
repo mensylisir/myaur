@@ -50,6 +50,10 @@ MIMO_DEB_LATEST = (
 MIMO_AI_DEB_LATEST = (
     "https://mimocode-cdn.xiaomimimo.com/mimocode/mimodesktopai/XiaomiMiMo-AI-latest-x64.deb"
 )
+# ZCode has neither an update manifest nor a versionless deb: its download
+# pages link the current versioned Linux deb directly.
+ZCODE_DOWNLOAD_PAGE = "https://zcode.z.ai/"
+ZCODE_CN_DOWNLOAD_PAGE = "https://zcode.z.ai/cn"
 AR_HEADER_SIZE = 60
 
 
@@ -219,11 +223,14 @@ def ar_members(raw: bytes) -> list[tuple[str, bytes, int]]:
     return members
 
 
-def probe_mimo_deb(url: str) -> Probe:
-    """Read the version from the control archive of MiMo's ``latest`` deb.
+def probe_deb_control(url: str) -> Probe:
+    """Read the version from the control archive of a Debian package.
 
-    The CDN object has no version in its name, so a single 2 MiB range
-    request replaces downloading the whole 300 MB package.
+    Used for products that publish a versionless "latest" deb (MiMo) or whose
+    version only exists in the package metadata (ZCode's download page links
+    ``ZCode-<version>-linux-x64.deb`` but the Debian revision lives in the
+    control archive). A single 2 MiB range request replaces downloading the
+    whole package.
     """
     raw = http(url, {"Range": "bytes=0-2097151"}, limit=2 * 1024 * 1024)
     control = None
@@ -259,6 +266,22 @@ def probe_mimo_deb(url: str) -> Probe:
         url=url,
         extra={"control_version": raw_version},
     )
+
+
+def probe_zcode_deb(page: str) -> Probe:
+    """Pick the newest Linux deb linked from a ZCode download page."""
+    text = http(page).decode("utf-8", "replace")
+    urls = {
+        match.group(1): match.group(0)
+        for match in re.finditer(
+            r"https://cdn-zcode\.z\.ai/zcode/electron/releases/(\d+(?:\.\d+)+)"
+            r"/linux-x64/ZCode-\1-linux-x64\.deb",
+            text,
+        )
+    }
+    if not urls:
+        raise ValueError("download page has no linux-x64 deb link")
+    return probe_deb_control(urls[max(urls, key=version_key)])
 
 
 def probe_github_release(repo: str) -> Probe:
@@ -311,9 +334,13 @@ PRODUCTS: tuple[tuple[str, str, Any], ...] = (
      lambda _cur: probe_qoderwake(
          "https://ide.qoder.com.cn/qoderwake-cn/channels/manifest.json")),
     ("mimo-desktop-bin", "Xiaomi MiMo 桌面版",
-     lambda _cur: probe_mimo_deb(MIMO_DEB_LATEST)),
+     lambda _cur: probe_deb_control(MIMO_DEB_LATEST)),
     ("mimo-desktop-intl-bin", "Xiaomi MiMo 海外版",
-     lambda _cur: probe_mimo_deb(MIMO_AI_DEB_LATEST)),
+     lambda _cur: probe_deb_control(MIMO_AI_DEB_LATEST)),
+    ("zcode-intl-bin", "ZCode 国际版",
+     lambda _cur: probe_zcode_deb(ZCODE_DOWNLOAD_PAGE)),
+    ("zcode-cn-bin", "ZCode 国内版",
+     lambda _cur: probe_zcode_deb(ZCODE_CN_DOWNLOAD_PAGE)),
     ("gw2api-bin", "gemini-web2api-go",
      lambda _cur: probe_github_release("zexadev/gemini-web2api-go")),
     ("trae-ide", "Trae IDE 国际版",

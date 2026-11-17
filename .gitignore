@@ -51,6 +51,10 @@ __pycache__/
 # DuMate 官方 deb 下载
 /dumate-app-bin/*.deb
 
+# ZCode 官方 deb 下载
+/zcode-intl-bin/*.deb
+/zcode-cn-bin/*.deb
+
 # appclone 官方发布归档
 /appclone-bin/*.tar.gz
 
