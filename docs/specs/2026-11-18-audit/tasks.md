@@ -83,9 +83,9 @@
 - [x] F2 `qoderwake-cn-bin` 对 512 / 128 图标合成 CN 角标（构建通过，512 图标已目视确认）
 - [x] F3 `kimi-work-bin` 头部注释与 README 标记 legacy（不锁定区域，建议改用 -intl / -cn）
 - [x] F4 在 spec 记录 zcode 深链共用、qoderwake URL 集相同两项上游限制
-- [ ] 三个改动包 `makepkg -f` 构建通过；图标 sha256 比对（intl 不变、cn 变化）；desktop 校验全绿
-- [ ] 三个包 `.SRCINFO` 同步；清理构建产物
-- [ ] 提交并推送 GitHub（不推 AUR）
+- [x] 三个改动包 `makepkg -f` 构建通过；图标 sha256 比对（intl 不变、cn 变化）；desktop 校验全绿
+- [x] 三个包 `.SRCINFO` 同步；清理构建产物
+- [x] 提交并推送 GitHub（不推 AUR）：`ee11496` 已推送 `origin/main`
 
 ## 验收标准
 
