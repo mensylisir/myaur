@@ -97,6 +97,15 @@
 - [x] 两包 `makepkg -f` 构建通过（1.2.20-2 / 1.2.20_cn-3，`check()` 断言通过）、`.SRCINFO` 同步、清理产物
 - [x] 提交并推送 GitHub（不推 AUR）：`5352fae` 已推送 `origin/main`
 
+## T11 第四轮：上游升级（已完成）
+
+- [x] 全量探测：仅 `qoder-agent`（0.5.12 → 0.5.14）与 `gw2api-bin`（4.29.0 → 4.30.0）过期，其余包均为最新
+- [x] `qoder-agent` 升级 0.5.14-1：新 RPM sha256 校验通过，实际 Electron 主版本仍为 43，`makepkg -f` 构建通过
+- [x] `qoder-agent` 0.5.14 的 desktop 重复 scheme 仍在，`prepare()` 去重逻辑继续生效
+- [x] `gw2api-bin` 升级 4.30.0-1：x86_64 / aarch64 sha256 与上游 `SHA256SUMS.txt` 一致，构建通过，包内二进制 `-version` 输出 4.30.0
+- [x] 4.30.0 新增的 `stream_idle_timeout_sec` 仅为运行时配置（config.json / 管理面板），CLI 参数与 systemd 单元无需改动
+- [x] 两包 `.SRCINFO` 同步，清理 `src/`、`pkg/`、`*.pkg.tar.zst`
+
 ## 验收标准
 
 - 所有包 `.SRCINFO` 同步、脚本语法通过、desktop 无 error。

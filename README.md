@@ -6,7 +6,7 @@
 
 | 包名 | 版本 | 上游 | 状态 |
 |---|---|---|---|
-| qoder-agent | 0.5.12 | https://qoder.com/ | 已推送 AUR 0.5.12-1（2026-11-16）；pkgrel 2 去重 desktop 中重复的 qoder 深链声明，待推送 |
+| qoder-agent | 0.5.14 | https://qoder.com/ | 待推送 AUR（2026-11-18 升级；pkgrel 1 去重 desktop 中重复的 qoder 深链声明） |
 | qoder-cn-agent | 0.5.14 | https://qoder.cn | 待推送 AUR（2026-11-18 升级） |
 | qoder-ide | 1.40.1 | https://qoder.com/ | 已推送 AUR（2026-11-16） |
 | qoder-cn-ide | 1.40.1 | https://qoder.cn | 已推送 AUR（2026-11-13） |
@@ -16,7 +16,7 @@
 | mimo-desktop-intl-bin | 26.1116.161705 | https://mimo-ai.xiaomimimo.com/desktop/ | 已构建（2026-11-17，x86_64；官方海外 Linux deb 重打包，可与国内版并存），待推送 AUR |
 | zcode-intl-bin | 3.18.2_10443 | https://zcode.z.ai/ | 已构建（2026-11-17；官方 Linux deb 重打包，保留 Z.ai 默认与系统语言），待推送 AUR |
 | zcode-cn-bin | 3.18.2_10443 | https://zcode.z.ai/cn | 已构建（2026-11-17；同一官方 deb 在包层切分，BigModel 默认、中文界面、独立数据目录，可与国际版并存；pkgrel 2 国内版图标加 CN 角标），待推送 AUR |
-| gw2api-bin | 4.29.0 | https://github.com/zexadev/gemini-web2api-go | 已推送 AUR（2026-11-17） |
+| gw2api-bin | 4.30.0 | https://github.com/zexadev/gemini-web2api-go | 待推送 AUR（2026-11-18 升级；新增 `stream_idle_timeout_sec` 为运行时配置项，打包方式不变） |
 | catpaw-cn | 2026.1030.1130 | https://s3plus.meituan.net/catpaw-external-resources/ide/win32-x64/stable/ | 已推送 AUR（2026-11-09） |
 | catpaw | 2026.1111.1938 | https://s3-fra01-eu.mykeeta.net/catpaw-overseas/ide/win32-x64/stable/ | 已推送 AUR（2026-11-12，pkgrel 1） |
 | trae-ide | 2.3.103560 | https://www.trae.cn/ | 待推送 AUR（2026-11-18 升级；pkgrel 2 补 x-scheme-handler/trae 深链声明） |
