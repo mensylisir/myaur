@@ -3,7 +3,7 @@ pkgname=qoder-cn-agent
 _pkgname=Qoder-CN
 pkgver=0.5.14
 _electronversion=43
-pkgrel=2
+pkgrel=1
 pkgdesc="Qoder 全新形态，以编程智能体为核心引擎，从想法到实现，轻松搞定。"
 arch=('x86_64')
 url="https://qoder.cn"
@@ -17,8 +17,6 @@ depends=(
 )
 makedepends=(
     'asar'
-    'imagemagick'
-    'ttf-dejavu'
 )
 optdepends=(
     'bash'
@@ -40,25 +38,6 @@ sha256sums=('c92d5a77b7b47c3434938e9b3d7df1ff676b1efd5820ba5cb69589e8de4834fc'
             '9417ba033cfc980d6723978dc5fca100cbec6da78e5494f9e64960e4efec8c21')
 pkgver() {
 	cat "${srcdir}/.pkgver" 2>/dev/null || echo "${pkgver}"
-}
-# 上游国内版 RPM 里的图标与国际版是同一套素材；右下角合成 CN 角标以便区分。
-_badge_icon() {
-    local src="$1" dst="$2" size="$3"
-    local bw pad radius pointsize tmp
-    bw=$(( size * 38 / 100 )); [ "$bw" -lt 7 ] && bw=7
-    pad=$(( size * 6 / 100 )); [ "$pad" -lt 1 ] && pad=1
-    radius=$(( bw / 4 )); [ "$radius" -lt 1 ] && radius=1
-    pointsize=$(( bw * 40 / 100 )); [ "$pointsize" -lt 4 ] && pointsize=4
-    tmp="$(mktemp --suffix=.png)"
-    install -dm755 "$(dirname "${dst}")"
-    magick -size "${bw}x${bw}" xc:none \
-        -fill '#C8102E' \
-        -draw "roundrectangle 0,0 $(( bw - 1 )),$(( bw - 1 )) ${radius},${radius}" \
-        -gravity center -font DejaVu-Sans-Bold -pointsize "${pointsize}" \
-        -fill white -annotate +0+0 'CN' "${tmp}" || return 1
-    magick "${src}" -resize "${size}x${size}" \
-        "${tmp}" -gravity southeast -geometry "+${pad}+${pad}" -composite "${dst}"
-    rm -f "${tmp}"
 }
 _get_app_dir() {
 	find "${srcdir}" -type f -name "resources.pak" ! -path "*/node_modules/*" -printf '%h\n' 2>/dev/null \
@@ -99,12 +78,7 @@ package() {
         _extension="${_i##*.}"
         _icon_path="${_i#*share/icons/}"
         _target_dir="/usr/share/icons/$(dirname "${_icon_path}")"
-        if [ "${_extension}" = png ]; then
-            _size="$(basename "$(dirname "${_target_dir}")" | cut -dx -f1)"
-            _badge_icon "${_i}" "${pkgdir}${_target_dir}/qoder-cn.png" "${_size}"
-        else
-            install -Dm644 "${_i}" "${pkgdir}${_target_dir}/qoder-cn.${_extension}"
-        fi
+        install -Dm644 "${_i}" "${pkgdir}${_target_dir}/qoder-cn.${_extension}"
     done
     install -Dm644 "${srcdir}/LICENSE.html" -t "${pkgdir}/usr/share/licenses/${pkgname}"
 }
