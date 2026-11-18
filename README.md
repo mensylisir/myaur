@@ -7,12 +7,12 @@
 | 包名 | 版本 | 上游 | 状态 |
 |---|---|---|---|
 | qoder-agent | 0.5.14 | https://qoder.com/ | 已推送 AUR（2026-11-18 升级；pkgrel 1 去重 desktop 中重复的 qoder 深链声明） |
-| qoder-cn-agent | 0.5.14 | https://qoder.cn | 已推送 AUR（2026-11-18 升级） |
+| qoder-cn-agent | 0.5.14 | https://qoder.cn | 已推送 AUR（2026-11-18 升级；pkgrel 2 国内版图标加 CN 角标） |
 | qoder-ide | 1.40.1 | https://qoder.com/ | 已推送 AUR（2026-11-16） |
 | qoder-cn-ide | 1.40.1 | https://qoder.cn | 已推送 AUR（2026-11-13） |
 | qoderwake-bin | 1.2.20 | https://qoder.com/ | 已推送 AUR（2026-11-18 升级；pkgrel 2 构建期断言区域固定为 global） |
 | qoderwake-cn-bin | 1.2.20_cn | https://qoder.cn | 已推送 AUR（2026-11-18 升级；pkgrel 3 国内版图标加 CN 角标，构建期断言区域固定为 cn） |
-| mimo-desktop-bin | 26.1116.161705 | https://mimo.xiaomimimo.com/desktop/ | 已推送 AUR（2026-11-18，x86_64；pkgrel 2 补 mesa、修正 sandbox 权限与 AppArmor 缓存清理） |
+| mimo-desktop-bin | 26.1116.161705 | https://mimo.xiaomimimo.com/desktop/ | 已推送 AUR（2026-11-18，x86_64；pkgrel 3 国内版图标加 CN 角标；pkgrel 2 补 mesa、修正 sandbox 权限与 AppArmor 缓存清理） |
 | mimo-desktop-intl-bin | 26.1116.161705 | https://mimo-ai.xiaomimimo.com/desktop/ | 已推送 AUR（2026-11-18，x86_64；官方海外 Linux deb 重打包，可与国内版并存） |
 | zcode-intl-bin | 3.18.2_10443 | https://zcode.z.ai/ | 已推送 AUR（2026-11-18；官方 Linux deb 重打包，保留 Z.ai 默认与系统语言） |
 | zcode-cn-bin | 3.18.2_10443 | https://zcode.z.ai/cn | 已推送 AUR（2026-11-18；同一官方 deb 在包层切分，BigModel 默认、中文界面、独立数据目录，可与国际版并存；pkgrel 2 国内版图标加 CN 角标） |

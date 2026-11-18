@@ -1,11 +1,13 @@
 pkgbase = qoder-cn-agent
 	pkgdesc = Qoder 全新形态，以编程智能体为核心引擎，从想法到实现，轻松搞定。
 	pkgver = 0.5.14
-	pkgrel = 1
+	pkgrel = 2
 	url = https://qoder.cn
 	arch = x86_64
 	license = LicenseRef-custom
 	makedepends = asar
+	makedepends = imagemagick
+	makedepends = ttf-dejavu
 	depends = electron43
 	depends = libsecret
 	depends = nodejs
