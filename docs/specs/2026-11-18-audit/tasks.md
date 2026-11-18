@@ -95,7 +95,7 @@
 - [x] 确认 `config list` 两版仅端口不同（19820 / 19830），没有 region/endpoint 覆盖项；console 运行时会把 qoder.com 文档/定价链接改写成区域 base
 - [x] 两个 PKGBUILD 新增 `check()` 断言区域选择器（intl=`global`、cn=`cn`），上游改变逻辑时构建失败
 - [x] 两包 `makepkg -f` 构建通过（1.2.20-2 / 1.2.20_cn-3，`check()` 断言通过）、`.SRCINFO` 同步、清理产物
-- [ ] 提交并推送 GitHub（不推 AUR）
+- [x] 提交并推送 GitHub（不推 AUR）：`5352fae` 已推送 `origin/main`
 
 ## 验收标准
 
