@@ -22,12 +22,13 @@
 pkgname=qoderwake-cn-bin
 _upstreamver=1.2.20-cn
 pkgver=1.2.20_cn
-pkgrel=1
+pkgrel=2
 pkgdesc="QoderWake 国内版 local CLI and daemon (official prebuilt Linux runtime)"
 arch=('x86_64' 'aarch64')
 url='https://qoder.cn/'
 license=('LicenseRef-custom')
 depends=('glibc' 'python')
+makedepends=('imagemagick' 'ttf-dejavu')
 optdepends=('xdg-utils: open the QoderWake console in the default browser')
 options=('!strip' '!debug')
 provides=("${pkgname%-bin}=${pkgver}")
@@ -41,6 +42,27 @@ source_aarch64=(
 )
 sha256sums_x86_64=('0cf0d8d6f396b2b03ac1cf3aa16316dc810b7c0e14e5fa8abacb16d4a645096b')
 sha256sums_aarch64=('25f32f74a5f677a5d4515f4971ddf154f9a71a5b705052fa30ff4d5d57ea5ffb')
+
+# 上游两版包内的位图 logo 相同；国内版右下角合成 CN 角标以便区分（console
+# 页面本身已使用 qoderwake-icon-cn.svg）。
+_badge_icon() {
+    local src="$1" dst="$2" size="$3"
+    local bw pad radius pointsize tmp
+    bw=$(( size * 38 / 100 )); [ "$bw" -lt 7 ] && bw=7
+    pad=$(( size * 6 / 100 )); [ "$pad" -lt 1 ] && pad=1
+    radius=$(( bw / 4 )); [ "$radius" -lt 1 ] && radius=1
+    pointsize=$(( bw * 40 / 100 )); [ "$pointsize" -lt 4 ] && pointsize=4
+    tmp="$(mktemp --suffix=.png)"
+    magick -size "${bw}x${bw}" xc:none \
+        -fill '#C8102E' \
+        -draw "roundrectangle 0,0 $(( bw - 1 )),$(( bw - 1 )) ${radius},${radius}" \
+        -gravity center -font DejaVu-Sans-Bold -pointsize "${pointsize}" \
+        -fill white -annotate +0+0 'CN' "${tmp}" || return 1
+    install -dm755 "$(dirname "${dst}")"
+    magick "${src}" -resize "${size}x${size}" \
+        "${tmp}" -gravity southeast -geometry "+${pad}+${pad}" -composite "${dst}"
+    rm -f "${tmp}"
+}
 
 package() {
   # The tarball has no top-level directory, so makepkg extracts it flat into
@@ -91,10 +113,10 @@ WRAPPER
   # Upstream ships no desktop integration; the product is a CLI plus a local
   # web console. Add a launcher that starts the daemon and opens that console,
   # using the QoderWake logo bundled in the runtime.
-  install -Dm644 "${srcdir}/resources/browser-connector/chrome-extension/qwork-logo-light.png" \
-    "${pkgdir}/usr/share/icons/hicolor/512x512/apps/qoderwake-cn.png"
-  install -Dm644 "${srcdir}/resources/browser-connector/chrome-extension/icons/icon-128.png" \
-    "${pkgdir}/usr/share/icons/hicolor/128x128/apps/qoderwake-cn.png"
+  _badge_icon "${srcdir}/resources/browser-connector/chrome-extension/qwork-logo-light.png" \
+    "${pkgdir}/usr/share/icons/hicolor/512x512/apps/qoderwake-cn.png" 512
+  _badge_icon "${srcdir}/resources/browser-connector/chrome-extension/icons/icon-128.png" \
+    "${pkgdir}/usr/share/icons/hicolor/128x128/apps/qoderwake-cn.png" 128
 
   install -Dm755 /dev/stdin "${pkgdir}/usr/lib/qoderwake-cn/qoderwake-cn-console" <<'CONSOLE'
 #!/bin/sh

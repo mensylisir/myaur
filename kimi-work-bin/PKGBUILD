@@ -5,6 +5,13 @@
 # proven kimi-bin layout (NSIS -> app-64.7z -> app.asar + daimon bundle) and
 # replaces the Windows-only launchers with offline wrappers running through
 # electron43's Node mode.
+#
+# LEGACY: this is the original single build and does not pin a region, so the
+# app picks China vs overseas from the login/account at runtime. New installs
+# should use kimi-work-intl-bin (region pinned to overseas) or
+# kimi-work-cn-bin (region pinned to china). Both use their own /opt prefix,
+# command and desktop id and can coexist with this package; only
+# kimi-work-intl-bin conflicts with it because both install /usr/bin/kimi-work.
 
 pkgname=kimi-work-bin
 pkgver=3.2.27

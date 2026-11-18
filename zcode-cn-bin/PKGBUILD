@@ -24,7 +24,7 @@
 
 pkgname=zcode-cn-bin
 pkgver=3.18.2_10443
-pkgrel=1
+pkgrel=2
 pkgdesc='ZCode — agentic development environment for GLM (official Linux build, BigModel defaults)'
 arch=('x86_64' 'aarch64')
 url='https://zcode.z.ai/cn'
@@ -45,7 +45,7 @@ depends=(
   'xdg-utils'
 )
 optdepends=('libappindicator-gtk3: tray icon support')
-makedepends=('libarchive' 'nodejs')
+makedepends=('libarchive' 'nodejs' 'imagemagick' 'ttf-dejavu')
 install="${pkgname}.install"
 conflicts=('zcode-cn' 'z-code-bin' 'zcode-bin' 'zcode-desktop-bin')
 provides=('zcode-cn')
@@ -58,6 +58,27 @@ sha256sums=('6f4fbd5d8f8e6a1cd8b920c2a867e20eca10dd61404a20aee399168f5be9035e'
             '2700a8d1d447a6805b1e600bdc12cc05afa16948896696a5a3a0ffb341e1d090')
 sha256sums_x86_64=('a7e066eeb018d15e403546a14dd3692220fc9976769b1f3525a0620cfa974f73')
 sha256sums_aarch64=('be3de63f57b1351d921bd977a21cff212d9e5a0710e3af8eae8abcfc2147b714')
+
+# 上游同一份包里只有一张 zcode.png；国内版图标右下角合成 CN 角标，避免两版
+# 在启动器/任务栏里完全一样。
+_badge_icon() {
+    local src="$1" dst="$2" size="$3"
+    local bw pad radius pointsize tmp
+    bw=$(( size * 38 / 100 )); [ "$bw" -lt 7 ] && bw=7
+    pad=$(( size * 6 / 100 )); [ "$pad" -lt 1 ] && pad=1
+    radius=$(( bw / 4 )); [ "$radius" -lt 1 ] && radius=1
+    pointsize=$(( bw * 40 / 100 )); [ "$pointsize" -lt 4 ] && pointsize=4
+    tmp="$(mktemp --suffix=.png)"
+    magick -size "${bw}x${bw}" xc:none \
+        -fill '#C8102E' \
+        -draw "roundrectangle 0,0 $(( bw - 1 )),$(( bw - 1 )) ${radius},${radius}" \
+        -gravity center -font DejaVu-Sans-Bold -pointsize "${pointsize}" \
+        -fill white -annotate +0+0 'CN' "${tmp}" || return 1
+    install -dm755 "$(dirname "${dst}")"
+    magick "${src}" -resize "${size}x${size}" \
+        "${tmp}" -gravity southeast -geometry "+${pad}+${pad}" -composite "${dst}"
+    rm -f "${tmp}"
+}
 
 package() {
   local _extractdir _data _size _arch _app
@@ -92,8 +113,9 @@ package() {
     "${_app}/resources/apparmor-profile"
 
   for _size in 16 24 32 48 64 128 256 512 1024; do
-    install -Dm644 "${_extractdir}/usr/share/icons/hicolor/${_size}x${_size}/apps/zcode.png" \
-      "${pkgdir}/usr/share/icons/hicolor/${_size}x${_size}/apps/zcode-cn.png"
+    _badge_icon "${_extractdir}/usr/share/icons/hicolor/${_size}x${_size}/apps/zcode.png" \
+      "${pkgdir}/usr/share/icons/hicolor/${_size}x${_size}/apps/zcode-cn.png" \
+      "${_size}"
   done
 
   install -Dm644 "${_extractdir}/usr/share/applications/zcode.desktop" \

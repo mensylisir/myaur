@@ -127,3 +127,40 @@
 6. **kimi-work / kimi-code 旧包无需新增 conflicts**：cn 包只占用带 `-cn` 的独立命令、desktop 与安装前缀，与旧单包无文件重叠。
 7. **仓库卫生**：`.gitignore` 补齐 `/workbuddy-*/*.tgz`，避免国际版构建下载物被误提交。
 8. **第二轮升级与复审**：4 个包无条件升级并构建通过；QoderWake 两版状态目录 / 端口隔离实测正常；发现并修复 qoder 两版 desktop 中重复的 scheme 声明（`desktop-file-validate` 不再有重复项警告）；另补查 5 个无自动探针的包，均为最新。
+
+## 第三轮：国内 / 国际版区分度审查（2026-11-18）
+
+逐对核对图标、登录（区域）、名称与其他身份字段。结论如下。
+
+| 包对 | 名称 / 桌面项 | 图标 | 登录 / 区域 | 结论 |
+| --- | --- | --- | --- | --- |
+| qoder-agent / qoder-cn-agent | `Qoder` / `Qoder CN`，desktop id、`StartupWMClass` 均不同 | 512 png sha256 不同 | `dataDirectoryName` `com.qoder.app.stable` / `com.qodercn.app.stable`；协议 `qoder` / `qoder-cn` | 完整分离 |
+| qoder-ide / qoder-cn-ide | `appId`、desktop、`StartupWMClass` 不同 | 图像不同（sha256 不同） | `product.json` 的 `appId` / `dataFolderName` / 协议 / update / license / privacy 域名全部不同 | 完整分离 |
+| trae-ide / trae-cn-ide | `Trae` / `Trae CN`，`StartupWMClass` `Trae` / `Trae-cn` | **字节相同**（均为上游 `code.png`） | userData `Trae` / `Trae CN`，协议 `trae` / `trae-cn` | 图标无区分 → 修复；深链未声明 → 修复 |
+| workbuddy / workbuddy-intl | `WorkBuddy` / `WorkBuddy AI` | 图像相同，但两版 desktop 名不同；intl 仅 256px | 域名 `workbuddy.cn` / `workbuddy.ai`、`dataFolderName` `.workbuddy` / `.workbuddy-ai` | 完整分离 |
+| kimi-code-intl-bin / -cn-bin | `kimi-code-app-intl` / `-cn`，desktop 不同 | CN 带角标，图像不同 | 同 deb + `patch-region.js`：协议 `kimi-code` / `kimi-code-cn`、API host、区域常量 | 完整分离 |
+| kimi-work-intl-bin / -cn-bin | `kimi-desktop-intl` / `-cn`，desktop 不同 | 图像不同 | 区域常量 `overseas` / `china` 钉死 | 完整分离 |
+| minimax-code-intl / -cn | `name` 不同，desktop 不同 | 图像不同 | 独立 `--user-data-dir`，intl 区域改 overseas | 完整分离 |
+| mimo-desktop-bin / -intl-bin | 官方两个 deb，产品名 / desktop 不同 | 图像不同 | 官方独立 deb，URI scheme 不同 | 完整分离 |
+| catpaw / catpaw-cn | `catpaw` / `catpaw-cn` | 图像不同 | `APP_ID` `com.catx.catpaw.overseas` / 国内对应值 | 完整分离 |
+| zcode-intl-bin / zcode-cn-bin | `ZCode` / `ZCode（国内版）`，desktop id 不同 | **字节相同** | 同一 asar；CN 由 `patch.cjs` 把 BigModel/智谱设为默认并固定中文；user data 目录独立；`zcode://` 两版共用（上游限制） | 图标无区分 → 修复 |
+| qoderwake-bin / qoderwake-cn-bin | `QoderWake` / `QoderWake 国内版` | **字节相同**；console SVG 已区分（`qoderwake-icon-cn.svg`） | 不同上游产物（`download.qoder.com` / `ide.qoder.com.cn`）；状态目录 `~/.qoderwake` / `~/.qoderwake-cn`，端口 19820 / 19830；二进制内 URL 集合相同，区域由账号决定 | 图标无区分 → 修复 |
+
+### 本轮修复项
+
+- **F1 Trae 深链**：`trae.desktop` 的 `MimeType` 增加 `x-scheme-handler/trae`，`trae-cn.desktop` 增加 `x-scheme-handler/trae-cn`（与两版 `product.json` 的 `urlProtocol` 一致），否则注册深链后 `xdg-open` 找不到处理程序。
+- **F2 国内版图标角标**（用户决定：仿照 kimi 加角标）：
+  - `trae-cn-ide`：新增 `makedepends=('imagemagick')`，从上游 512 png 生成 16/24/32/48/64/128/256/512 各尺寸并合成角标，安装到对应 hicolor 目录（原仅 512）。
+  - `zcode-cn-bin`：对解包出的每个尺寸 png 合成角标后再安装为 `zcode-cn.png`。
+  - `qoderwake-cn-bin`：对 512 与 128 两张源图分别合成角标。
+  - 角标规范：右下角圆角方块，底色 `#C8102E`，白色粗体 `CN`；宽度为图像宽度 38%，距右边与下边各 6%，小尺寸（≤24px）按比例缩小。
+- **F3 `kimi-work-bin` 标记 legacy**：PKGBUILD 头部注释与 README 注明“早期通用包，不锁定区域，建议改用 `kimi-work-intl-bin` / `kimi-work-cn-bin`”；不新增 conflicts，避免破坏现有用户。
+- **F4 记录上游限制**：`zcode://` 两版共用；`qoderwake` 两版二进制 URL 集相同（区域由账号决定）；不强行二进制 patch。
+
+### 第三轮验证步骤
+
+1. `trae-cn-ide`、`zcode-cn-bin`、`qoderwake-cn-bin` 执行 `makepkg -f`，构建通过且产物清理。
+2. 比对：国际版图标 sha256 不变；国内版新图标与上游不同，且各尺寸存在。
+3. `desktop-file-validate` 全绿；`trae-cn.desktop` 的 `MimeType` 含 `x-scheme-handler/trae-cn`，`trae.desktop` 含 `x-scheme-handler/trae`。
+4. 三个包 `.SRCINFO` 重新生成并与 PKGBUILD 一致。
+5. 所有改动只提交 GitHub，不推 AUR。

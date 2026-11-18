@@ -74,6 +74,19 @@
 - [x] 清理全部 `src/`、`pkg/`、`*.pkg.tar.zst` 与本轮下载归档
 - [x] 复查：27 包 `.SRCINFO` 同步、全部 desktop 无 error、无大文件待提交
 
+## T9 第三轮：国内 / 国际版区分度审查与修复（待执行）
+
+- [x] 逐对核对 11 组双版包的图标 / 登录 / 名称 / 协议（结论见 spec.md 第三轮表格）
+- [x] F1 `trae-ide/trae.desktop` 增加 `x-scheme-handler/trae`；`trae-cn-ide/trae-cn.desktop` 增加 `x-scheme-handler/trae-cn`
+- [x] F2 `trae-cn-ide` 增加 `imagemagick` makedepends，生成 16~512 带 CN 角标图标并安装全部尺寸（构建通过，512 图标已目视确认）
+- [x] F2 `zcode-cn-bin` 对每个尺寸图标合成 CN 角标（构建通过，16/512/1024 已确认）
+- [x] F2 `qoderwake-cn-bin` 对 512 / 128 图标合成 CN 角标（构建通过，512 图标已目视确认）
+- [x] F3 `kimi-work-bin` 头部注释与 README 标记 legacy（不锁定区域，建议改用 -intl / -cn）
+- [x] F4 在 spec 记录 zcode 深链共用、qoderwake URL 集相同两项上游限制
+- [ ] 三个改动包 `makepkg -f` 构建通过；图标 sha256 比对（intl 不变、cn 变化）；desktop 校验全绿
+- [ ] 三个包 `.SRCINFO` 同步；清理构建产物
+- [ ] 提交并推送 GitHub（不推 AUR）
+
 ## 验收标准
 
 - 所有包 `.SRCINFO` 同步、脚本语法通过、desktop 无 error。

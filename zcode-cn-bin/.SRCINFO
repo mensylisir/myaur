@@ -1,7 +1,7 @@
 pkgbase = zcode-cn-bin
 	pkgdesc = ZCode — agentic development environment for GLM (official Linux build, BigModel defaults)
 	pkgver = 3.18.2_10443
-	pkgrel = 1
+	pkgrel = 2
 	url = https://zcode.z.ai/cn
 	install = zcode-cn-bin.install
 	arch = x86_64
@@ -9,6 +9,8 @@ pkgbase = zcode-cn-bin
 	license = LicenseRef-Proprietary
 	makedepends = libarchive
 	makedepends = nodejs
+	makedepends = imagemagick
+	makedepends = ttf-dejavu
 	depends = alsa-lib
 	depends = at-spi2-core
 	depends = gtk3
