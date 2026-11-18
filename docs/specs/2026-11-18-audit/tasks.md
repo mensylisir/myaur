@@ -82,10 +82,20 @@
 - [x] F2 `zcode-cn-bin` 对每个尺寸图标合成 CN 角标（构建通过，16/512/1024 已确认）
 - [x] F2 `qoderwake-cn-bin` 对 512 / 128 图标合成 CN 角标（构建通过，512 图标已目视确认）
 - [x] F3 `kimi-work-bin` 头部注释与 README 标记 legacy（不锁定区域，建议改用 -intl / -cn）
-- [x] F4 在 spec 记录 zcode 深链共用、qoderwake URL 集相同两项上游限制
+- [x] F4 在 spec 记录 zcode 深链共用限制；QoderWake 区域经核实为构建期固定（见 T10）
 - [x] 三个改动包 `makepkg -f` 构建通过；图标 sha256 比对（intl 不变、cn 变化）；desktop 校验全绿
 - [x] 三个包 `.SRCINFO` 同步；清理构建产物
 - [x] 提交并推送 GitHub（不推 AUR）：`ee11496` 已推送 `origin/main`
+
+## T10 QoderWake 区域固定核实与构建期断言
+
+- [x] 解包 1.2.20 / 1.2.20-cn 两版，确认二进制均为 Bun 打包的 ELF（BuildID 相同、内容不同）
+- [x] 定位区域选择器 `Cs()`：国际版返回 `global`，国内版返回 `cn`（构建期常量替换，不读环境变量/账号）
+- [x] 确认区域常量决定 base URL（qoder.com / qoder.com.cn）、`homeDirName`（`.qoderwake` / `.qoderwake-cn`）、`binaryName`
+- [x] 确认 `config list` 两版仅端口不同（19820 / 19830），没有 region/endpoint 覆盖项；console 运行时会把 qoder.com 文档/定价链接改写成区域 base
+- [x] 两个 PKGBUILD 新增 `check()` 断言区域选择器（intl=`global`、cn=`cn`），上游改变逻辑时构建失败
+- [x] 两包 `makepkg -f` 构建通过（1.2.20-2 / 1.2.20_cn-3，`check()` 断言通过）、`.SRCINFO` 同步、清理产物
+- [ ] 提交并推送 GitHub（不推 AUR）
 
 ## 验收标准
 

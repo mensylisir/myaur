@@ -10,8 +10,8 @@
 | qoder-cn-agent | 0.5.14 | https://qoder.cn | 待推送 AUR（2026-11-18 升级） |
 | qoder-ide | 1.40.1 | https://qoder.com/ | 已推送 AUR（2026-11-16） |
 | qoder-cn-ide | 1.40.1 | https://qoder.cn | 已推送 AUR（2026-11-13） |
-| qoderwake-bin | 1.2.20 | https://qoder.com/ | 待推送 AUR（2026-11-18 升级） |
-| qoderwake-cn-bin | 1.2.20_cn | https://qoder.cn | 待推送 AUR（2026-11-18 升级；pkgrel 2 国内版图标加 CN 角标） |
+| qoderwake-bin | 1.2.20 | https://qoder.com/ | 待推送 AUR（2026-11-18 升级；pkgrel 2 构建期断言区域固定为 global） |
+| qoderwake-cn-bin | 1.2.20_cn | https://qoder.cn | 待推送 AUR（2026-11-18 升级；pkgrel 3 国内版图标加 CN 角标，构建期断言区域固定为 cn） |
 | mimo-desktop-bin | 26.1116.161705 | https://mimo.xiaomimimo.com/desktop/ | 已推送 AUR（2026-11-16，x86_64；pkgrel 2 补 mesa、修正 sandbox 权限与 AppArmor 缓存清理，待推送） |
 | mimo-desktop-intl-bin | 26.1116.161705 | https://mimo-ai.xiaomimimo.com/desktop/ | 已构建（2026-11-17，x86_64；官方海外 Linux deb 重打包，可与国内版并存），待推送 AUR |
 | zcode-intl-bin | 3.18.2_10443 | https://zcode.z.ai/ | 已构建（2026-11-17；官方 Linux deb 重打包，保留 Z.ai 默认与系统语言），待推送 AUR |

@@ -144,7 +144,7 @@
 | mimo-desktop-bin / -intl-bin | 官方两个 deb，产品名 / desktop 不同 | 图像不同 | 官方独立 deb，URI scheme 不同 | 完整分离 |
 | catpaw / catpaw-cn | `catpaw` / `catpaw-cn` | 图像不同 | `APP_ID` `com.catx.catpaw.overseas` / 国内对应值 | 完整分离 |
 | zcode-intl-bin / zcode-cn-bin | `ZCode` / `ZCode（国内版）`，desktop id 不同 | **字节相同** | 同一 asar；CN 由 `patch.cjs` 把 BigModel/智谱设为默认并固定中文；user data 目录独立；`zcode://` 两版共用（上游限制） | 图标无区分 → 修复 |
-| qoderwake-bin / qoderwake-cn-bin | `QoderWake` / `QoderWake 国内版` | **字节相同**；console SVG 已区分（`qoderwake-icon-cn.svg`） | 不同上游产物（`download.qoder.com` / `ide.qoder.com.cn`）；状态目录 `~/.qoderwake` / `~/.qoderwake-cn`，端口 19820 / 19830；二进制内 URL 集合相同，区域由账号决定 | 图标无区分 → 修复 |
+| qoderwake-bin / qoderwake-cn-bin | `QoderWake` / `QoderWake 国内版` | **字节相同**；console SVG 已区分（`qoderwake-icon-cn.svg`） | 不同上游产物（`download.qoder.com` / `ide.qoder.com.cn`）；状态目录 `~/.qoderwake` / `~/.qoderwake-cn`，端口 19820 / 19830；区域由构建期常量固定（见下文） | 图标无区分 → 修复 |
 
 ### 本轮修复项
 
@@ -155,7 +155,8 @@
   - `qoderwake-cn-bin`：对 512 与 128 两张源图分别合成角标。
   - 角标规范：右下角圆角方块，底色 `#C8102E`，白色粗体 `CN`；宽度为图像宽度 38%，距右边与下边各 6%，小尺寸（≤24px）按比例缩小。
 - **F3 `kimi-work-bin` 标记 legacy**：PKGBUILD 头部注释与 README 注明“早期通用包，不锁定区域，建议改用 `kimi-work-intl-bin` / `kimi-work-cn-bin`”；不新增 conflicts，避免破坏现有用户。
-- **F4 记录上游限制**：`zcode://` 两版共用；`qoderwake` 两版二进制 URL 集相同（区域由账号决定）；不强行二进制 patch。
+- **F4 记录上游限制**：`zcode://` 两版共用；不强行二进制 patch。
+- **F5 QoderWake 区域固定（补充核实）**：两版二进制都内置了 `global` / `cn` 两张区域表，所以 URL 集合看起来相同，但实际区域由构建期常量 `Cs()` 决定：国际版为 `` return`global`?… ``（base `https://qoder.com`），国内版为 `` return`cn`?… ``（base `https://qoder.com.cn`）；`homeDirName`、`binaryName`、console 的 docs/pricing 链接也随该常量切换，与登录账号无关，配置项里没有任何 region/endpoint 覆盖。为防止上游以后把区域改成运行时判定，两个 PKGBUILD 新增 `check()`：用 `grep -a` 断言二进制中的区域选择器分别为 `global` / `cn`，否则构建失败。Bun 打包的 250MB 可执行文件不做字节级改写，避免破坏内嵌 JS。
 
 ### 第三轮验证步骤
 
