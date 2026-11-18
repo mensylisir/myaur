@@ -26,8 +26,8 @@ src/
 /gw2api-bin/gemini-web2api-go_v*_linux_*
 
 # apifox 官方 Linux 归档
-/apifox-bin/*.zip
-/apifox-bin/*.AppImage
+/apifox-appimage-bin/*.zip
+/apifox-appimage-bin/*.AppImage
 
 # workbuddy port downloads
 /workbuddy-*/*.zip

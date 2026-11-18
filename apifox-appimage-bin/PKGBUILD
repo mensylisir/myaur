@@ -14,7 +14,7 @@
 # desktop entry; the Windows channel manifest (download/latest.yml) shares the
 # same version and is what scripts/check-upstream-updates.py reads.
 
-pkgname=apifox-bin
+pkgname=apifox-appimage-bin
 pkgver=2.8.55
 pkgrel=1
 pkgdesc='Apifox = Postman + Swagger + Mock + JMeter. API design, debugging, mocking and testing client (official Linux build)'
@@ -61,7 +61,7 @@ optdepends=(
 provides=("apifox=${pkgver}")
 conflicts=('apifox')
 options=('!strip' '!debug')
-noextract=("apifox-${pkgver}-${CARCH}.zip")
+noextract=("apifox-${pkgver}-x86_64.zip" "apifox-${pkgver}-aarch64.zip")
 
 source_x86_64=("apifox-${pkgver}-x86_64.zip::https://file-assets.apifox.com/download/Apifox-linux-latest.zip")
 source_aarch64=("apifox-${pkgver}-aarch64.zip::https://file-assets.apifox.com/download/Apifox-linux-arm64-latest.zip")

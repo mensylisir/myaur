@@ -17,7 +17,7 @@
 | zcode-intl-bin | 3.18.2_10443 | https://zcode.z.ai/ | 已构建（2026-11-17；官方 Linux deb 重打包，保留 Z.ai 默认与系统语言），待推送 AUR |
 | zcode-cn-bin | 3.18.2_10443 | https://zcode.z.ai/cn | 已构建（2026-11-17；同一官方 deb 在包层切分，BigModel 默认、中文界面、独立数据目录，可与国际版并存；pkgrel 2 国内版图标加 CN 角标），待推送 AUR |
 | gw2api-bin | 4.30.0 | https://github.com/zexadev/gemini-web2api-go | 待推送 AUR（2026-11-18 升级；新增 `stream_idle_timeout_sec` 为运行时配置项，打包方式不变） |
-| apifox-bin | 2.8.55 | https://apifox.com/ | 自维护（2026-11-18；官方 Linux AppImage 重打包，自带 Electron 37，修复 AUR 版 prepare 硬编码 `Apifox*.AppImage` 导致的构建失败） |
+| apifox-appimage-bin | 2.8.55 | https://apifox.com/ | 自维护（2026-11-18；官方 Linux AppImage 重打包，自带 Electron 37。AUR 的 `apifox-bin` 归他人所有，故用此名） |
 | catpaw-cn | 2026.1030.1130 | https://s3plus.meituan.net/catpaw-external-resources/ide/win32-x64/stable/ | 已推送 AUR（2026-11-09） |
 | catpaw | 2026.1111.1938 | https://s3-fra01-eu.mykeeta.net/catpaw-overseas/ide/win32-x64/stable/ | 已推送 AUR（2026-11-12，pkgrel 1） |
 | trae-ide | 2.3.103560 | https://www.trae.cn/ | 待推送 AUR（2026-11-18 升级；pkgrel 2 补 x-scheme-handler/trae 深链声明） |

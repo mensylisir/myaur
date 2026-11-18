@@ -375,7 +375,7 @@ PRODUCTS: tuple[tuple[str, str, Any], ...] = (
      lambda _cur: probe_zcode_deb(ZCODE_CN_DOWNLOAD_PAGE)),
     ("gw2api-bin", "gemini-web2api-go",
      lambda _cur: probe_github_release("zexadev/gemini-web2api-go")),
-    ("apifox-bin", "Apifox",
+    ("apifox-appimage-bin", "Apifox",
      lambda _cur: probe_apifox()),
     ("trae-ide", "Trae IDE 国际版",
      lambda _cur: probe_trae("https://icube-normal.traeapi.us/icube/api/v1/native/version/trae/latest")),

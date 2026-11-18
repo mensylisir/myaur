@@ -106,11 +106,11 @@
 - [x] 4.30.0 新增的 `stream_idle_timeout_sec` 仅为运行时配置（config.json / 管理面板），CLI 参数与 systemd 单元无需改动
 - [x] 两包 `.SRCINFO` 同步，清理 `src/`、`pkg/`、`*.pkg.tar.zst`
 
-## T12 新增自维护 `apifox-bin`（已完成）
+## T12 新增自维护 `apifox-appimage-bin`（已完成）
 
 - [x] 复现 AUR `apifox-bin` 2.8.55-1 构建失败：`prepare()` 在 `$srcdir` 顶层 glob `Apifox*.AppImage`，而上游 zip 现在只含 `Apifox.AppImage`（arm64 zip 内为 `Apifox-2.8.55-arm64.AppImage`），两版命名不一致
 - [x] 官方 zip 结构确认：x86_64 为 `Apifox.AppImage`，aarch64 为 `Apifox-2.8.55-arm64.AppImage`，桌面项 `X-AppImage-Version=2.8.55`，内置 Electron 37.7.0
-- [x] 新建 `apifox-bin/`：自带 Electron 运行时（原生模块与 37 ABI 绑定，且官方仓库已无 `electron37`），`prepare()` 用 `find` 定位唯一 AppImage，zip 不解包由 `prepare()` 显式 `bsdtar` 提取并校验版本
+- [x] 新建 `apifox-appimage-bin/`（AUR 上 `apifox-bin` 归 `zxp19821005` 所有，不能推同名包）：自带 Electron 运行时（原生模块与 37 ABI 绑定，且官方仓库已无 `electron37`），`prepare()` 用 `find` 定位唯一 AppImage，zip 不解包由 `prepare()` 显式 `bsdtar` 提取并校验版本
 - [x] 安装布局：`/usr/lib/apifox` 全量运行时、`/usr/bin/apifox`、desktop 改为 `Exec=apifox %U`、8 档图标、`chrome-sandbox` 4755
 - [x] `scripts/check-upstream-updates.py` 新增 Apifox 探针（读取 `download/latest.yml`，与 AppImage 版本一致）
 - [x] `makepkg -f` 构建通过（2.8.55-1）；`.SRCINFO` 生成；清理产物
