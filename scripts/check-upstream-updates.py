@@ -299,6 +299,23 @@ def probe_zcode_deb(page: str) -> Probe:
     return probe_deb_control(urls[max(urls, key=version_key)])
 
 
+def probe_apifox() -> Probe:
+    """Apifox's Linux downloads are mutable "-latest" zips without a version.
+
+    The channel manifest next to them is the Windows update feed and is tiny;
+    Apifox ships every desktop platform from one release, so its version also
+    covers the Linux AppImage (verified against X-AppImage-Version).
+    """
+    text = http("https://file-assets.apifox.com/download/latest.yml").decode(
+        "utf-8", "replace"
+    )
+    version = re.search(r"^version:\s*(\S+)", text, re.MULTILINE)
+    return Probe(
+        version=version.group(1) if version else None,
+        url="https://file-assets.apifox.com/download/Apifox-linux-latest.zip",
+    )
+
+
 def probe_github_release(repo: str) -> Probe:
     data = http_json(f"https://api.github.com/repos/{repo}/releases/latest")
     return Probe(
@@ -358,6 +375,8 @@ PRODUCTS: tuple[tuple[str, str, Any], ...] = (
      lambda _cur: probe_zcode_deb(ZCODE_CN_DOWNLOAD_PAGE)),
     ("gw2api-bin", "gemini-web2api-go",
      lambda _cur: probe_github_release("zexadev/gemini-web2api-go")),
+    ("apifox-bin", "Apifox",
+     lambda _cur: probe_apifox()),
     ("trae-ide", "Trae IDE 国际版",
      lambda _cur: probe_trae("https://icube-normal.traeapi.us/icube/api/v1/native/version/trae/latest")),
     ("trae-cn-ide", "Trae IDE 国内版",
