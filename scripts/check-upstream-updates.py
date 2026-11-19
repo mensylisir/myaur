@@ -357,6 +357,19 @@ def probe_github_release(repo: str) -> Probe:
     )
 
 
+def probe_github_tags(repo: str) -> Probe:
+    """Latest version tag; for repos that tag releases without publishing them."""
+    tags = http_json(f"https://api.github.com/repos/{repo}/tags?per_page=30")
+    for tag in tags:
+        name = tag.get("name", "").lstrip("vV")
+        if name and name[0].isdigit():
+            return Probe(
+                version=name,
+                url=f"https://github.com/{repo}/releases/tag/{tag['name']}",
+            )
+    raise ValueError("no version tag found")
+
+
 def probe_trae(url: str) -> Probe:
     """Trae exposes per-platform builds; the package tracks the Linux build id."""
     data = http_json(url)
@@ -412,6 +425,8 @@ PRODUCTS: tuple[tuple[str, str, Any], ...] = (
      lambda _cur: probe_apifox()),
     ("kilo-desktop-bin", "Kilo Desktop",
      lambda _cur: probe_kilo()),
+    ("claudemom", "ClaudeMom",
+     lambda _cur: probe_github_tags("BigPizzaV3/ClaudeMom")),
     ("trae-ide", "Trae IDE 国际版",
      lambda _cur: probe_trae("https://icube-normal.traeapi.us/icube/api/v1/native/version/trae/latest")),
     ("trae-cn-ide", "Trae IDE 国内版",

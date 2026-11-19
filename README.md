@@ -19,6 +19,7 @@
 | gw2api-bin | 4.30.0 | https://github.com/zexadev/gemini-web2api-go | 已推送 AUR（2026-11-18 升级；新增 `stream_idle_timeout_sec` 为运行时配置项，打包方式不变） |
 | apifox-appimage-bin | 2.8.55 | https://apifox.com/ | 已推送 AUR（2026-11-18；官方 Linux AppImage 重打包，自带 Electron 37。AUR 的 `apifox-bin` 归他人所有，故用此名） |
 | kilo-desktop-bin | 1.0.0.20261117 | https://kilo.ai | 已推送 AUR（2026-11-19；Anaconda Kilo Desktop 官方 deb 重打包，pkgver 追加 deb 构建日期） |
+| claudemom | 0.1.9 | https://github.com/BigPizzaV3/ClaudeMom | 已推送 AUR（2026-11-19，x86_64；上游只发布 macOS/Windows 安装包，从 tag 源码编译 Tauri 2；自带 sherpa-onnx 静态库避免构建期联网，并显式补齐 cargo 漏传的 zstd/ring/sqlite3 静态库链接参数） |
 | catpaw-cn | 2026.1030.1130 | https://s3plus.meituan.net/catpaw-external-resources/ide/win32-x64/stable/ | 已推送 AUR（2026-11-09） |
 | catpaw | 2026.1111.1938 | https://s3-fra01-eu.mykeeta.net/catpaw-overseas/ide/win32-x64/stable/ | 已推送 AUR（2026-11-12，pkgrel 1） |
 | trae-ide | 2.3.103560 | https://www.trae.cn/ | 已推送 AUR（2026-11-18 升级；pkgrel 3 国际版圆形 INTL 角标；pkgrel 2 补 x-scheme-handler/trae 深链声明） |
@@ -75,6 +76,7 @@ SMTP_PASS=<QQ 邮箱授权码> python3 scripts/check-upstream-updates.py --mail
 | gw2api-bin | GitHub Releases API |
 | apifox-appimage-bin | 官方 `download/latest.yml`（与 Linux AppImage 同一发布版本） |
 | kilo-desktop-bin | 官方 `latest` deb（control `Version` 恒为 1.0.0，再拼上 Last-Modified 日期） |
+| claudemom | GitHub 版本 tag（上游不发 Linux 产物，也没有 release 版本语义） |
 | trae-ide / trae-cn-ide | 官方 icube 版本清单，取 Linux 构建号 |
 
 ## 邮件通知（GitHub Actions）
