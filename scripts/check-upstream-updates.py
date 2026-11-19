@@ -31,6 +31,7 @@ import zlib
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from email.message import EmailMessage
+from email.utils import parsedate_to_datetime
 from pathlib import Path
 from typing import Any
 
@@ -55,6 +56,12 @@ MIMO_AI_DEB_LATEST = (
 # pages link the current versioned Linux deb directly.
 ZCODE_DOWNLOAD_PAGE = "https://zcode.z.ai/"
 ZCODE_CN_DOWNLOAD_PAGE = "https://zcode.z.ai/cn"
+# Kilo Desktop publishes one mutable "latest" deb per architecture and keeps
+# Version at 1.0.0 across releases, so its Last-Modified date is part of the
+# version the package tracks.
+KILO_DEB_LATEST = (
+    "https://autoupdate.desktop.anaconda.com/kilo-desktop/latest/latest/linux/x64/kilo-desktop.deb"
+)
 AR_HEADER_SIZE = 60
 
 
@@ -73,6 +80,13 @@ def http(url: str, headers: dict[str, str] | None = None, limit: int = 0) -> byt
     req = urllib.request.Request(url, headers={"User-Agent": UA, **(headers or {})})
     with urllib.request.urlopen(req, timeout=TIMEOUT) as resp:
         return resp.read(limit) if limit else resp.read()
+
+
+def http_headers(url: str, method: str = "HEAD") -> dict[str, str]:
+    """Return the response headers with lower-case names."""
+    req = urllib.request.Request(url, method=method, headers={"User-Agent": UA})
+    with urllib.request.urlopen(req, timeout=TIMEOUT) as resp:
+        return {name.lower(): value for name, value in resp.headers.items()}
 
 
 def http_json(url: str, headers: dict[str, str] | None = None) -> Any:
@@ -316,6 +330,25 @@ def probe_apifox() -> Probe:
     )
 
 
+def probe_kilo() -> Probe:
+    """Kilo Desktop keeps Version at 1.0.0 across releases.
+
+    Its deb is a mutable "latest" artifact without an update manifest, while
+    the payload (app.asar and the unpacked native prebuilds) changes every
+    build. The Last-Modified date is appended to the control version so a
+    rebuilt artifact still reads as an upgrade.
+    """
+    control = probe_deb_control(KILO_DEB_LATEST)
+    modified = http_headers(KILO_DEB_LATEST).get("last-modified")
+    if not modified:
+        raise ValueError("deb response has no Last-Modified header")
+    stamp = parsedate_to_datetime(modified).strftime("%Y%m%d")
+    return Probe(
+        version=f"{control.extra['control_version']}.{stamp}",
+        url=KILO_DEB_LATEST,
+    )
+
+
 def probe_github_release(repo: str) -> Probe:
     data = http_json(f"https://api.github.com/repos/{repo}/releases/latest")
     return Probe(
@@ -377,6 +410,8 @@ PRODUCTS: tuple[tuple[str, str, Any], ...] = (
      lambda _cur: probe_github_release("zexadev/gemini-web2api-go")),
     ("apifox-appimage-bin", "Apifox",
      lambda _cur: probe_apifox()),
+    ("kilo-desktop-bin", "Kilo Desktop",
+     lambda _cur: probe_kilo()),
     ("trae-ide", "Trae IDE 国际版",
      lambda _cur: probe_trae("https://icube-normal.traeapi.us/icube/api/v1/native/version/trae/latest")),
     ("trae-cn-ide", "Trae IDE 国内版",

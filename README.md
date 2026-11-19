@@ -18,6 +18,7 @@
 | zcode-cn-bin | 3.18.2_10443 | https://zcode.z.ai/cn | 已推送 AUR（2026-11-18；同一官方 deb 在包层切分，BigModel 默认、中文界面、独立数据目录，可与国际版并存；pkgrel 4 国内版圆形 CN 角标） |
 | gw2api-bin | 4.30.0 | https://github.com/zexadev/gemini-web2api-go | 已推送 AUR（2026-11-18 升级；新增 `stream_idle_timeout_sec` 为运行时配置项，打包方式不变） |
 | apifox-appimage-bin | 2.8.55 | https://apifox.com/ | 已推送 AUR（2026-11-18；官方 Linux AppImage 重打包，自带 Electron 37。AUR 的 `apifox-bin` 归他人所有，故用此名） |
+| kilo-desktop-bin | 1.0.0.20261117 | https://kilo.ai | 已推送 AUR（2026-11-19；Anaconda Kilo Desktop 官方 deb 重打包，pkgver 追加 deb 构建日期） |
 | catpaw-cn | 2026.1030.1130 | https://s3plus.meituan.net/catpaw-external-resources/ide/win32-x64/stable/ | 已推送 AUR（2026-11-09） |
 | catpaw | 2026.1111.1938 | https://s3-fra01-eu.mykeeta.net/catpaw-overseas/ide/win32-x64/stable/ | 已推送 AUR（2026-11-12，pkgrel 1） |
 | trae-ide | 2.3.103560 | https://www.trae.cn/ | 已推送 AUR（2026-11-18 升级；pkgrel 3 国际版圆形 INTL 角标；pkgrel 2 补 x-scheme-handler/trae 深链声明） |
@@ -73,6 +74,7 @@ SMTP_PASS=<QQ 邮箱授权码> python3 scripts/check-upstream-updates.py --mail
 | zcode-intl-bin / zcode-cn-bin | 官方下载页的 linux-x64 deb 链接，再读 control 归档的 `Version`（含 Debian revision） |
 | gw2api-bin | GitHub Releases API |
 | apifox-appimage-bin | 官方 `download/latest.yml`（与 Linux AppImage 同一发布版本） |
+| kilo-desktop-bin | 官方 `latest` deb（control `Version` 恒为 1.0.0，再拼上 Last-Modified 日期） |
 | trae-ide / trae-cn-ide | 官方 icube 版本清单，取 Linux 构建号 |
 
 ## 邮件通知（GitHub Actions）
