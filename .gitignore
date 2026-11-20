@@ -51,6 +51,11 @@ __pycache__/
 
 # MiMo 官方 deb 下载
 /mimo-desktop-bin/*.deb
+/mimo-desktop-intl-bin/*.deb
+
+# claudemom 上游源码包与 sherpa-onnx 静态库
+/claudemom/*.tar.gz
+/claudemom/*.tar.bz2
 
 # DuMate 官方 deb 下载
 /dumate-app-bin/*.deb
