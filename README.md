@@ -6,10 +6,10 @@
 
 | 包名 | 版本 | 上游 | 状态 |
 |---|---|---|---|
-| qoder-agent | 0.5.16 | https://qoder.com/ | 已推送 AUR（2026-11-20 升级；保留 x-scheme-handler/qoder 去重） |
-| qoder-cn-agent | 0.5.16 | https://qoder.cn | 已推送 AUR（2026-11-20 升级；上游 CN 图标自带折角标记，不额外加角标） |
-| qoder-ide | 1.41.1 | https://qoder.com/ | 已推送 AUR（2026-11-20 升级） |
-| qoder-cn-ide | 1.41.1 | https://qoder.cn | 已推送 AUR（2026-11-20 升级） |
+| qoder-agent | 0.5.16 | https://qoder.com/ | 已推送 AUR（2026-11-21；pkgrel 2 修复启动报 PLUGIN_SDK_ENVIRONMENT_UNAVAILABLE：fs 路径重定向层替换 realpathSync 时未保留 .native） |
+| qoder-cn-agent | 0.5.16 | https://qoder.cn | 已推送 AUR（2026-11-21；pkgrel 2 同步修复 realpathSync.native 丢失；上游 CN 图标自带折角标记，不额外加角标） |
+| qoder-ide | 1.41.1 | https://qoder.com/ | 已推送 AUR（2026-11-21；pkgrel 2 preload 同步保留 realpathSync.native） |
+| qoder-cn-ide | 1.41.1 | https://qoder.cn | 已推送 AUR（2026-11-21；pkgrel 2 preload 同步保留 realpathSync.native） |
 | qoderwake-bin | 1.2.22 | https://qoder.com/ | 已推送 AUR（2026-11-20 升级；国际版圆形 INTL 角标，构建期断言区域固定为 global） |
 | qoderwake-cn-bin | 1.2.22_cn | https://qoder.cn | 已推送 AUR（2026-11-20 升级；国内版圆形 CN 角标，构建期断言区域固定为 cn） |
 | mimo-desktop-bin | 26.1120.201429 | https://mimo.xiaomimimo.com/desktop/ | 已推送 AUR（2026-11-20 升级；国内版圆形 CN 角标；上游图标改为 512px，按新尺寸派生多尺寸） |
