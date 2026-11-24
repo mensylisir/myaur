@@ -65,7 +65,7 @@ SMTP_PASS=<QQ 邮箱授权码> python3 scripts/check-upstream-updates.py --mail
 | 包 | 探测方式 |
 |---|---|
 | catpaw / catpaw-cn | 官方 `/api/gateway/ide/latest?platform=win32-x64`（旧 `/ide/update` 对任意版本都返回 204，无法探测；国内域名 `catx.nocode.cn`） |
-| workbuddy-intl-agent / workbuddy-agent | Windows payload 走官方 `/v2/update?platform=workbuddy-win32-x64-archive`，同时对比官方国内 deb（`workbuddy-linux-x64-deb`）与两个 npm 助手（`@tencent-ai/sandbox-cli-linux-x64` latest、`@tencent-ai/agent-harness-linux-x64` beta） |
+| workbuddy-intl-agent / workbuddy-agent | 主程序是 Windows payload（pkgver 取 `版本_构建哈希`，哈希从下载 URL 的 `-<8hex>.exe` 解析，哈希变化也算更新）；同时对比官方国内 deb（`workbuddy-linux-x64-deb`，版本+构建哈希）与两个 npm 助手（`@tencent-ai/sandbox-cli-linux-x64` latest、`@tencent-ai/agent-harness-linux-x64` beta） |
 | minimax-code-bin | npm registry `@minimax-ai/code` 的 latest |
 | minimax-code-intl-bin / minimax-code-cn-bin | electron-builder `latest.yml`（Windows NSIS 安装包，两版共用同一官方镜像） |
 | kimi-work-bin / kimi-work-intl-bin / kimi-work-cn-bin | electron-builder `latest.yml`（`kimi-img.moonshot.cn/app/upgrade`，Windows 安装包） |

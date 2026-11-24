@@ -66,14 +66,12 @@ KILO_DEB_LATEST = (
 AR_HEADER_SIZE = 60
 
 # Packages whose PKGBUILD pins upstream pieces separately from pkgver.  Keys
-# are PKGBUILD variable names, values are probe component names.
+# are PKGBUILD variable names, values are probe component names.  WorkBuddy's
+# Windows payload and Linux donor deb are compared in main() because both need
+# the build hash from the download URL, not just the numeric version.
 COMPONENTS: dict[str, dict[str, str]] = {
-    "workbuddy-agent": {"_hostver": "deb", "_sandbox": "sandbox", "_harness": "harness"},
-    "workbuddy-intl-agent": {
-        "_hostver": "deb",
-        "_sandbox": "sandbox",
-        "_harness": "harness",
-    },
+    "workbuddy-agent": {"_sandbox": "sandbox", "_harness": "harness"},
+    "workbuddy-intl-agent": {"_sandbox": "sandbox", "_harness": "harness"},
 }
 
 
@@ -211,6 +209,19 @@ def probe_npm(name: str, channel: str = "latest") -> Probe:
     return Probe(version=version, url=dist.get("tarball"), checksum=dist.get("shasum"))
 
 
+def with_build(version: Any, url: Any) -> str | None:
+    """Combine a WorkBuddy version with the 8-hex build tag from its URL.
+
+    The update API returns ``5.11.3.43806934`` while the real download is
+    ``...-5.11.3.43806934-ecace0f7.exe``; two builds can share the numeric
+    version but differ in that hash, and the hash alone is a real update.
+    """
+    if not version:
+        return None
+    match = re.search(r"-([0-9a-f]{8})\.(?:exe|zip|deb)(?:\?|$)", str(url or ""))
+    return f"{version}_{match.group(1)}" if match else str(version)
+
+
 def probe_workbuddy(domain: str, platform: str) -> Probe:
     """WorkBuddy ships a Windows payload plus separate Linux runtime pieces.
 
@@ -219,10 +230,12 @@ def probe_workbuddy(domain: str, platform: str) -> Probe:
     them without touching the payload version.  Collect all of them.
     """
     data = http_json(f"https://{domain}/v2/update?platform={platform}")
-    components: dict[str, str | None] = {}
+    components: dict[str, str | None] = {
+        "payload": with_build(data.get("version"), data.get("url")),
+    }
     try:
         deb = http_json("https://www.workbuddy.cn/v2/update?platform=workbuddy-linux-x64-deb")
-        components["deb"] = deb.get("version")
+        components["deb"] = with_build(deb.get("version"), deb.get("url"))
     except Exception as exc:  # noqa: BLE001 - a missing channel must not hide the payload
         components["deb"] = f"error: {type(exc).__name__}"
     try:
@@ -625,24 +638,33 @@ def main() -> int:
             row["state"] = "update"
             status = max(status, 1)
 
-        # Pinned side pieces (WorkBuddy's Linux deb and npm helpers) move on
-        # their own schedule, so compare them separately from pkgver.
-        mapping = COMPONENTS.get(pkg)
-        if mapping and row["state"] != "error":
+        # WorkBuddy: the Windows payload is the main program (it becomes
+        # pkgver), while the domestic deb only supplies the customized Electron
+        # runtime.  Compare both with the 8-hex build hash from the download
+        # URL, because the update API's numeric version alone would hide a
+        # rebuild that keeps the same version.
+        if pkg in ("workbuddy-agent", "workbuddy-intl-agent") and row["state"] != "error":
             components = (result.extra or {}).get("components") or {}
             diffs: list[str] = []
-            for variable, key in mapping.items():
+            payload = components.get("payload")
+            if payload:
+                row["upstream"] = payload
+            payload_changed = bool(payload and payload != current)
+            if payload_changed:
+                diffs.append(f"payload {current} -> {payload}")
+            deb_pinned = f"{pkgvar(pkg, '_hostver')}_{pkgvar(pkg, '_hostbuild')}"
+            deb_latest = components.get("deb")
+            deb_changed = bool(deb_latest and deb_latest != deb_pinned)
+            if deb_changed:
+                diffs.append(f"deb {deb_pinned} -> {deb_latest}")
+            for variable, key in (COMPONENTS.get(pkg) or {}).items():
                 pinned = pkgvar(pkg, variable)
                 latest = components.get(key)
                 if pinned and latest and comparable(str(latest)) != comparable(pinned):
                     diffs.append(f"{variable} {pinned} -> {latest}")
             if diffs:
-                if row["state"] == "current":
-                    row["state"] = "components"
-                    row["upstream"] = current
-                else:
-                    row["state"] = "update"
                 row["component_updates"] = diffs
+                row["state"] = "update" if (payload_changed or deb_changed) else "components"
                 status = max(status, 1)
         rows.append(row)
 
