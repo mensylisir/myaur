@@ -14,8 +14,9 @@
 | qoderwake-cn-bin | 1.2.23_cn | https://qoder.cn | 已推送 AUR（2026-11-24 升级；保留国内版 CN 角标与构建期区域断言 cn） |
 | mimo-desktop-bin | 26.1120.201429 | https://mimo.xiaomimimo.com/desktop/ | 已推送 AUR（2026-11-20 升级；国内版圆形 CN 角标；上游图标改为 512px，按新尺寸派生多尺寸） |
 | mimo-desktop-intl-bin | 26.1120.201429 | https://mimo-ai.xiaomimimo.com/desktop/ | 已推送 AUR（2026-11-20 升级，x86_64；官方海外 Linux deb 重打包，国际版圆形 INTL 角标，可与国内版并存） |
-| zcode-intl-bin | 4.0.0_10870 | https://zcode.z.ai/ | 已推送 AUR（2026-11-24 升级至 4.0.0；保留国际版 INTL 角标与 Z.ai 默认） |
-| zcode-cn-bin | 4.0.0_10870 | https://zcode.z.ai/cn | 已推送 AUR（2026-11-24 升级至 4.0.0；pkgrel 3 界面语言跟随系统，与上游一致；独立 userData/数据目录保证与国内账号登录互不干扰；保留 CN 角标与 BigModel 置顶） |
+| zcode-intl-bin | 4.0.0_10870 | https://zcode.z.ai/ | 已推送 AUR（2026-11-24 pkgrel 2：asar 只保留 Z.ai 全球登录源，锁定国际账号；INTL 角标；语言跟随系统） |
+| zcode-cn-bin | 4.0.0_10870 | https://zcode.z.ai/cn | 已推送 AUR（2026-11-24 pkgrel 5：asar 只保留 BigModel 登录源，锁定国内智谱账号；CN 角标；语言跟随系统） |
+| zcode-zai-cn-bin | 4.0.0_10870 | https://zcode.z.ai/cn | 已推送 AUR（2026-11-24 新增：asar 只保留 Z.ai (CN) 登录源，锁定国内 Z.ai 账号；ZCN 角标；独立 /opt 与数据目录） |
 | gw2api-bin | 4.32.0 | https://github.com/zexadev/gemini-web2api-go | 已推送 AUR（2026-11-24 升级；打包方式不变） |
 | apifox-appimage-bin | 2.8.55 | https://apifox.com/ | 已推送 AUR（2026-11-18；官方 Linux AppImage 重打包，自带 Electron 37。AUR 的 `apifox-bin` 归他人所有，故用此名） |
 | kilo-desktop-bin | 1.0.0.20261117 | https://kilo.ai | 已推送 AUR（2026-11-19；Anaconda Kilo Desktop 官方 deb 重打包，pkgver 追加 deb 构建日期） |
@@ -77,7 +78,7 @@ SMTP_PASS=<QQ 邮箱授权码> python3 scripts/check-upstream-updates.py --mail
 | qoderwake-bin / qoderwake-cn-bin | 官方 channel `manifest.json` 的 `latest` 与 Linux amd64 归档 sha256 |
 | mimo-desktop-bin | 官方 `latest` deb 的 control 归档（HTTP Range 取前 2 MiB，读 `Version`） |
 | mimo-desktop-intl-bin | 同上，取海外 `mimodesktopai` 通道 |
-| zcode-intl-bin / zcode-cn-bin | 官方下载页的 linux-x64 deb 链接，再读 control 归档的 `Version`（含 Debian revision） |
+| zcode-intl-bin / zcode-cn-bin / zcode-zai-cn-bin | 官方下载页的 linux-x64 deb 链接，再读 control 归档的 `Version`（含 Debian revision） |
 | gw2api-bin | GitHub Releases API |
 | apifox-appimage-bin | 官方 `download/latest.yml`（与 Linux AppImage 同一发布版本） |
 | kilo-desktop-bin | 官方 `latest` deb（control `Version` 恒为 1.0.0，再拼上 Last-Modified 日期） |
