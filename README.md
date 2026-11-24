@@ -15,7 +15,7 @@
 | mimo-desktop-bin | 26.1120.201429 | https://mimo.xiaomimimo.com/desktop/ | 已推送 AUR（2026-11-20 升级；国内版圆形 CN 角标；上游图标改为 512px，按新尺寸派生多尺寸） |
 | mimo-desktop-intl-bin | 26.1120.201429 | https://mimo-ai.xiaomimimo.com/desktop/ | 已推送 AUR（2026-11-20 升级，x86_64；官方海外 Linux deb 重打包，国际版圆形 INTL 角标，可与国内版并存） |
 | zcode-intl-bin | 4.0.0_10870 | https://zcode.z.ai/ | 已推送 AUR（2026-11-24 升级至 4.0.0；保留国际版 INTL 角标与 Z.ai 默认） |
-| zcode-cn-bin | 4.0.0_10870 | https://zcode.z.ai/cn | 已推送 AUR（2026-11-24 升级至 4.0.0；pkgrel 2 补导出 LANG=zh_CN.UTF-8，因上游界面语言只跟随系统 locale；保留 CN 角标、BigModel 置顶与独立数据目录） |
+| zcode-cn-bin | 4.0.0_10870 | https://zcode.z.ai/cn | 已推送 AUR（2026-11-24 升级至 4.0.0；pkgrel 3 界面语言跟随系统，与上游一致；独立 userData/数据目录保证与国内账号登录互不干扰；保留 CN 角标与 BigModel 置顶） |
 | gw2api-bin | 4.32.0 | https://github.com/zexadev/gemini-web2api-go | 已推送 AUR（2026-11-24 升级；打包方式不变） |
 | apifox-appimage-bin | 2.8.55 | https://apifox.com/ | 已推送 AUR（2026-11-18；官方 Linux AppImage 重打包，自带 Electron 37。AUR 的 `apifox-bin` 归他人所有，故用此名） |
 | kilo-desktop-bin | 1.0.0.20261117 | https://kilo.ai | 已推送 AUR（2026-11-19；Anaconda Kilo Desktop 官方 deb 重打包，pkgver 追加 deb 构建日期） |
