@@ -6,24 +6,24 @@
 
 | 包名 | 版本 | 上游 | 状态 |
 |---|---|---|---|
-| qoder-agent | 0.5.16 | https://qoder.com/ | 已推送 AUR（2026-11-21；pkgrel 4 从 process.argv 移除启动器自用的 `--app <app.asar>`，否则被 0.5.16 当成待打开文件而报 Could not add 1 files；pkgrel 3 移除 `--require` preload 参数；pkgrel 2 修复 PLUGIN_SDK_ENVIRONMENT_UNAVAILABLE：fs 重定向层替换 realpathSync 时未保留 .native） |
-| qoder-cn-agent | 0.5.16 | https://qoder.cn | 已推送 AUR（2026-11-21；pkgrel 4 同步移除 argv 中的 `--app`；pkgrel 3 移除 preload 参数；pkgrel 2 修复 realpathSync.native 丢失；上游 CN 图标自带折角标记，不额外加角标） |
+| qoder-agent | 0.5.17 | https://qoder.com/ | 已推送 AUR（2026-11-24 升级；pkgrel 1 保留 preload 修复：移除 argv 中 --require/--app、保留 realpathSync.native） |
+| qoder-cn-agent | 0.5.18 | https://qoder.cn | 已推送 AUR（2026-11-24 升级；pkgrel 1 保留 preload 修复；上游 CN 图标自带折角标记，不额外加角标） |
 | qoder-ide | 1.41.1 | https://qoder.com/ | 已推送 AUR（2026-11-21；pkgrel 4 同步移除 argv 中的 `--app`；pkgrel 3 移除 preload 参数；pkgrel 2 preload 保留 realpathSync.native） |
 | qoder-cn-ide | 1.41.1 | https://qoder.cn | 已推送 AUR（2026-11-21；pkgrel 4 同步移除 argv 中的 `--app`；pkgrel 3 移除 preload 参数；pkgrel 2 preload 保留 realpathSync.native） |
-| qoderwake-bin | 1.2.22 | https://qoder.com/ | 已推送 AUR（2026-11-20 升级；国际版圆形 INTL 角标，构建期断言区域固定为 global） |
-| qoderwake-cn-bin | 1.2.22_cn | https://qoder.cn | 已推送 AUR（2026-11-20 升级；国内版圆形 CN 角标，构建期断言区域固定为 cn） |
+| qoderwake-bin | 1.2.23 | https://qoder.com/ | 已推送 AUR（2026-11-24 升级；保留国际版 INTL 角标与构建期区域断言 global） |
+| qoderwake-cn-bin | 1.2.23_cn | https://qoder.cn | 已推送 AUR（2026-11-24 升级；保留国内版 CN 角标与构建期区域断言 cn） |
 | mimo-desktop-bin | 26.1120.201429 | https://mimo.xiaomimimo.com/desktop/ | 已推送 AUR（2026-11-20 升级；国内版圆形 CN 角标；上游图标改为 512px，按新尺寸派生多尺寸） |
 | mimo-desktop-intl-bin | 26.1120.201429 | https://mimo-ai.xiaomimimo.com/desktop/ | 已推送 AUR（2026-11-20 升级，x86_64；官方海外 Linux deb 重打包，国际版圆形 INTL 角标，可与国内版并存） |
-| zcode-intl-bin | 3.18.2_10443 | https://zcode.z.ai/ | 已推送 AUR（2026-11-18；官方 Linux deb 重打包，保留 Z.ai 默认与系统语言；pkgrel 2 国际版圆形 INTL 角标） |
-| zcode-cn-bin | 3.18.2_10443 | https://zcode.z.ai/cn | 已推送 AUR（2026-11-18；同一官方 deb 在包层切分，BigModel 默认、中文界面、独立数据目录，可与国际版并存；pkgrel 4 国内版圆形 CN 角标） |
-| gw2api-bin | 4.31.0 | https://github.com/zexadev/gemini-web2api-go | 已推送 AUR（2026-11-20 升级，打包方式不变） |
+| zcode-intl-bin | 4.0.0_10870 | https://zcode.z.ai/ | 已推送 AUR（2026-11-24 升级至 4.0.0；保留国际版 INTL 角标与 Z.ai 默认） |
+| zcode-cn-bin | 4.0.0_10870 | https://zcode.z.ai/cn | 已推送 AUR（2026-11-24 升级至 4.0.0；保留国内版 CN 角标、BigModel 置顶与独立数据目录） |
+| gw2api-bin | 4.32.0 | https://github.com/zexadev/gemini-web2api-go | 已推送 AUR（2026-11-24 升级；打包方式不变） |
 | apifox-appimage-bin | 2.8.55 | https://apifox.com/ | 已推送 AUR（2026-11-18；官方 Linux AppImage 重打包，自带 Electron 37。AUR 的 `apifox-bin` 归他人所有，故用此名） |
 | kilo-desktop-bin | 1.0.0.20261117 | https://kilo.ai | 已推送 AUR（2026-11-19；Anaconda Kilo Desktop 官方 deb 重打包，pkgver 追加 deb 构建日期） |
-| claudemom | 0.1.10 | https://github.com/BigPizzaV3/ClaudeMom | 已推送 AUR（2026-11-20 升级，x86_64；launcher 指向 /usr/lib/claudemom/claudemom，sherpa-onnx 静态库仍为 1.13.8） |
+| claudemom | 0.1.14 | https://github.com/BigPizzaV3/ClaudeMom | 已推送 AUR（2026-11-24 升级；保留 launcher 路径、sherpa-onnx 1.13.8 静态库与 zstd/ring/sqlite3 链接参数） |
 | catpaw-cn | 2026.1030.1130 | https://s3plus.meituan.net/catpaw-external-resources/ide/win32-x64/stable/ | 已推送 AUR（2026-11-09） |
 | catpaw | 2026.1111.1938 | https://s3-fra01-eu.mykeeta.net/catpaw-overseas/ide/win32-x64/stable/ | 已推送 AUR（2026-11-12，pkgrel 1） |
 | trae-ide | 2.3.103560 | https://www.trae.cn/ | 已推送 AUR（2026-11-18 升级；pkgrel 3 国际版圆形 INTL 角标；pkgrel 2 补 x-scheme-handler/trae 深链声明） |
-| trae-cn-ide | 2.3.105403 | https://www.trae.cn/ | 已推送 AUR（2026-11-20 升级；国内版圆形 CN 角标并安装多尺寸；保持 x86_64 tar.gz 源，不使用探测接口返回的 arm64 deb） |
+| trae-cn-ide | 2.3.106768 | https://www.trae.cn/ | 已推送 AUR（2026-11-24 升级；保留 x86_64 归档、CN 角标与 trae-cn 深链声明） |
 | workbuddy-agent | 5.11.3.43806934_ecace0f7 | https://www.workbuddy.cn/app | 已推送 AUR（2026-11-18；Windows 包 payload + 官方国内 deb 运行时，流程与 intl 一致；Wayland 下预置空快捷键避免 Add Keyboard Shortcuts 弹窗，并带 GPU/Wayland IME 启动参数） |
 | workbuddy-intl-agent | 5.11.4.44121853_0026dff0 | https://www.workbuddy.ai | 已推送 AUR（2026-11-18；Windows 包 payload + 国内 deb 的定制 Electron/运行时，shadow asar 装配，修复 CREDENTIAL_BOOTSTRAP_FAILED；pkgrel 2 恢复 5.9.4 的 Wayland 快捷键防护与 GPU/IME 启动参数；pkgrel 3 将深链改为上游国际版实际注册的 workbuddy-ai，避免与国内版抢占 workbuddy://） |
 | kimi-work-bin | 3.2.27 | https://www.kimi.com/products/kimi-work | 已推送 AUR（2026-11-13，x86_64；启动命令 kimi-work）；LEGACY：不锁定区域，建议改用 kimi-work-intl-bin / kimi-work-cn-bin |
