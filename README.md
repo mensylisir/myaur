@@ -24,16 +24,16 @@
 | catpaw | 2026.1111.1938 | https://s3-fra01-eu.mykeeta.net/catpaw-overseas/ide/win32-x64/stable/ | 已推送 AUR（2026-11-12，pkgrel 1） |
 | trae-ide | 2.3.103560 | https://www.trae.cn/ | 已推送 AUR（2026-11-18 升级；pkgrel 3 国际版圆形 INTL 角标；pkgrel 2 补 x-scheme-handler/trae 深链声明） |
 | trae-cn-ide | 2.3.106768 | https://www.trae.cn/ | 已推送 AUR（2026-11-24 升级；保留 x86_64 归档、CN 角标与 trae-cn 深链声明） |
-| workbuddy-agent | 5.11.3.43806934_ecace0f7 | https://www.workbuddy.cn/app | 已推送 AUR（2026-11-18；Windows 包 payload + 官方国内 deb 运行时，流程与 intl 一致；Wayland 下预置空快捷键避免 Add Keyboard Shortcuts 弹窗，并带 GPU/Wayland IME 启动参数） |
-| workbuddy-intl-agent | 5.11.4.44121853_0026dff0 | https://www.workbuddy.ai | 已推送 AUR（2026-11-18；Windows 包 payload + 国内 deb 的定制 Electron/运行时，shadow asar 装配，修复 CREDENTIAL_BOOTSTRAP_FAILED；pkgrel 2 恢复 5.9.4 的 Wayland 快捷键防护与 GPU/IME 启动参数；pkgrel 3 将深链改为上游国际版实际注册的 workbuddy-ai，避免与国内版抢占 workbuddy://） |
-| kimi-work-bin | 3.2.27 | https://www.kimi.com/products/kimi-work | 已推送 AUR（2026-11-13，x86_64；启动命令 kimi-work）；LEGACY：不锁定区域，建议改用 kimi-work-intl-bin / kimi-work-cn-bin |
-| minimax-code-bin | 0.7.7 | https://agent.minimax.cn/download | 已推送 AUR（2026-11-13，x86_64） |
-| kimi-code-intl-bin | 1.3.5 | https://code.kimi.ai/ | 已推送 AUR（2026-11-13；x86_64；命令 kimi-code，区域固定 global，Wayland 下禁用全局快捷键 portal 避免弹窗） |
-| kimi-code-cn-bin | 1.3.5 | https://code.kimi.com/ | 已推送 AUR（2026-11-13；x86_64；命令 kimi-code-cn，区域固定 mainland-cn，Wayland 下禁用全局快捷键 portal 避免弹窗） |
-| kimi-work-intl-bin | 3.2.27 | https://www.kimi.ai/products/kimi-work | 已推送 AUR（2026-11-13；x86_64；命令 kimi-work，区域固定 overseas，默认关闭 launcher 快捷键） |
-| kimi-work-cn-bin | 3.2.27 | https://www.kimi.com/products/kimi-work | 已推送 AUR（2026-11-13；x86_64；命令 kimi-work-cn，区域固定 china，默认关闭 launcher 快捷键） |
-| minimax-code-intl-bin | 3.1.16 | https://code.minimax.io/ | 已推送 AUR（2026-11-16，x86_64；命令 minimax-code，baseUrl agent.minimax.io，注册 minimax 深链，托盘菜单可退出；安装包取自官方镜像 filecdn.minimax.chat） |
-| minimax-code-cn-bin | 3.1.16 | https://code.minimax.cn/ | 已推送 AUR（2026-11-16，x86_64；命令 minimax-code-cn，baseUrl agent.minimax.cn，注册 minimax-cn 深链，托盘菜单可退出） |
+| workbuddy-agent | 5.11.3.43806934_ecace0f7 | https://www.workbuddy.cn/app | 已推送 AUR（2026-11-24 更新内嵌 sandbox 5.13.0；Windows 包 payload + 官方国内 deb 运行时，流程与 intl 一致；Wayland 下预置空快捷键避免 Add Keyboard Shortcuts 弹窗，并带 GPU/Wayland IME 启动参数） |
+| workbuddy-intl-agent | 5.11.4.44121853_0026dff0 | https://www.workbuddy.ai | 已推送 AUR（2026-11-24 更新内嵌 sandbox 5.13.0；Windows 包 payload + 国内 deb 的定制 Electron/运行时，shadow asar 装配，修复 CREDENTIAL_BOOTSTRAP_FAILED；pkgrel 2 恢复 5.9.4 的 Wayland 快捷键防护与 GPU/IME 启动参数；pkgrel 3 将深链改为上游国际版实际注册的 workbuddy-ai，避免与国内版抢占 workbuddy://） |
+| kimi-work-bin | 3.2.28 | https://www.kimi.com/products/kimi-work | 已推送 AUR（2026-11-24 升级，x86_64；启动命令 kimi-work）；LEGACY：不锁定区域，建议改用 kimi-work-intl-bin / kimi-work-cn-bin |
+| minimax-code-bin | 0.7.9 | https://agent.minimax.cn/download | 已推送 AUR（2026-11-24 升级，x86_64） |
+| kimi-code-intl-bin | 1.4.3 | https://code.kimi.ai/ | 已推送 AUR（2026-11-24 升级；x86_64；命令 kimi-code，区域固定 global，Wayland 下禁用全局快捷键 portal 避免弹窗） |
+| kimi-code-cn-bin | 1.4.3 | https://code.kimi.com/ | 已推送 AUR（2026-11-24 升级；x86_64；命令 kimi-code-cn，区域固定 mainland-cn，Wayland 下禁用全局快捷键 portal 避免弹窗） |
+| kimi-work-intl-bin | 3.2.28 | https://www.kimi.ai/products/kimi-work | 已推送 AUR（2026-11-24 升级；x86_64；命令 kimi-work，区域固定 overseas，默认关闭 launcher 快捷键；补丁适配 3.2.28 新字符串表） |
+| kimi-work-cn-bin | 3.2.28 | https://www.kimi.com/products/kimi-work | 已推送 AUR（2026-11-24 升级；x86_64；命令 kimi-work-cn，区域固定 china，默认关闭 launcher 快捷键；补丁适配 3.2.28 新字符串表） |
+| minimax-code-intl-bin | 3.1.18 | https://code.minimax.io/ | 已推送 AUR（2026-11-24 升级，x86_64；命令 minimax-code，baseUrl agent.minimax.io，注册 minimax 深链，托盘菜单可退出；安装包取自官方镜像 filecdn.minimax.chat） |
+| minimax-code-cn-bin | 3.1.18 | https://code.minimax.cn/ | 已推送 AUR（2026-11-24 升级，x86_64；命令 minimax-code-cn，baseUrl agent.minimax.cn，注册 minimax-cn 深链，托盘菜单可退出） |
 | appclone-bin | 1.1.2 | https://github.com/mensylisir/appclone | 已推送 AUR（2026-11-17） |
 | dumate-app-bin | 1.0.92 | https://www.dumate.cn/ | 已推送 AUR（2026-11-14，x86_64；官方 deb 重打包，版本化 URL；与 AUR 已有 dumate-bin 功能相同） |
 
@@ -64,8 +64,13 @@ SMTP_PASS=<QQ 邮箱授权码> python3 scripts/check-upstream-updates.py --mail
 
 | 包 | 探测方式 |
 |---|---|
-| catpaw / catpaw-cn | 官方 update gateway（`ide-type: CatPaw_Desk`，返回 204 表示已最新） |
-| workbuddy-intl-agent / workbuddy-agent | 官方 `/v2/update?platform=...` 接口 |
+| catpaw / catpaw-cn | 官方 `/api/gateway/ide/latest?platform=win32-x64`（旧 `/ide/update` 对任意版本都返回 204，无法探测；国内域名 `catx.nocode.cn`） |
+| workbuddy-intl-agent / workbuddy-agent | Windows payload 走官方 `/v2/update?platform=workbuddy-win32-x64-archive`，同时对比官方国内 deb（`workbuddy-linux-x64-deb`）与两个 npm 助手（`@tencent-ai/sandbox-cli-linux-x64` latest、`@tencent-ai/agent-harness-linux-x64` beta） |
+| minimax-code-bin | npm registry `@minimax-ai/code` 的 latest |
+| minimax-code-intl-bin / minimax-code-cn-bin | electron-builder `latest.yml`（Windows NSIS 安装包，两版共用同一官方镜像） |
+| kimi-work-bin / kimi-work-intl-bin / kimi-work-cn-bin | electron-builder `latest.yml`（`kimi-img.moonshot.cn/app/upgrade`，Windows 安装包） |
+| kimi-code-intl-bin / kimi-code-cn-bin | electron-builder `latest-linux.yml`（优先取 deb，国际 `cdn.kimi.ai` / 国内 `cdn.kimi.com`） |
+| appclone-bin | GitHub Releases API |
 | qoder-agent / qoder-cn-agent | electron-builder 的 `latest-linux.yml` |
 | qoder-ide | `center.qoder.sh` 更新接口 |
 | qoder-cn-ide | RPM lead 的 NEVRA（HTTP Range 只取前 96 字节） |

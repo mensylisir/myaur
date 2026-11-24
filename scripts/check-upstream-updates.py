@@ -26,6 +26,7 @@ import ssl
 import sys
 import tarfile
 import urllib.error
+import urllib.parse
 import urllib.request
 import zlib
 from dataclasses import dataclass, field
@@ -63,6 +64,17 @@ KILO_DEB_LATEST = (
     "https://autoupdate.desktop.anaconda.com/kilo-desktop/latest/latest/linux/x64/kilo-desktop.deb"
 )
 AR_HEADER_SIZE = 60
+
+# Packages whose PKGBUILD pins upstream pieces separately from pkgver.  Keys
+# are PKGBUILD variable names, values are probe component names.
+COMPONENTS: dict[str, dict[str, str]] = {
+    "workbuddy-agent": {"_hostver": "deb", "_sandbox": "sandbox", "_harness": "harness"},
+    "workbuddy-intl-agent": {
+        "_hostver": "deb",
+        "_sandbox": "sandbox",
+        "_harness": "harness",
+    },
+}
 
 
 @dataclass
@@ -122,6 +134,13 @@ def pkgver(pkg: str) -> str:
     return expand(match.group(1))
 
 
+def pkgvar(pkg: str, name: str) -> str | None:
+    """Read one plain ``name=value`` variable from a PKGBUILD."""
+    text = (ROOT / pkg / "PKGBUILD").read_text(encoding="utf-8")
+    match = re.search(rf"^{re.escape(name)}=(\S+)", text, re.MULTILINE)
+    return match.group(1) if match else None
+
+
 def comparable(version: Any) -> str:
     """Normalise pkgver encodings without hiding real upstream changes.
 
@@ -143,35 +162,83 @@ def version_key(version: str) -> tuple[int, ...]:
                  for part in re.split(r"[._\-]", version))
 
 
-def probe_catpaw(domain: str, current: str) -> Probe:
-    """CatPaw / 妙手 query their update gateway with the running client version.
+def probe_catpaw(domain: str, _current: str) -> Probe:
+    """CatPaw / 妙手 publish the current installer through an unauthenticated API.
 
-    The gateway answers ``204 No Content`` when the client is already current.
+    The older ``/ide/update`` gateway answers 204 to every version, including
+    versions that do not exist, so it cannot detect releases.  ``/ide/latest``
+    returns the current manifest unconditionally and does work.
     """
-    url = f"https://{domain}/api/gateway/ide/update?platform=win32-x64"
-    req = urllib.request.Request(
-        url,
-        headers={
-            "User-Agent": UA,
-            "ide-type": "CatPaw_Desk",
-            "ide-version": current,
-            "os-version": "10.0.19045",
-            "user-mis-id": "0",
-        },
+    data = http_json(f"https://{domain}/api/gateway/ide/latest?platform=win32-x64")
+    payload = data.get("data") or {}
+    return Probe(
+        version=payload.get("version"),
+        url=payload.get("url"),
+        checksum=payload.get("sha256"),
     )
-    with urllib.request.urlopen(req, timeout=TIMEOUT) as resp:
-        if resp.status == 204:
-            return Probe(version=current)
-        data = json.loads(resp.read())
-    return Probe(version=data.get("version"), url=data.get("url"), checksum=data.get("sha256"))
+
+
+def probe_electron_yml(url: str) -> Probe:
+    """Read an electron-builder feed (``latest.yml`` / ``latest-linux.yml``).
+
+    Used by products that port the installer of another platform.  Only the
+    version and the first artifact are exposed; vendor feeds usually publish
+    sha512, so the checksum is left for the packaging step to compute.
+    """
+    text = http(url).decode("utf-8", "replace")
+    version = re.search(r"^version:\s*(\S+)", text, re.MULTILINE)
+    entries = re.findall(r"^\s*-\s*url:\s*(.+?)\s*$", text, re.MULTILINE)
+    if not entries:
+        entries = re.findall(r"^path:\s*(.+?)\s*$", text, re.MULTILINE)
+    # Feeds list every platform artifact; prefer the installer this repository
+    # actually repackages (deb for Linux ports, exe for Windows payload ports).
+    preferred = next(
+        (name for name in entries if name.lower().endswith((".deb", ".rpm", ".exe", ".zip"))),
+        entries[0] if entries else None,
+    )
+    resolved = None
+    if preferred:
+        resolved = urllib.parse.urljoin(url, urllib.parse.quote(preferred))
+    return Probe(version=version.group(1) if version else None, url=resolved)
+
+
+def probe_npm(name: str, channel: str = "latest") -> Probe:
+    """Latest version of an npm package, used for npm-distributed products."""
+    data = http_json(f"https://registry.npmjs.org/{urllib.parse.quote(name, safe='')}")
+    tags = data.get("dist-tags") or {}
+    version = tags.get(channel)
+    dist = ((data.get("versions") or {}).get(version) or {}).get("dist") or {}
+    return Probe(version=version, url=dist.get("tarball"), checksum=dist.get("shasum"))
 
 
 def probe_workbuddy(domain: str, platform: str) -> Probe:
+    """WorkBuddy ships a Windows payload plus separate Linux runtime pieces.
+
+    The package tracks the Windows payload in pkgver, but the domestic deb and
+    the two npm helper packages are pinned separately, so a release can change
+    them without touching the payload version.  Collect all of them.
+    """
     data = http_json(f"https://{domain}/v2/update?platform={platform}")
+    components: dict[str, str | None] = {}
+    try:
+        deb = http_json("https://www.workbuddy.cn/v2/update?platform=workbuddy-linux-x64-deb")
+        components["deb"] = deb.get("version")
+    except Exception as exc:  # noqa: BLE001 - a missing channel must not hide the payload
+        components["deb"] = f"error: {type(exc).__name__}"
+    try:
+        components["sandbox"] = probe_npm("@tencent-ai/sandbox-cli-linux-x64").version
+    except Exception as exc:  # noqa: BLE001
+        components["sandbox"] = f"error: {type(exc).__name__}"
+    try:
+        # The package pins the beta harness build, not the stable dist-tag.
+        components["harness"] = probe_npm("@tencent-ai/agent-harness-linux-x64", "beta").version
+    except Exception as exc:  # noqa: BLE001
+        components["harness"] = f"error: {type(exc).__name__}"
     return Probe(
         version=data.get("version"),
         url=data.get("url"),
         checksum=data.get("sha256hash"),
+        extra={"components": components},
     )
 
 
@@ -391,7 +458,7 @@ def probe_trae(url: str) -> Probe:
 
 PRODUCTS: tuple[tuple[str, str, Any], ...] = (
     ("catpaw", "CatPaw 国际版", lambda cur: probe_catpaw("global-gateway.catpaw.com", cur)),
-    ("catpaw-cn", "CatPaw 国内版", lambda cur: probe_catpaw("catpaw.meituan.com", cur)),
+    ("catpaw-cn", "CatPaw 国内版", lambda cur: probe_catpaw("catx.nocode.cn", cur)),
     ("workbuddy-intl-agent", "WorkBuddy 国际版",
      lambda _cur: probe_workbuddy("www.workbuddy.ai", "workbuddy-win32-x64-archive")),
     ("workbuddy-agent", "WorkBuddy 国内版",
@@ -431,6 +498,26 @@ PRODUCTS: tuple[tuple[str, str, Any], ...] = (
      lambda _cur: probe_trae("https://icube-normal.traeapi.us/icube/api/v1/native/version/trae/latest")),
     ("trae-cn-ide", "Trae IDE 国内版",
      lambda _cur: probe_trae("https://api.trae.cn/icube/api/v1/native/version/trae/cn/latest")),
+    ("minimax-code-bin", "MiniMax Code（npm 版）",
+     lambda _cur: probe_npm("@minimax-ai/code")),
+    ("minimax-code-intl-bin", "MiniMax Code 国际版",
+     lambda _cur: probe_electron_yml(
+         "https://filecdn.minimax.chat/public/minimax-agent-prod/release/latest.yml")),
+    ("minimax-code-cn-bin", "MiniMax Code 国内版",
+     lambda _cur: probe_electron_yml(
+         "https://filecdn.minimax.chat/public/minimax-agent-prod/release/latest.yml")),
+    ("kimi-work-bin", "Kimi Work（旧包）",
+     lambda _cur: probe_electron_yml("https://kimi-img.moonshot.cn/app/upgrade/latest.yml")),
+    ("kimi-work-intl-bin", "Kimi Work 国际版",
+     lambda _cur: probe_electron_yml("https://kimi-img.moonshot.cn/app/upgrade/latest.yml")),
+    ("kimi-work-cn-bin", "Kimi Work 国内版",
+     lambda _cur: probe_electron_yml("https://kimi-img.moonshot.cn/app/upgrade/latest.yml")),
+    ("kimi-code-intl-bin", "Kimi Code 国际版",
+     lambda _cur: probe_electron_yml("https://cdn.kimi.ai/kimi-code/desktop/latest-linux.yml")),
+    ("kimi-code-cn-bin", "Kimi Code 国内版",
+     lambda _cur: probe_electron_yml("https://cdn.kimi.com/kimi-code/desktop/latest-linux.yml")),
+    ("appclone-bin", "appclone",
+     lambda _cur: probe_github_release("mensylisir/appclone")),
 )
 
 
@@ -447,10 +534,12 @@ def mail_body(payload: dict[str, Any]) -> str:
         if row["state"] == "error":
             line += f"，失败原因：{row['error']}"
         lines.append(line)
-        if row["state"] == "update" and row.get("url"):
+        if row["state"] in ("update", "components") and row.get("url"):
             lines.append(f"  {row['url']}")
-        if row["state"] == "update" and row.get("checksum"):
+        if row["state"] in ("update", "components") and row.get("checksum"):
             lines.append(f"  sha256: {row['checksum']}")
+        for diff in row.get("component_updates") or ():
+            lines.append(f"  {diff}")
     lines += [
         "",
         f"结论：{len(payload['updates'])} 个待更新，{len(payload['errors'])} 个探测失败。",
@@ -535,23 +624,45 @@ def main() -> int:
         else:
             row["state"] = "update"
             status = max(status, 1)
+
+        # Pinned side pieces (WorkBuddy's Linux deb and npm helpers) move on
+        # their own schedule, so compare them separately from pkgver.
+        mapping = COMPONENTS.get(pkg)
+        if mapping and row["state"] != "error":
+            components = (result.extra or {}).get("components") or {}
+            diffs: list[str] = []
+            for variable, key in mapping.items():
+                pinned = pkgvar(pkg, variable)
+                latest = components.get(key)
+                if pinned and latest and comparable(str(latest)) != comparable(pinned):
+                    diffs.append(f"{variable} {pinned} -> {latest}")
+            if diffs:
+                if row["state"] == "current":
+                    row["state"] = "components"
+                    row["upstream"] = current
+                else:
+                    row["state"] = "update"
+                row["component_updates"] = diffs
+                status = max(status, 1)
         rows.append(row)
 
     width = max(len(r["product"]) for r in rows) if rows else 0
     for row in rows:
-        mark = {"current": "=", "update": ">", "error": "!"}[row["state"]]
+        mark = {"current": "=", "update": ">", "components": "~", "error": "!"}[row["state"]]
         row["mark"] = mark
         upstream = row.get("upstream") or "-"
         line = f"{mark} {row['product']:<{width}}  {row['current'] or '-':<16} -> {upstream}"
         if row["state"] == "error":
             line += f"  ({row['error']})"
         print(line)
-        if row["state"] == "update" and row.get("url"):
+        if row["state"] in ("update", "components") and row.get("url"):
             print(f"    {row['url']}")
-        if row["state"] == "update" and row.get("checksum"):
+        if row["state"] in ("update", "components") and row.get("checksum"):
             print(f"    sha256: {row['checksum']}")
+        for diff in row.get("component_updates") or ():
+            print(f"    {diff}")
 
-    updates = [r["package"] for r in rows if r["state"] == "update"]
+    updates = [r["package"] for r in rows if r["state"] in ("update", "components")]
     errors = [r["package"] for r in rows if r["state"] == "error"]
     print(f"\n{len(rows)} checked, {len(updates)} outdated, {len(errors)} probe errors")
 
