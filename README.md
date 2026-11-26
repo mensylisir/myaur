@@ -31,8 +31,8 @@
 | minimax-code-bin | 0.7.10 | https://agent.minimax.cn/download | 已推送 AUR（2026-11-26 升级，x86_64） |
 | kimi-code-intl-bin | 1.5.0 | https://code.kimi.ai/ | 已推送 AUR（2026-11-26 升级；x86_64；命令 kimi-code，区域固定 global，Wayland 下禁用全局快捷键 portal 避免弹窗） |
 | kimi-code-cn-bin | 1.5.0 | https://code.kimi.com/ | 已推送 AUR（2026-11-26 升级；x86_64；命令 kimi-code-cn，区域固定 mainland-cn，Wayland 下禁用全局快捷键 portal 避免弹窗） |
-| kimi-work-intl-bin | 3.2.28 | https://www.kimi.ai/products/kimi-work | 已推送 AUR（2026-11-24 升级；x86_64；命令 kimi-work，区域固定 overseas，默认关闭 launcher 快捷键；补丁适配 3.2.28 新字符串表） |
-| kimi-work-cn-bin | 3.2.28 | https://www.kimi.com/products/kimi-work | 已推送 AUR（2026-11-24 升级；x86_64；命令 kimi-work-cn，区域固定 china，默认关闭 launcher 快捷键；补丁适配 3.2.28 新字符串表） |
+| kimi-work-intl-bin | 3.2.28 | https://www.kimi.ai/products/kimi-work | 已推送 AUR（2026-11-26 pkgrel 2：补齐此前漏推的 3.2.28 字符串表补丁；x86_64；命令 kimi-work，区域固定 overseas，默认关闭 launcher 快捷键） |
+| kimi-work-cn-bin | 3.2.28 | https://www.kimi.com/products/kimi-work | 已推送 AUR（2026-11-26 pkgrel 2：补齐此前漏推的 3.2.28 字符串表补丁；x86_64；命令 kimi-work-cn，区域固定 china，默认关闭 launcher 快捷键） |
 | minimax-code-intl-bin | 3.1.19 | https://code.minimax.io/ | 已推送 AUR（2026-11-24 升级，x86_64；命令 minimax-code，baseUrl agent.minimax.io，注册 minimax 深链，托盘菜单可退出；安装包取自官方镜像 filecdn.minimax.chat） |
 | minimax-code-cn-bin | 3.1.19 | https://code.minimax.cn/ | 已推送 AUR（2026-11-24 升级，x86_64；命令 minimax-code-cn，baseUrl agent.minimax.cn，注册 minimax-cn 深链，托盘菜单可退出） |
 | appclone-bin | 1.1.2 | https://github.com/mensylisir/appclone | 已推送 AUR（2026-11-17） |
