@@ -31,8 +31,8 @@
 | minimax-code-bin | 0.8.0 | https://agent.minimax.cn/download | 已推送 AUR（2026-11-28 升级，x86_64） |
 | kimi-code-intl-bin | 1.5.1 | https://code.kimi.ai/ | 已推送 AUR（2026-11-28 升级；x86_64；命令 kimi-code，区域固定 global，Wayland 下禁用全局快捷键 portal 避免弹窗；与国内版 deb 字节相同，按同一 sha256 校验） |
 | kimi-code-cn-bin | 1.5.1 | https://code.kimi.com/ | 已推送 AUR（2026-11-28 升级；x86_64；命令 kimi-code-cn，区域固定 mainland-cn，Wayland 下禁用全局快捷键 portal 避免弹窗） |
-| kimi-work-intl-bin | 3.2.29 | https://www.kimi.ai/products/kimi-work | 已推送 AUR（2026-11-28 升级；字符串表 id 变更已适配：manual/lastEffective 15466/6565、resourcesPath 21706、appId/.desktop 6775/7472，5 个补丁点在产物 asar 中逐一确认；区域固定 overseas，默认关闭 launcher 快捷键） |
-| kimi-work-cn-bin | 3.2.29 | https://www.kimi.com/products/kimi-work | 已推送 AUR（2026-11-28 升级；字符串表 id 变更已适配：manual/lastEffective 15466/6565、resourcesPath 21706、appId/.desktop 6775/7472，5 个补丁点在产物 asar 中逐一确认；区域固定 china，默认关闭 launcher 快捷键） |
+| kimi-work-intl-bin | 3.2.29 | https://www.kimi.ai/products/kimi-work | 已推送 AUR（2026-11-28 pkgrel 2：字符串表 id 变更已适配（manual/lastEffective 15466/6565、resourcesPath 21706、appId/.desktop 6775/7472），并新增设备/账号区域 getter 固定——登录页与认证 URL 不再被系统区域带偏；区域固定 overseas，默认关闭 launcher 快捷键） |
+| kimi-work-cn-bin | 3.2.29 | https://www.kimi.com/products/kimi-work | 已推送 AUR（2026-11-28 pkgrel 2：字符串表 id 变更已适配（manual/lastEffective 15466/6565、resourcesPath 21706、appId/.desktop 6775/7472），并新增设备/账号区域 getter 固定——登录页与认证 URL 不再被系统区域带偏；区域固定 china，默认关闭 launcher 快捷键） |
 | minimax-code-intl-bin | 3.1.19 | https://code.minimax.io/ | 已推送 AUR（2026-11-24 升级，x86_64；命令 minimax-code，baseUrl agent.minimax.io，注册 minimax 深链，托盘菜单可退出；安装包取自官方镜像 filecdn.minimax.chat） |
 | minimax-code-cn-bin | 3.1.19 | https://code.minimax.cn/ | 已推送 AUR（2026-11-24 升级，x86_64；命令 minimax-code-cn，baseUrl agent.minimax.cn，注册 minimax-cn 深链，托盘菜单可退出） |
 | appclone-bin | 1.1.2 | https://github.com/mensylisir/appclone | 已推送 AUR（2026-11-17） |
