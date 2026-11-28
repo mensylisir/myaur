@@ -26,8 +26,8 @@
 | trae-ide | 2.3.106769 | https://www.trae.cn/ | 已推送 AUR（2026-11-26 升级；保留国际版圆形 INTL 角标；补 x-scheme-handler/trae 深链声明） |
 | trae-cn-ide | 2.3.108162 | https://www.trae.cn/ | 已推送 AUR（2026-11-26 升级；保留 x86_64 归档、CN 角标与 trae-cn 深链声明） |
 | workbuddy-agent | 5.11.3.43806934_ecace0f7 | https://www.workbuddy.cn/app | 已推送 AUR（2026-11-26：Windows payload 未变，deb 运行时升至 5.11.6、sandbox 5.13.3；Wayland 下预置空快捷键避免 Add Keyboard Shortcuts 弹窗，并带 GPU/Wayland IME 启动参数） |
-| workbuddy-intl-agent | 5.11.7.44923190_525fde10 | https://www.workbuddy.ai | 已推送 AUR（2026-11-26：Windows payload 5.11.7，deb 运行时 5.11.6、sandbox 5.13.3；shadow asar 装配；保留 Wayland 快捷键防护、GPU/IME 启动参数与 workbuddy-ai 深链） |
-| kimi-work-bin | 3.2.29 | https://www.kimi.com/products/kimi-work | 已推送 AUR（2026-11-28 升级，x86_64；启动命令 kimi-work）；LEGACY：不锁定区域，建议改用 kimi-work-intl-bin / kimi-work-cn-bin |
+| workbuddy-intl-agent | 5.11.7.44923190_525fde10 | https://www.workbuddy.ai | 已推送 AUR（2026-11-28 pkgrel 2：Windows payload 5.11.7，deb 运行时 5.11.6、sandbox 5.13.3；shadow asar 装配；IM 后端补丁的幂等判断收紧为只认后端工厂内的 linux 分支，避免上游出现同名字符串时误跳过；保留 Wayland 快捷键防护、GPU/IME 启动参数与 workbuddy-ai 深链） |
+| kimi-work-bin | 3.2.29 | https://www.kimi.com/products/kimi-work | 已推送 AUR（2026-11-28 pkgrel 2，x86_64；启动命令 kimi-work；daimon 去 devDependencies 现带前置/后置断言，格式变动会直接构建失败）；LEGACY：不锁定区域，建议改用 kimi-work-intl-bin / kimi-work-cn-bin |
 | minimax-code-bin | 0.8.0 | https://agent.minimax.cn/download | 已推送 AUR（2026-11-28 升级，x86_64） |
 | kimi-code-intl-bin | 1.5.1 | https://code.kimi.ai/ | 已推送 AUR（2026-11-28 升级；x86_64；命令 kimi-code，区域固定 global，Wayland 下禁用全局快捷键 portal 避免弹窗；与国内版 deb 字节相同，按同一 sha256 校验） |
 | kimi-code-cn-bin | 1.5.1 | https://code.kimi.com/ | 已推送 AUR（2026-11-28 升级；x86_64；命令 kimi-code-cn，区域固定 mainland-cn，Wayland 下禁用全局快捷键 portal 避免弹窗） |
