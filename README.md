@@ -6,12 +6,12 @@
 
 | 包名 | 版本 | 上游 | 状态 |
 |---|---|---|---|
-| qoder-agent | 0.5.20 | https://qoder.com/ | 已推送 AUR（2026-11-26 升级；pkgrel 1 保留 preload 修复：移除 argv 中 --require/--app、保留 realpathSync.native） |
-| qoder-cn-agent | 0.5.20 | https://qoder.cn | 已推送 AUR（2026-11-26 升级；pkgrel 1 保留 preload 修复；上游 CN 图标自带折角标记，不额外加角标） |
-| qoder-ide | 1.41.1 | https://qoder.com/ | 已推送 AUR（2026-11-21；pkgrel 4 同步移除 argv 中的 `--app`；pkgrel 3 移除 preload 参数；pkgrel 2 preload 保留 realpathSync.native） |
-| qoder-cn-ide | 1.41.1 | https://qoder.cn | 已推送 AUR（2026-11-21；pkgrel 4 同步移除 argv 中的 `--app`；pkgrel 3 移除 preload 参数；pkgrel 2 preload 保留 realpathSync.native） |
-| qoderwake-bin | 1.2.25 | https://qoder.com/ | 已推送 AUR（2026-11-26 升级；保留国际版 INTL 角标与构建期区域断言 global） |
-| qoderwake-cn-bin | 1.2.25_cn | https://qoder.cn | 已推送 AUR（2026-11-26 升级；保留国内版 CN 角标与构建期区域断言 cn） |
+| qoder-agent | 0.5.21 | https://qoder.com/ | 已推送 AUR（2026-11-28 升级；保留 preload 修复：移除 argv 中 --require/--app、保留 realpathSync.native） |
+| qoder-cn-agent | 0.5.21 | https://qoder.cn | 已推送 AUR（2026-11-28 升级；保留 preload 修复；上游 CN 图标自带折角标记，不额外加角标） |
+| qoder-ide | 1.42.1 | https://qoder.com/ | 已推送 AUR（2026-11-28 升级；pkgrel 重置为 1，连同 preload / `--app` argv 修复一并发布；探测接口 CDN 节点滞后时以 `release/latest` RPM 的 NEVRA 为准） |
+| qoder-cn-ide | 1.42.1 | https://qoder.cn | 已推送 AUR（2026-11-28 升级；pkgrel 重置为 1，连同 preload / `--app` argv 修复一并发布） |
+| qoderwake-bin | 1.2.27 | https://qoder.com/ | 已推送 AUR（2026-11-28 升级；保留国际版 INTL 角标与构建期区域断言 global） |
+| qoderwake-cn-bin | 1.2.27_cn | https://qoder.cn | 已推送 AUR（2026-11-28 升级；保留国内版 CN 角标与构建期区域断言 cn） |
 | mimo-desktop-bin | 26.1120.201429 | https://mimo.xiaomimimo.com/desktop/ | 已推送 AUR（2026-11-20 升级；国内版圆形 CN 角标；上游图标改为 512px，按新尺寸派生多尺寸） |
 | mimo-desktop-intl-bin | 26.1120.201429 | https://mimo-ai.xiaomimimo.com/desktop/ | 已推送 AUR（2026-11-20 升级，x86_64；官方海外 Linux deb 重打包，国际版圆形 INTL 角标，可与国内版并存） |
 | zcode-intl-bin | 4.0.0_10870 | https://zcode.z.ai/ | 已推送 AUR（2026-11-24 pkgrel 2：asar 只保留 Z.ai 全球登录源，锁定国际账号；INTL 角标；语言跟随系统） |
@@ -27,12 +27,12 @@
 | trae-cn-ide | 2.3.108162 | https://www.trae.cn/ | 已推送 AUR（2026-11-26 升级；保留 x86_64 归档、CN 角标与 trae-cn 深链声明） |
 | workbuddy-agent | 5.11.3.43806934_ecace0f7 | https://www.workbuddy.cn/app | 已推送 AUR（2026-11-26：Windows payload 未变，deb 运行时升至 5.11.6、sandbox 5.13.3；Wayland 下预置空快捷键避免 Add Keyboard Shortcuts 弹窗，并带 GPU/Wayland IME 启动参数） |
 | workbuddy-intl-agent | 5.11.7.44923190_525fde10 | https://www.workbuddy.ai | 已推送 AUR（2026-11-26：Windows payload 5.11.7，deb 运行时 5.11.6、sandbox 5.13.3；shadow asar 装配；保留 Wayland 快捷键防护、GPU/IME 启动参数与 workbuddy-ai 深链） |
-| kimi-work-bin | 3.2.28 | https://www.kimi.com/products/kimi-work | 已推送 AUR（2026-11-24 升级，x86_64；启动命令 kimi-work）；LEGACY：不锁定区域，建议改用 kimi-work-intl-bin / kimi-work-cn-bin |
-| minimax-code-bin | 0.7.10 | https://agent.minimax.cn/download | 已推送 AUR（2026-11-26 升级，x86_64） |
-| kimi-code-intl-bin | 1.5.0 | https://code.kimi.ai/ | 已推送 AUR（2026-11-26 升级；x86_64；命令 kimi-code，区域固定 global，Wayland 下禁用全局快捷键 portal 避免弹窗） |
-| kimi-code-cn-bin | 1.5.0 | https://code.kimi.com/ | 已推送 AUR（2026-11-26 升级；x86_64；命令 kimi-code-cn，区域固定 mainland-cn，Wayland 下禁用全局快捷键 portal 避免弹窗） |
-| kimi-work-intl-bin | 3.2.28 | https://www.kimi.ai/products/kimi-work | 已推送 AUR（2026-11-26 pkgrel 2：补齐此前漏推的 3.2.28 字符串表补丁；x86_64；命令 kimi-work，区域固定 overseas，默认关闭 launcher 快捷键） |
-| kimi-work-cn-bin | 3.2.28 | https://www.kimi.com/products/kimi-work | 已推送 AUR（2026-11-26 pkgrel 2：补齐此前漏推的 3.2.28 字符串表补丁；x86_64；命令 kimi-work-cn，区域固定 china，默认关闭 launcher 快捷键） |
+| kimi-work-bin | 3.2.29 | https://www.kimi.com/products/kimi-work | 已推送 AUR（2026-11-28 升级，x86_64；启动命令 kimi-work）；LEGACY：不锁定区域，建议改用 kimi-work-intl-bin / kimi-work-cn-bin |
+| minimax-code-bin | 0.8.0 | https://agent.minimax.cn/download | 已推送 AUR（2026-11-28 升级，x86_64） |
+| kimi-code-intl-bin | 1.5.1 | https://code.kimi.ai/ | 已推送 AUR（2026-11-28 升级；x86_64；命令 kimi-code，区域固定 global，Wayland 下禁用全局快捷键 portal 避免弹窗；与国内版 deb 字节相同，按同一 sha256 校验） |
+| kimi-code-cn-bin | 1.5.1 | https://code.kimi.com/ | 已推送 AUR（2026-11-28 升级；x86_64；命令 kimi-code-cn，区域固定 mainland-cn，Wayland 下禁用全局快捷键 portal 避免弹窗） |
+| kimi-work-intl-bin | 3.2.29 | https://www.kimi.ai/products/kimi-work | 已推送 AUR（2026-11-28 升级；字符串表 id 变更已适配：manual/lastEffective 15466/6565、resourcesPath 21706、appId/.desktop 6775/7472，5 个补丁点在产物 asar 中逐一确认；区域固定 overseas，默认关闭 launcher 快捷键） |
+| kimi-work-cn-bin | 3.2.29 | https://www.kimi.com/products/kimi-work | 已推送 AUR（2026-11-28 升级；字符串表 id 变更已适配：manual/lastEffective 15466/6565、resourcesPath 21706、appId/.desktop 6775/7472，5 个补丁点在产物 asar 中逐一确认；区域固定 china，默认关闭 launcher 快捷键） |
 | minimax-code-intl-bin | 3.1.19 | https://code.minimax.io/ | 已推送 AUR（2026-11-24 升级，x86_64；命令 minimax-code，baseUrl agent.minimax.io，注册 minimax 深链，托盘菜单可退出；安装包取自官方镜像 filecdn.minimax.chat） |
 | minimax-code-cn-bin | 3.1.19 | https://code.minimax.cn/ | 已推送 AUR（2026-11-24 升级，x86_64；命令 minimax-code-cn，baseUrl agent.minimax.cn，注册 minimax-cn 深链，托盘菜单可退出） |
 | appclone-bin | 1.1.2 | https://github.com/mensylisir/appclone | 已推送 AUR（2026-11-17） |
@@ -73,7 +73,7 @@ SMTP_PASS=<QQ 邮箱授权码> python3 scripts/check-upstream-updates.py --mail
 | kimi-code-intl-bin / kimi-code-cn-bin | electron-builder `latest-linux.yml`（优先取 deb，国际 `cdn.kimi.ai` / 国内 `cdn.kimi.com`） |
 | appclone-bin | GitHub Releases API |
 | qoder-agent / qoder-cn-agent | electron-builder 的 `latest-linux.yml` |
-| qoder-ide | `center.qoder.sh` 更新接口 |
+| qoder-ide | `center.qoder.sh` 更新接口（多次取样取最新，CDN 节点滞后时回退到 `release/latest` RPM 的 NEVRA） |
 | qoder-cn-ide | RPM lead 的 NEVRA（HTTP Range 只取前 96 字节） |
 | qoderwake-bin / qoderwake-cn-bin | 官方 channel `manifest.json` 的 `latest` 与 Linux amd64 归档 sha256 |
 | mimo-desktop-bin | 官方 `latest` deb 的 control 归档（HTTP Range 取前 2 MiB，读 `Version`） |

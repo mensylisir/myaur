@@ -63,6 +63,15 @@ ZCODE_CN_DOWNLOAD_PAGE = "https://zcode.z.ai/cn"
 KILO_DEB_LATEST = (
     "https://autoupdate.desktop.anaconda.com/kilo-desktop/latest/latest/linux/x64/kilo-desktop.deb"
 )
+# Qoder IDE's update API answers from CDN nodes that lag behind a rollout, but
+# the ``release/latest`` RPM in the same OSS bucket is refreshed by the release
+# job, so its RPM lead is the authoritative version.
+QODER_IDE_OSS_LATEST = (
+    "https://qoder-ide.oss-accelerate.aliyuncs.com/release/latest/qoder-ide_x86_64.rpm"
+)
+QODER_IDE_OSS_VERSIONED = (
+    "https://qoder-ide.oss-accelerate.aliyuncs.com/release/{version}/qoder-ide_x86_64.rpm"
+)
 AR_HEADER_SIZE = 60
 
 # Packages whose PKGBUILD pins upstream pieces separately from pkgver.  Keys
@@ -302,18 +311,61 @@ def probe_qoderwake(url: str) -> Probe:
     )
 
 
-def probe_qoder_ide(url: str) -> Probe:
-    data = http_json(url)
-    return Probe(version=data.get("productVersion"), url=data.get("url"),
-                 checksum=data.get("sha256hash"))
+def rpm_lead(url: str) -> tuple[str | None, str]:
+    """Read the NEVRA out of the RPM lead with a 96-byte range request."""
+    raw = http(url, {"Range": "bytes=0-95"}, limit=96)
+    name = raw[RPM_LEAD_NAME].decode("ascii", "replace").split("\x00", 1)[0]
+    match = re.search(r"-(\d+(?:\.\d+)+)-", name)
+    return (match.group(1) if match else None), name
+
+
+def probe_qoder_ide(url: str, current: str, attempts: int = 5) -> Probe:
+    """The update API sits behind CDN nodes that lag behind a rollout: during a
+    release the same URL alternates between the old and the new manifest, so a
+    single request can miss a real update (1.42.1 shipped while some nodes kept
+    answering 1.41.1).  Ask several times, keep the newest answer, and fall back
+    to the version baked into the ``release/latest`` RPM, which the release job
+    refreshes in the same OSS bucket and is therefore authoritative."""
+    current_key = version_key(current)
+    best: dict[str, Any] = {}
+    best_key: tuple[int, ...] = ()
+    for _ in range(attempts):
+        try:
+            data = http_json(url)
+        except (urllib.error.URLError, ValueError):
+            continue
+        if not isinstance(data, dict):
+            continue
+        version = data.get("productVersion")
+        if not isinstance(version, str) or not version:
+            continue
+        key = version_key(version)
+        if key > best_key:
+            best, best_key = data, key
+        if best_key > current_key:
+            break
+
+    try:
+        oss_version, _nevra = rpm_lead(QODER_IDE_OSS_LATEST)
+    except (urllib.error.URLError, ValueError):
+        oss_version = None
+    if oss_version and version_key(oss_version) > best_key:
+        return Probe(
+            version=oss_version,
+            url=QODER_IDE_OSS_VERSIONED.format(version=oss_version),
+            extra={"source": "oss-latest-rpm"},
+        )
+
+    if not best:
+        raise ValueError(f"no usable manifest after {attempts} requests")
+    return Probe(version=best.get("productVersion"), url=best.get("url"),
+                 checksum=best.get("sha256hash"))
 
 
 def probe_qoder_cn_ide(url: str) -> Probe:
     """No update API: read the NEVRA out of the RPM lead via a range request."""
-    raw = http(url, {"Range": "bytes=0-95"}, limit=96)
-    name = raw[RPM_LEAD_NAME].decode("ascii", "replace").split("\x00", 1)[0]
-    match = re.search(r"-(\d+(?:\.\d+)+)-", name)
-    return Probe(version=match.group(1) if match else None, url=url, extra={"nevra": name})
+    version, name = rpm_lead(url)
+    return Probe(version=version, url=url, extra={"nevra": name})
 
 
 def ar_members(raw: bytes) -> list[tuple[str, bytes, int]]:
@@ -482,7 +534,8 @@ PRODUCTS: tuple[tuple[str, str, Any], ...] = (
      lambda _cur: probe_qoder_latest(
          "https://qoder-app.oss-cn-beijing.aliyuncs.com/qoder-app/releases/latest-linux.yml")),
     ("qoder-ide", "Qoder IDE 国际版",
-     lambda _cur: probe_qoder_ide("https://center.qoder.sh/algo/api/update/linux-x64/stable/latest")),
+     lambda cur: probe_qoder_ide(
+         "https://center.qoder.sh/algo/api/update/linux-x64/stable/latest", cur)),
     ("qoder-cn-ide", "Qoder IDE 国内版",
      lambda _cur: probe_qoder_cn_ide(
          "https://qoder-ide-cn.oss-cn-hangzhou.aliyuncs.com/qoder/release/lastest/qoder-cn-ide_x86_64.rpm")),
