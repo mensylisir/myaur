@@ -10,8 +10,8 @@
 | qoder-cn-agent | 0.5.21 | https://qoder.cn | 已推送 AUR（2026-11-28 升级；保留 preload 修复；上游 CN 图标自带折角标记，不额外加角标） |
 | qoder-ide | 1.42.1 | https://qoder.com/ | 已推送 AUR（2026-11-28 升级；pkgrel 重置为 1，连同 preload / `--app` argv 修复一并发布；探测接口 CDN 节点滞后时以 `release/latest` RPM 的 NEVRA 为准） |
 | qoder-cn-ide | 1.42.1 | https://qoder.cn | 已推送 AUR（2026-11-28 升级；pkgrel 重置为 1，连同 preload / `--app` argv 修复一并发布） |
-| qoderwake-bin | 1.2.27 | https://qoder.com/ | 已推送 AUR（2026-11-28 升级；保留国际版 INTL 角标与构建期区域断言 global） |
-| qoderwake-cn-bin | 1.2.27_cn | https://qoder.cn | 已推送 AUR（2026-11-28 升级；保留国内版 CN 角标与构建期区域断言 cn） |
+| qoderwake-bin | 1.2.27 | https://qoder.com/ | 已推送 AUR（2026-11-28 pkgrel 2：区域断言此前只有函数定义未调用，已挂到 prepare，串区会直接构建失败；产物中确认 region 常量为 global；保留 INTL 角标） |
+| qoderwake-cn-bin | 1.2.27_cn | https://qoder.cn | 已推送 AUR（2026-11-28 pkgrel 2：区域断言此前只有函数定义未调用，已挂到 prepare，串区会直接构建失败；产物中确认 region 常量为 cn；保留 CN 角标） |
 | mimo-desktop-bin | 26.1120.201429 | https://mimo.xiaomimimo.com/desktop/ | 已推送 AUR（2026-11-20 升级；国内版圆形 CN 角标；上游图标改为 512px，按新尺寸派生多尺寸） |
 | mimo-desktop-intl-bin | 26.1120.201429 | https://mimo-ai.xiaomimimo.com/desktop/ | 已推送 AUR（2026-11-20 升级，x86_64；官方海外 Linux deb 重打包，国际版圆形 INTL 角标，可与国内版并存） |
 | zcode-intl-bin | 4.0.0_10870 | https://zcode.z.ai/ | 已推送 AUR（2026-11-24 pkgrel 2：asar 只保留 Z.ai 全球登录源，锁定国际账号；INTL 角标；语言跟随系统） |
