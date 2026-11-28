@@ -33,8 +33,8 @@
 | kimi-code-cn-bin | 1.5.1 | https://code.kimi.com/ | 已推送 AUR（2026-11-28 升级；x86_64；命令 kimi-code-cn，区域固定 mainland-cn，Wayland 下禁用全局快捷键 portal 避免弹窗） |
 | kimi-work-intl-bin | 3.2.29 | https://www.kimi.ai/products/kimi-work | 已推送 AUR（2026-11-28 pkgrel 2：字符串表 id 变更已适配（manual/lastEffective 15466/6565、resourcesPath 21706、appId/.desktop 6775/7472），并新增设备/账号区域 getter 固定——登录页与认证 URL 不再被系统区域带偏；区域固定 overseas，默认关闭 launcher 快捷键） |
 | kimi-work-cn-bin | 3.2.29 | https://www.kimi.com/products/kimi-work | 已推送 AUR（2026-11-28 pkgrel 2：字符串表 id 变更已适配（manual/lastEffective 15466/6565、resourcesPath 21706、appId/.desktop 6775/7472），并新增设备/账号区域 getter 固定——登录页与认证 URL 不再被系统区域带偏；区域固定 china，默认关闭 launcher 快捷键） |
-| minimax-code-intl-bin | 3.1.19 | https://code.minimax.io/ | 已推送 AUR（2026-11-24 升级，x86_64；命令 minimax-code，baseUrl agent.minimax.io，注册 minimax 深链，托盘菜单可退出；安装包取自官方镜像 filecdn.minimax.chat） |
-| minimax-code-cn-bin | 3.1.19 | https://code.minimax.cn/ | 已推送 AUR（2026-11-24 升级，x86_64；命令 minimax-code-cn，baseUrl agent.minimax.cn，注册 minimax-cn 深链，托盘菜单可退出） |
+| minimax-code-intl-bin | 3.1.19 | https://code.minimax.io/ | 已推送 AUR（2026-11-28 pkgrel 2，x86_64；命令 minimax-code，baseUrl agent.minimax.io，注册 minimax 深链，托盘菜单可退出；区域改写后校验 .env.local 必须指向 agent.minimax.io；7z 解包前显式建输出目录） |
+| minimax-code-cn-bin | 3.1.19 | https://code.minimax.cn/ | 已推送 AUR（2026-11-28 pkgrel 2，x86_64；命令 minimax-code-cn，baseUrl agent.minimax.cn，注册 minimax-cn 深链，托盘菜单可退出；新增断言：安装包 .env.local 必须指向 agent.minimax.cn，上游换通道会直接构建失败） |
 | appclone-bin | 1.1.2 | https://github.com/mensylisir/appclone | 已推送 AUR（2026-11-17） |
 | dumate-app-bin | 1.0.92 | https://www.dumate.cn/ | 已推送 AUR（2026-11-14，x86_64；官方 deb 重打包，版本化 URL；与 AUR 已有 dumate-bin 功能相同） |
 
